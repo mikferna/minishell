@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:02:12 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/09 13:43:38 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/10/11 12:24:57 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,27 @@
 int	check_line_quote(char *s)
 {
 	int i;
-	int quote;
+	int quoted;
+	int	quotes;
 
-	quote = 0;
+	quotes = 0;
+	quoted = 0;
 	i = 0;
 	if (!s)
 		return (2);
 	while (s && s[i])
 	{
-		if (s[i] == '\"' || s[i] == '\'')
-			quote++;
+		if (s[i] == '\"')
+			quoted++;
+		if (s[i] == '\'')
+			quotes++;
 		i++;
 	}
 	if (check_redirections(s) == 1)
 		return (1);
-	if (quote % 2 != 0)
+	if (quoted % 2 != 0 || quotes % 2 != 0)
 		return (1);
-	return (0);	
+	return (0);
 }
 
 int	check_redirections(char *s)

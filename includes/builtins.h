@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 12:12:33 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/09 16:01:06 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/10/11 14:37:40 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@ int		exitt(char **args);
 
 /*-env_gen.c-*/
 void	get_env(char **envp, t_env **env);
+
+/*-echo.c-*/
+int		mini_echo(t_env *env, char **args);
 
 /*-utils.c-*/
 char	*get_path(t_env *env, char *dir);

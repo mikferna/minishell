@@ -6,7 +6,7 @@
 #    By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/04 16:06:29 by mikferna          #+#    #+#              #
-#    Updated: 2023/10/09 15:56:30 by mikferna         ###   ########.fr        #
+#    Updated: 2023/10/11 12:56:57 by mikferna         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ SRCS			=	srcs/00_main.c						\
 					srcs/builtins/pwd.c					\
 					srcs/builtins/unset.c				\
 					srcs/builtins/utils.c				\
+					srcs/builtins/echo.c				\
 
 
 OBJS			=	$(SRCS:.c=.o)
