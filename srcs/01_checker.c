@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:02:12 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/17 13:21:41 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/10/17 13:58:26 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int	check_stdout(char *s, int k)
 		return (1);
 	else
 		return (0);
+	return (1);
 }
 
 int	check_pipe(char *s, int k)
@@ -83,30 +84,11 @@ int	check_pipe(char *s, int k)
 		return (1);
 	else
 		return (0);
+	return (1);
 }
 
-int	ft_check_redir(char *s)
+int	check_aux(char *s, int k)
 {
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == '>' || s[i] == '<' || s[i] == '|')
-		{
-			if (check_redirection(s, i) != 0)
-				return (1);
-		}
-		i++;
-	}
-	return (0);
-}
-
-int	check_redirection(char *s, int i)
-{
-	int	k;
-
-	k = i;
 	while (s[k] == '>' || s[k] == '<' || s[k] == '|')
 	{
 		if (s[k] == '>')
@@ -125,6 +107,25 @@ int	check_redirection(char *s, int i)
 				return (1);
 		}
 		k++;
+	}
+	return (0);
+}
+
+int	ft_check_redir(char *s)
+{
+	int	i;
+	int	k;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == '>' || s[i] == '<' || s[i] == '|')
+		{
+			k = i;
+			if (check_aux(s, k) != 0)
+				return (1);
+		}
+		i++;
 	}
 	return (0);
 }
