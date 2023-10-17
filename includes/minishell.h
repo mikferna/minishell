@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:44:19 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/17 12:42:21 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/10/17 14:00:27 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ typedef struct s_ldata
 {
 	char	*inp_line;
 }			t_ldata;
+
+typedef struct s_token
+{
+	char *inp_line;
+}		t_token;
 
 /*-00_main.c-*/
 int			main(int argc, char **argv, char **envp);

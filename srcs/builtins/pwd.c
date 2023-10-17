@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 15:49:55 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/11 14:37:27 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/10/16 11:38:29 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 int	pwd(char **args)
 {
 	char	*pwd;
-		
+
+	args = NULL;
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
 	{

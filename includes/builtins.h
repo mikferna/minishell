@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 12:12:33 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/11 14:37:40 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/10/17 13:46:04 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,15 @@ int		do_nothing(void);
 int		pwd(char **args);
 
 /*-export.c-*/
-int		export(t_env *env, char **args);
-int		do_export(t_env **env, char **args);
+int		export(t_env **env, char **args);
+int		do_export(t_env *temp, char **args);
 
 /*-unset.c-*/
 int		unset(t_env *env, char **args);
 void	do_unset(t_env **env, t_env **past_env);
 
 /*-env.c-*/
-int		env(t_env *env, char **args);
+int		envi(t_env *env, char **args);
 
 /*-exit.c-*/
 int		exitt(char **args);

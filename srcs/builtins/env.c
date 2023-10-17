@@ -6,14 +6,14 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 11:20:16 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/11 14:03:02 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/10/16 13:46:42 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 //aqui entran env, y el arg
-int	env(t_env *env, char **args)
+int	envi(t_env *env, char **args)
 {
 	t_env	*temp;
 

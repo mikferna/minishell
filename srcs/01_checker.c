@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:02:12 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/17 13:58:26 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/10/17 14:00:17 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ int	check_aux(char *s, int k)
 		}
 		k++;
 	}
+	
 	return (0);
 }
 
