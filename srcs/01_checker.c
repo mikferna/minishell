@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   01_checker.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:02:12 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/09 13:43:38 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/10/17 12:46:07 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	check_line_quote(char *s)
 {
-	int i;
-	int quote;
+	int	i;
+	int	quote;
 
 	quote = 0;
 	i = 0;
@@ -31,52 +31,96 @@ int	check_line_quote(char *s)
 		return (1);
 	if (quote % 2 != 0)
 		return (1);
-	return (0);	
+	return (0);
 }
 
 int	check_redirections(char *s)
 {
-	int i;
+	int		i;
+	char	**temp;
+
+	i = 0;
+	temp = ft_split(s, '\'');
+	if (ft_check_redir(temp[0]) == 0)
+		return (0);
+	return (1);
+}
+
+int	check_stdin(char *s, int k)
+{
+	if (s[k + 1] == '>' && (s[k + 2] == '>' || \
+		s[k + 2] == '<' || s[k + 2] == '|'))
+		return (1);
+	else if (s[k + 1] == '<' || s[k + 1] == '|' || \
+		s[k + 1] == '\0' || s[k + 1] == ' ')
+		return (1);
+	else
+		return (0);
+	return (1);
+}
+
+int	check_stdout(char *s, int k)
+{
+	if (s[k + 1] == '<' && (s[k + 2] == '>' || \
+		s[k + 2] == '<' || s[k + 2] == '|'))
+		return (1);
+	else if (s[k + 1] == '>')
+		return (1);
+	else if (s[k + 1] == '|' || s[k + 1] == ' ' || s[k + 1] == '\0')
+		return (1);
+	else
+		return (0);
+}
+
+int	check_pipe(char *s, int k)
+{
+	if (s[k + 1] == '|' && (s[k + 2] != '>' || \
+		s[k + 2] != '<' || s[k + 2] != '|'))
+		return (1);
+	else
+		return (0);
+}
+
+int	ft_check_redir(char *s)
+{
+	int	i;
 
 	i = 0;
 	while (s[i])
 	{
-		//checker_sides esta mal
-		if ((s[i] == '<' || s[i] == '>' || s[i] == '|') && (check_sides(s, s[i], 0) == 1))
-			return (1);
+		if (s[i] == '>' || s[i] == '<' || s[i] == '|')
+		{
+			if (check_redirection(s, i) != 0)
+				return (1);
+		}
 		i++;
 	}
 	return (0);
 }
 
-int	check_sides(char *s, char w, int i)
+int	check_redirection(char *s, int i)
 {
-	int chr;
-	int	chart;
+	int	k;
 
-	chr = 0;
-	chart = 0;
-	while (s[i] && (w == '<' || w == '>'))
+	k = i;
+	while (s[k] == '>' || s[k] == '<' || s[k] == '|')
 	{
-		if (s[i] != ' ' && s[i] != w)
-			return (0);
-		if (s[i] == '>' && s[i + 1] == '<')
-			return (1);
-		if (s[i] == w)
-			chart++;
-		i++;
+		if (s[k] == '>')
+		{
+			if (check_stdin(s, k) != 0)
+				return (1);
+		}
+		else if (s[k] == '<')
+		{
+			if (check_stdout(s, k) != 0)
+				return (1);
+		}
+		else if (s[k] == '|')
+		{
+			if (check_pipe(s, k) != 0)
+				return (1);
+		}
+		k++;
 	}
-	while (s[i] && w == '|')
-	{
-		if (s[i] != w && s[i] != ' ')
-			chr = 1;
-		if (s[i] == '|' && chr == 0)
-			return (1);
-		else if (s[i] == '|' && chr == 1)
-			chr = 0;
-		i++;
-	}
-	if ((chr == 0 && s[i] == '\0') || chart > 2)
-		return (1);
 	return (0);
 }

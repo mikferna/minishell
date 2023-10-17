@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+         #
+#    By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/04 16:06:29 by mikferna          #+#    #+#              #
-#    Updated: 2023/10/09 15:56:30 by mikferna         ###   ########.fr        #
+#    Updated: 2023/10/13 17:53:24 by jumoncad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
