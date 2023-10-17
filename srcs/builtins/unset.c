@@ -6,12 +6,13 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 12:35:45 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/05 13:29:20 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/10/11 13:15:23 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+//entra el env, y en args entra 0-unset 1-la variable a hacer unset
 int	unset(t_env *env, char **args)
 {
 	t_env	*temp;

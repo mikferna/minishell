@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:02:12 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/17 12:46:07 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/10/17 13:21:41 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,25 @@
 int	check_line_quote(char *s)
 {
 	int	i;
-	int	quote;
+	int	quoted;
+	int	quotes;
 
-	quote = 0;
+	quotes = 0;
+	quoted = 0;
 	i = 0;
 	if (!s)
 		return (2);
 	while (s && s[i])
 	{
-		if (s[i] == '\"' || s[i] == '\'')
-			quote++;
+		if (s[i] == '\"')
+			quoted++;
+		if (s[i] == '\'')
+			quotes++;
 		i++;
 	}
 	if (check_redirections(s) == 1)
 		return (1);
-	if (quote % 2 != 0)
+	if (quoted % 2 != 0 || quotes % 2 != 0)
 		return (1);
 	return (0);
 }
@@ -48,11 +52,11 @@ int	check_redirections(char *s)
 
 int	check_stdin(char *s, int k)
 {
-	if (s[k + 1] == '>' && (s[k + 2] == '>' || \
-		s[k + 2] == '<' || s[k + 2] == '|'))
+	if (s[k + 1] == '>' && (s[k + 2] == '>' || s[k + 2] == '<' || s[k
+			+ 2] == '|'))
 		return (1);
-	else if (s[k + 1] == '<' || s[k + 1] == '|' || \
-		s[k + 1] == '\0' || s[k + 1] == ' ')
+	else if (s[k + 1] == '<' || s[k + 1] == '|' || s[k + 1] == '\0' || s[k
+		+ 1] == ' ')
 		return (1);
 	else
 		return (0);
@@ -61,8 +65,8 @@ int	check_stdin(char *s, int k)
 
 int	check_stdout(char *s, int k)
 {
-	if (s[k + 1] == '<' && (s[k + 2] == '>' || \
-		s[k + 2] == '<' || s[k + 2] == '|'))
+	if (s[k + 1] == '<' && (s[k + 2] == '>' || s[k + 2] == '<' || s[k
+			+ 2] == '|'))
 		return (1);
 	else if (s[k + 1] == '>')
 		return (1);
@@ -74,8 +78,8 @@ int	check_stdout(char *s, int k)
 
 int	check_pipe(char *s, int k)
 {
-	if (s[k + 1] == '|' && (s[k + 2] != '>' || \
-		s[k + 2] != '<' || s[k + 2] != '|'))
+	if (s[k + 1] == '|' && (s[k + 2] != '>' || s[k + 2] != '<' || s[k
+			+ 2] != '|'))
 		return (1);
 	else
 		return (0);

@@ -6,7 +6,7 @@
 #    By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/04 16:06:29 by mikferna          #+#    #+#              #
-#    Updated: 2023/10/13 17:53:24 by jumoncad         ###   ########.fr        #
+#    Updated: 2023/10/17 13:20:17 by jumoncad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ SRCS			=	srcs/00_main.c						\
 					srcs/builtins/pwd.c					\
 					srcs/builtins/unset.c				\
 					srcs/builtins/utils.c				\
+					srcs/builtins/echo.c				\
 
 
 OBJS			=	$(SRCS:.c=.o)
