@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:44:19 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/04 11:26:31 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/10/12 13:17:24 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ typedef struct s_ldata
 {
 	char *inp_line;
 }		t_ldata;
+
+typedef struct s_token
+{
+	char *inp_line;
+}		t_token;
 
 /*-00_main.c-*/
 int		main(int argc, char **argv, char **envp);

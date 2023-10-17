@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 12:09:00 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/11 14:37:30 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/10/17 12:09:44 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 //entra en el 0-exit 1-un numero 2+-nada o si entra algo va a dar mal
 int	exitt(char **args)
 {
-	if (!args[1])
+	if (!args || !args[1])
 	{
 		ft_putstr_fd("exit\n", 2);
-		return (0);
+		exit (0);
 	}
 	if (args[1] && args[2])
 	{
 		ft_putstr_fd("exit\nminishell: exit: too many arguments\n", 2);
-		return (1);
+		exit (1);
 	}
 	return (ft_atoi(args[1]));
 }

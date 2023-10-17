@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:02:12 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/11 12:24:57 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/10/12 13:59:49 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	check_redirections(char *s)
 			return (1);
 		i++;
 	}
+	
 	return (0);
 }
 
