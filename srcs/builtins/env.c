@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 11:20:16 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/16 13:46:42 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:23:19 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	envi(t_env *env, char **args)
 	}
 	while (temp)
 	{
-		printf("%s=\"%s\"\n", temp->env_name, temp->env);
+		printf("%s=%s\n", temp->env_name, temp->env);
 		temp = temp->next;
 	}
 	return (0);

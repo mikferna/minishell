@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:44:19 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/12 13:17:24 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/10/18 11:31:00 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int		check_sides(char *s, char w, int i);
 void	env_addback(t_env	*list, char *str, char *str2);
 t_env	*ft_lstnew(char *str, char *str2);
 int		ft_lstsize(t_env *lst);
+void	ft_lstadd_back(t_env *lst, t_env *new);
 char	*start_strchar(char *str, char c);
 char	*end_strchar(char *str, char c);
 
