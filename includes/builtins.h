@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 12:12:33 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/19 11:39:58 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/10/19 13:15:37 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,8 @@
 # include <stdlib.h>
 # include "minishell.h"
 
-typedef struct s_env
-{
-	char			*env_name;
-	char			*env;
-	struct s_env	*next;
-}				t_env;
+//puede que lo de abajo de error no lo he probado
+typedef struct s_env t_env;
 
 /*-cd.c-*/
 int		cd(t_env *env, char **args);

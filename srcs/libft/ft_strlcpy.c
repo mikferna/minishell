@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   03_minishell.c                                     :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/02 13:13:23 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/23 14:00:44 by mikferna         ###   ########.fr       */
+/*   Created: 2023/10/19 12:16:31 by mikferna          #+#    #+#             */
+/*   Updated: 2023/10/23 13:46:22 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-void	minishell(t_ldata *line, t_env *env)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	(void)line;
-	//(void)env;
-	char *hola[4];
-	hola[0] = "echo";
-	hola[1] = "'hola \" $USER'";
-	hola[2] = "adios";
-	hola[3] = NULL;
-	expander(env, hola);
-	//pwd(NULL);
+	size_t	i;
+
+	i = 0;
+	while ((i < (dstsize - 1)) && src[i] && dstsize > 0)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	if (dstsize != 0)
+		dst[i] = '\0';
+	return (ft_strlen(src));
 }
