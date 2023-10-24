@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 10:44:43 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/17 13:51:09 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/10/18 11:55:06 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ int	do_export(t_env *temp, char **args)
 		if (!name || !path)
 			return (1);
 		env_addback(temp, path, name);
-		free (name);
-		free (path);
+		//free (name);
+		//free (path);
 		i++;
 	}
 	printf("LLEGO\n");

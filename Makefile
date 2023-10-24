@@ -6,7 +6,7 @@
 #    By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/04 16:06:29 by mikferna          #+#    #+#              #
-#    Updated: 2023/10/17 13:20:17 by jumoncad         ###   ########.fr        #
+#    Updated: 2023/10/24 12:02:30 by jumoncad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRCS			=	srcs/00_main.c						\
 					srcs/01_checker.c					\
 					srcs/02_node_utils.c				\
 					srcs/03_minishell.c					\
+					srcs/04_check_redir.c				\
 					srcs/libft/ft_itoa.c				\
 					srcs/libft/ft_atoi.c				\
 					srcs/libft/ft_putchar_fd.c			\

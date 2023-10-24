@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:59:02 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/17 13:20:46 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/10/18 12:32:44 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_ldata	*line;
 	t_env	*env;
+	int		check;
 
 	if (argc != 1 || argv[1])
 	{
@@ -26,9 +27,10 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		line->inp_line = readline("miñishell> ");
-		if (check_line_quote(line->inp_line) >= 1)
+		check = check_line_quote(line);
+		if (check >= 1)
 		{
-			if (check_line_quote(line->inp_line) == 1)
+			if (check == 1)
 				printf("Input Error\n");
 			continue ;
 		}
