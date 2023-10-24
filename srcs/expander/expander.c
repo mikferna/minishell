@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:10:24 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/23 14:00:42 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/10/24 15:43:20 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@ char	**expander(t_env *env, char **str)
 		if (str[i][j] != '\'' && dollar_sign(str[i]) != 0
 			&& str[i][dollar_sign(str[i])] != '\0')
 		{
-			tmp = ret_doll_str(env, str[i]); //aqui tiene que devolver la frase con el dolar cambiado o sin canbiar
+			tmp = ret_doll_str(env, str[i]); //aqui tiene que devolver la frase con el dolar cambiado o sin cambiar
 			str[i] = tmp;
 		}
 		if (ft_strncmp(str[0], "export", ft_strlen(str[0]) - 1) != 0)
 		{
-			if (str[i][j] != '\'')
-				str[i] = delete_quotes(str[i], '\"');
-			else if (str[i][j] != '\"')
+			if (str[i][j] == '\'')
 				str[i] = delete_quotes(str[i], '\'');
+			else if (str[i][j] == '\"')
+				str[i] = delete_quotes(str[i], '\"');
 		}
 		i++;
 	}
@@ -78,7 +78,8 @@ char *ret_dollar(t_env *env, char *str, int i)
 	i++;
 	str2 = ft_split(&str[i], ' ');
 	ret = NULL;
-	printf("str2[0]-> [%s]\n", str2[0]);
+	if (ft_strcmp(str2[0], "?") == 0)
+		return ("??");
 	while (tmp)
 	{
 		if (ft_strcmp(tmp->env_name, str2[0]) == 0)
@@ -89,5 +90,7 @@ char *ret_dollar(t_env *env, char *str, int i)
 		}
 		tmp = tmp->next;
 	}
+	if (!ret)
+		return (" ");
 	return (ret);
 }

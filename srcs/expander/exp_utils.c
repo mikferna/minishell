@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:15:03 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/23 13:49:08 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/10/24 13:00:23 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,22 @@
 
 char	*delete_quotes(char *str, char c)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	char	*tmp;
+	char	**split;
 
-	i = 0;
+	i = 1;
 	j = 0;
-	while (str[i])
+	tmp = NULL;
+	split = ft_split(str, c);
+	tmp = ft_substr(split[0], 0, ft_strlen(split[0]));
+	while(split[i])
 	{
-		printf("str[%d] = %c\n", i, str[i]);
-		if (str[i] == c)
-		{
-			j = 0;
-			while (str[i + j] == c)
-				j++;
-			ft_strlcpy(&str[i], &str[i + j], ft_strlen(str) - i);
-		}
+		tmp = ft_strjoin(tmp, split[i]);
 		i++;
 	}
-	return (str);
+	return (tmp);
 }
 
 size_t	dollar_sign(char *str)
