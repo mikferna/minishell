@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:10:24 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/24 15:43:20 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/10/25 11:56:31 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ char *ret_dollar(t_env *env, char *str, int i)
 	i++;
 	str2 = ft_split(&str[i], ' ');
 	ret = NULL;
-	if (ft_strcmp(str2[0], "?") == 0)
-		return ("??");
+	if (str2[0][0] == '?')
+		return (ft_strjoin(ft_itoa(g_global.error_num), ft_strtrim(str2[0], "?")));
 	while (tmp)
 	{
 		if (ft_strcmp(tmp->env_name, str2[0]) == 0)

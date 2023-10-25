@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:44:19 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/23 13:49:16 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/10/25 11:35:34 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,13 @@ typedef struct s_env
 	char			*env;
 	struct s_env	*next;
 }				t_env;
+
+typedef struct s_global
+{
+	int	error_num;
+}	t_global;
+
+t_global	g_global;
 
 /*-00_main.c-*/
 int		main(int argc, char **argv, char **envp);
