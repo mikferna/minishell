@@ -1,34 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_memmove                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/06 11:20:16 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/18 13:23:19 by mikferna         ###   ########.fr       */
+/*   Created: 2023/10/23 13:03:20 by mikferna          #+#    #+#             */
+/*   Updated: 2023/10/23 13:03:28 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-//aqui entran env, y el arg
-int	envi(t_env *env, char **args)
+void	*ft_memmove(void *dst, const void *src, size_t n)
 {
-	t_env	*temp;
+	size_t	i;
 
-	temp = env;
-	if (args[1])
+	i = 0;
+	if (src == 0 && dst == 0)
+		return (0);
+	if (dst < src)
 	{
-		ft_putstr_fd("env: ", 2);
-		ft_putstr_fd(args[1], 2);
-		ft_putstr_fd(": No such file or directory", 2);
-		return (127);
+		while (n)
+		{
+			((char *)dst)[i] = ((char *)src)[i];
+			i++;
+			n--;
+		}
 	}
-	while (temp)
+	else
 	{
-		printf("%s=%s\n", temp->env_name, temp->env);
-		temp = temp->next;
+		while (n)
+		{
+			((char *)dst)[n - 1] = ((char *)src)[n - 1];
+			n--;
+		}
 	}
-	return (0);
+	return (dst);
 }

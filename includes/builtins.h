@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 12:12:33 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/17 13:46:04 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/10/24 13:38:04 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,8 @@
 # include <stdlib.h>
 # include "minishell.h"
 
-typedef struct s_env
-{
-	char			*env_name;
-	char			*env;
-	struct s_env	*next;
-}				t_env;
+//puede que lo de abajo de error no lo he probado
+typedef struct s_env t_env;
 
 /*-cd.c-*/
 int		cd(t_env *env, char **args);
@@ -39,12 +35,12 @@ int		do_nothing(void);
 int		pwd(char **args);
 
 /*-export.c-*/
-int		export(t_env **env, char **args);
-int		do_export(t_env *temp, char **args);
+int		export(t_env *env, char **args);
+int		do_export(t_env *env, t_env	*temp, char **args);
 
 /*-unset.c-*/
 int		unset(t_env *env, char **args);
-void	do_unset(t_env **env, t_env **past_env);
+void	do_unset(t_env *temp, t_env *temp2, t_env *env, int x);
 
 /*-env.c-*/
 int		envi(t_env *env, char **args);

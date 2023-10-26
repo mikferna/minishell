@@ -1,34 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   exp_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/06 11:20:16 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/18 13:23:19 by mikferna         ###   ########.fr       */
+/*   Created: 2023/10/19 12:15:03 by mikferna          #+#    #+#             */
+/*   Updated: 2023/10/24 13:00:23 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-//aqui entran env, y el arg
-int	envi(t_env *env, char **args)
+char	*delete_quotes(char *str, char c)
 {
-	t_env	*temp;
+	int		i;
+	int		j;
+	char	*tmp;
+	char	**split;
 
-	temp = env;
-	if (args[1])
+	i = 1;
+	j = 0;
+	tmp = NULL;
+	split = ft_split(str, c);
+	tmp = ft_substr(split[0], 0, ft_strlen(split[0]));
+	while(split[i])
 	{
-		ft_putstr_fd("env: ", 2);
-		ft_putstr_fd(args[1], 2);
-		ft_putstr_fd(": No such file or directory", 2);
-		return (127);
+		tmp = ft_strjoin(tmp, split[i]);
+		i++;
 	}
-	while (temp)
+	return (tmp);
+}
+
+size_t	dollar_sign(char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
 	{
-		printf("%s=%s\n", temp->env_name, temp->env);
-		temp = temp->next;
+		if (str[i] == '$')
+			return (i + 1);
+		i++;
 	}
 	return (0);
 }

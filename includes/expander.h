@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   expander.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/06 11:20:16 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/18 13:23:19 by mikferna         ###   ########.fr       */
+/*   Created: 2023/10/19 13:22:31 by mikferna          #+#    #+#             */
+/*   Updated: 2023/10/23 12:21:14 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#ifndef EXPORT_H
+# define EXPORT_H
 
-//aqui entran env, y el arg
-int	envi(t_env *env, char **args)
-{
-	t_env	*temp;
+# include <unistd.h>
+# include <stdlib.h>
+# include "minishell.h"
 
-	temp = env;
-	if (args[1])
-	{
-		ft_putstr_fd("env: ", 2);
-		ft_putstr_fd(args[1], 2);
-		ft_putstr_fd(": No such file or directory", 2);
-		return (127);
-	}
-	while (temp)
-	{
-		printf("%s=%s\n", temp->env_name, temp->env);
-		temp = temp->next;
-	}
-	return (0);
-}
+/*-expander.c-*/
+char	**expander(t_env *env, char **str);
+
+/*-exp_utils.c-*/
+char	*delete_quotes(char *str, char c);
+size_t	dollar_sign(char *str);
+char	*ret_doll_str(t_env *env, char *str);
+char	*ret_dollar(t_env *env, char *str, int i);
+
+#endif

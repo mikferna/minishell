@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/06 11:20:16 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/18 13:23:19 by mikferna         ###   ########.fr       */
+/*   Created: 2023/10/19 12:16:31 by mikferna          #+#    #+#             */
+/*   Updated: 2023/10/23 13:46:22 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-//aqui entran env, y el arg
-int	envi(t_env *env, char **args)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	t_env	*temp;
+	size_t	i;
 
-	temp = env;
-	if (args[1])
+	i = 0;
+	while ((i < (dstsize - 1)) && src[i] && dstsize > 0)
 	{
-		ft_putstr_fd("env: ", 2);
-		ft_putstr_fd(args[1], 2);
-		ft_putstr_fd(": No such file or directory", 2);
-		return (127);
+		dst[i] = src[i];
+		i++;
 	}
-	while (temp)
-	{
-		printf("%s=%s\n", temp->env_name, temp->env);
-		temp = temp->next;
-	}
-	return (0);
+	if (dstsize != 0)
+		dst[i] = '\0';
+	return (ft_strlen(src));
 }

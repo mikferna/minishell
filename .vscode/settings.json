@@ -1,0 +1,9 @@
+{
+	"files.associations": {
+		"minishell.h": "c",
+		"sstream": "c",
+		"typeinfo": "c",
+		"builtins.h": "c",
+		"ft_memmove": "c"
+	}
+}

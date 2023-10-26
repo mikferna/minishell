@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:15:54 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/17 13:16:32 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/10/18 11:30:39 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,15 @@ int	ft_lstsize(t_env *lst)
 		i++;
 	}
 	return (i);
+}
+
+void	ft_lstadd_back(t_env *lst, t_env *new)
+{
+	while (lst->next)
+	{
+		lst = lst->next;
+	}
+	lst->next = new;
 }
 
 char *end_strchar(char *str, char c)
