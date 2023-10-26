@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:59:02 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/18 12:32:44 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/10/26 11:58:54 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,4 @@ void	init_structs(t_ldata **line, t_env **env, char **envp)
 {
 	*line = malloc(sizeof(t_ldata));
 	get_env(envp, env);
-}
-
-void prueba()
-{
-	printf("prueba\n");
 }

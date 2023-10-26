@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:13:23 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/26 11:37:16 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/10/26 12:05:06 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	minishell(t_ldata *line, t_env *env)
 	char *hola[4];
 	int i = 0;
 	hola[0] = "echo";
-	hola[1] = "hola\"simon\"volibar";
+	hola[1] = "hola\"simon\"\"\"\"\"\"\"\"\"\"\"\"\"\"volibar";
 	hola[2] = "adios";
 	hola[3] = NULL;
 	g_global.error_num = 0;

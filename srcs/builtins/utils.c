@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 12:16:45 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/26 11:37:35 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:14:07 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,44 +36,3 @@ int	ft_strcmp(char *s1, char *s2)
 	}
 	return (s1[i] - s2[i]);
 }
-
-/* char	**ft_split_comillas_dobles(char const *s, char c)
-{
-	char	**result;
-	size_t	i;
-	int		j;
-	int		start;
-	int		comillad;
-	int		comillas;
-
-	comillad = 0;
-	comillas = 0;
-	if (!s)
-		return (NULL);
-	result = (char **)malloc(sizeof(char *) * (ft_doublesize(s, c) + 1));
-	if (!result)
-		return (NULL);
-	start = -1;
-	i = -1;
-	j = 0;
-	while (++i <= ft_strlen(s))
-	{
-		if (s[i] == '"' && comillad == 0 && comillas == 0)
-			comillad = 1;
-		else if (s[i] == '\'' && comillad == 0 && comillas == 0)
-			comillas = 1;
-		else if (s[i] == '"' && comillad == 1 && comillas == 0)
-			comillad = 0;
-		else if (s[i] == '\'' && comillad == 0 && comillas == 1)
-			comillas = 0;
-		if (s[i] != c && start < 0)
-			start = i;
-		else if (start >= 0 && (s[i] == c || i == ft_strlen(s)) && (comillad == 0 || comillas == 0))
-		{
-			result[j++] = ft_substr(s, start, (i - start));
-			start = -1;
-		}
-	}
-	result[j] = NULL;
-	return (result);
-} */
