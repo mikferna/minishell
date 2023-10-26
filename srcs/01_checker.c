@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:02:12 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/26 11:59:26 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/10/26 12:49:37 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ int	ft_check_quotes(char *s, int comillasd, int comillas, int i)
 			if (s[i] == '\'')
 				comillas++;
 		}
-		i++;
+		if(s[i] != '\0')
+			i++;
 	}
 	if (comillasd % 2 != 0 || comillas % 2 != 0)
 		return (1);
