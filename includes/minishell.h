@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:44:19 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/26 12:03:07 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/10/26 13:13:36 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,13 @@ int		ft_lstsize(t_env *lst);
 void	ft_lstadd_back(t_env *lst, t_env *new);
 char	*start_strchar(char *str, char c);
 char	*end_strchar(char *str, char c);
-char	**ft_split_comillas_dobles(char const *s, char c);
+char	**ft_split_comillas(char const *s, char c);
 
 /*-03_minishell.c-*/
 void	minishell(t_ldata *line, t_env *env);
 
 /*-04_check_redir.c-*/
 int			ft_check_redir(char *s);
+int	ft_doublesize(const char *s, char c);
 
 #endif
