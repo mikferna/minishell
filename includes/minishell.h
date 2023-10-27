@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:44:19 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/26 13:13:36 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/10/27 13:33:59 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,9 @@ typedef struct s_global
 
 t_global	g_global;
 
+//readline
+void rl_replace_line(const char *text, int clear_undo);
+
 /*-00_main.c-*/
 int		main(int argc, char **argv, char **envp);
 void	init_structs(t_ldata **line, t_env **env, char **envp);
@@ -81,5 +84,8 @@ void	minishell(t_ldata *line, t_env *env);
 /*-04_check_redir.c-*/
 int			ft_check_redir(char *s);
 int	ft_doublesize(const char *s, char c);
+
+/*-05_signal.c*/
+void run_singl(int num);
 
 #endif
