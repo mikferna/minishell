@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:44:19 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/04 11:26:31 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/10/26 13:13:36 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft.h"
 # include "builtins.h"
+# include "expander.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
@@ -36,23 +37,49 @@ typedef struct s_ldata
 	char *inp_line;
 }		t_ldata;
 
+typedef struct s_token
+{
+	char *inp_line;
+}		t_token;
+
+typedef struct s_env
+{
+	char			*env_name;
+	char			*env;
+	struct s_env	*next;
+}				t_env;
+
+typedef struct s_global
+{
+	int	error_num;
+}	t_global;
+
+t_global	g_global;
+
 /*-00_main.c-*/
 int		main(int argc, char **argv, char **envp);
 void	init_structs(t_ldata **line, t_env **env, char **envp);
 
 /*-01_checker.c-*/
-int		check_line_quote(char *s);
+int		check_line_quote(t_ldata *s);
 int		check_redirections(char *s);
 int		check_sides(char *s, char w, int i);
+int		ft_check_quotes(char *s, int comillasd, int comillas, int i);
 
 /*-02_node_utils.c-*/
 void	env_addback(t_env	*list, char *str, char *str2);
 t_env	*ft_lstnew(char *str, char *str2);
 int		ft_lstsize(t_env *lst);
+void	ft_lstadd_back(t_env *lst, t_env *new);
 char	*start_strchar(char *str, char c);
 char	*end_strchar(char *str, char c);
+char	**ft_split_comillas(char const *s, char c);
 
 /*-03_minishell.c-*/
 void	minishell(t_ldata *line, t_env *env);
+
+/*-04_check_redir.c-*/
+int			ft_check_redir(char *s);
+int	ft_doublesize(const char *s, char c);
 
 #endif

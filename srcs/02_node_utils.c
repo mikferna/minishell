@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:15:54 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/09 13:44:48 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/10/18 11:30:39 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,16 @@ int	ft_lstsize(t_env *lst)
 	return (i);
 }
 
-char *start_strchar(char *str, char c)
+void	ft_lstadd_back(t_env *lst, t_env *new)
+{
+	while (lst->next)
+	{
+		lst = lst->next;
+	}
+	lst->next = new;
+}
+
+char *end_strchar(char *str, char c)
 {
 	int		len;
 	int		i;
@@ -67,6 +76,8 @@ char *start_strchar(char *str, char c)
 	len = ft_strlen(str);
 	while (str[i] && str[i] != c)
 		i++;
+	if (i == len)
+		return (NULL);
 	ret = (char *)malloc(sizeof(char) * (len - i));
 	i++;
 	if (!ret)
@@ -77,20 +88,21 @@ char *start_strchar(char *str, char c)
 	return (ret);
 }
 
-char *end_strchar(char *str, char c)
+char *start_strchar(char *str, char c)
 {
 	int		i;
 	int		start;
 	char	*ret;
+	int		len;
 
 	if (!str)
 		return NULL;
-	int length = 0;
-	while (str[length] != '\0')
-		length++;
+	len = ft_strlen(str);
 	i = 0;
 	while (str[i] != '\0' && str[i] != c)
 		i++;
+	if (i == len)
+		return (NULL);
 	ret = (char *)malloc(sizeof(char) * (i + 1));
 	if (!ret)
 		return NULL;

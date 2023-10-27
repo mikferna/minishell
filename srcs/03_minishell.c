@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   03_minishell.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:13:23 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/03 12:35:45 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/10/26 13:13:20 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,26 @@
 void	minishell(t_ldata *line, t_env *env)
 {
 	(void)line;
-	(void)env;
+	//(void)env;
+	char **hola;
+	int i = 0;
+	/* hola[0] = "echo";
+	hola[1] = "hola\"simon\"\"\"\"\"\"\"\"\"\"\"\"\"\"volibar";
+	hola[2] = "adios";
+	hola[3] = NULL; */
+	hola = ft_split_comillas(line->inp_line, ' ');
+	g_global.error_num = 0;
+	while (hola[i])
+	{
+		printf("%s\n", hola[i]);
+		i++;
+	}
+	expander(env, hola);
+	i = 0;
+	while (hola[i])
+	{
+		printf("%s\n", hola[i]);
+		i++;
+	}
+	//pwd(NULL);
 }

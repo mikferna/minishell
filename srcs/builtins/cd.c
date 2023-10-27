@@ -6,12 +6,13 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 12:11:51 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/04 14:15:01 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/10/11 13:08:36 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+//aqui entra el env y como args 1-cd 2-lo que venga o vacio
 int	cd(t_env *env, char **args)
 {
 	int	i;

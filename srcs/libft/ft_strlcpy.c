@@ -1,41 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/23 12:24:12 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/27 12:02:40 by mikferna         ###   ########.fr       */
+/*   Created: 2023/10/19 12:16:31 by mikferna          #+#    #+#             */
+/*   Updated: 2023/10/23 13:46:22 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	unsigned int	y1;
-	unsigned int	y2;
-	unsigned int	x;
-	unsigned int	i;
-	char			*str1;
+	size_t	i;
 
-	if (!s1 || !s2)
-		return (NULL);
-	y1 = ft_strlen(s1);
-	y2 = ft_strlen(s2);
 	i = 0;
-	x = -1;
-	str1 = malloc(sizeof(char) * (y1 + y2 + 1));
-	if (!str1)
-		return (NULL);
-	while (s1[i])
+	while ((i < (dstsize - 1)) && src[i] && dstsize > 0)
 	{
-		str1[i] = s1[i];
+		dst[i] = src[i];
 		i++;
 	}
-	while (s2[++x])
-		str1[i++] = s2[x];
-	str1[i] = '\0';
-	return (str1);
+	if (dstsize != 0)
+		dst[i] = '\0';
+	return (ft_strlen(src));
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 12:29:28 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/09 15:43:54 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/10/26 13:13:32 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	ft_doublesize(const char *s, char c)
+int	ft_doublesize(const char *s, char c)
 {
 	int	size;
 

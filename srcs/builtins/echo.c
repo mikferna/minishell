@@ -1,41 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/23 12:24:12 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/27 12:02:40 by mikferna         ###   ########.fr       */
+/*   Created: 2023/10/11 12:57:09 by mikferna          #+#    #+#             */
+/*   Updated: 2023/10/16 12:32:20 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+int	mini_echo(t_env *env, char **args)
 {
-	unsigned int	y1;
-	unsigned int	y2;
-	unsigned int	x;
-	unsigned int	i;
-	char			*str1;
+	int	n;
+	int	i;
 
-	if (!s1 || !s2)
-		return (NULL);
-	y1 = ft_strlen(s1);
-	y2 = ft_strlen(s2);
-	i = 0;
-	x = -1;
-	str1 = malloc(sizeof(char) * (y1 + y2 + 1));
-	if (!str1)
-		return (NULL);
-	while (s1[i])
+	n = 0;
+	i = 1;
+	env = 0;
+	if (args[1] && args[1][0] == '-')
 	{
-		str1[i] = s1[i];
+		n = 1;
+		while (args[1][i])
+		{
+			if(args[1][i] != 'n')
+				n = 0;
+			i++;
+		}
+	}
+	i = n + 1;
+	while (args[i])
+	{
+		ft_putstr_fd(args[i], 1);
+		if (args[i + 1])
+			write(1, " ", 1);
 		i++;
 	}
-	while (s2[++x])
-		str1[i++] = s2[x];
-	str1[i] = '\0';
-	return (str1);
+	if (n == 0)
+		write(1, "\n", 1);
+	return (0);
 }

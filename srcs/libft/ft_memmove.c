@@ -1,41 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_memmove                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/23 12:24:12 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/27 12:02:40 by mikferna         ###   ########.fr       */
+/*   Created: 2023/10/23 13:03:20 by mikferna          #+#    #+#             */
+/*   Updated: 2023/10/23 13:03:28 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+void	*ft_memmove(void *dst, const void *src, size_t n)
 {
-	unsigned int	y1;
-	unsigned int	y2;
-	unsigned int	x;
-	unsigned int	i;
-	char			*str1;
+	size_t	i;
 
-	if (!s1 || !s2)
-		return (NULL);
-	y1 = ft_strlen(s1);
-	y2 = ft_strlen(s2);
 	i = 0;
-	x = -1;
-	str1 = malloc(sizeof(char) * (y1 + y2 + 1));
-	if (!str1)
-		return (NULL);
-	while (s1[i])
+	if (src == 0 && dst == 0)
+		return (0);
+	if (dst < src)
 	{
-		str1[i] = s1[i];
-		i++;
+		while (n)
+		{
+			((char *)dst)[i] = ((char *)src)[i];
+			i++;
+			n--;
+		}
 	}
-	while (s2[++x])
-		str1[i++] = s2[x];
-	str1[i] = '\0';
-	return (str1);
+	else
+	{
+		while (n)
+		{
+			((char *)dst)[n - 1] = ((char *)src)[n - 1];
+			n--;
+		}
+	}
+	return (dst);
 }
