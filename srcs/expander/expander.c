@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:10:24 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/25 11:56:31 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/10/30 12:51:46 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,19 @@ char	**expander(t_env *env, char **str)
 	while (str[i])
 	{
 		j = 0;
-		while (str[i][j] && (str[i][j] != '\'' && str[i][j] != '\"'))
+		while (str[i][j] && (str[i][j] != '\'' && str[i][j] != '\"') && str[i][j] != '$')
 			j++;
 		if (str[i][j] != '\'' && dollar_sign(str[i]) != 0
 			&& str[i][dollar_sign(str[i])] != '\0')
 		{
-			tmp = ret_doll_str(env, str[i]); //aqui tiene que devolver la frase con el dolar cambiado o sin cambiar
+			tmp = ret_doll_str(env, str[i]);
+			free(str[i]); //aqui tiene que devolver la frase con el dolar cambiado o sin cambiar
 			str[i] = tmp;
 		}
+		printf("str[i]->[%s]\n", str[i]);
+		j = 0;
+		while (str[i][j] && (str[i][j] != '\'' && str[i][j] != '\"'))
+			j++;
 		if (ft_strncmp(str[0], "export", ft_strlen(str[0]) - 1) != 0)
 		{
 			if (str[i][j] == '\'')
@@ -55,16 +60,20 @@ char	*ret_doll_str(t_env *env, char *str)
 		if (str[i] == '$')
 		{
 			tmp = ft_substr(str, 0, i);
-			tmp = ft_strjoin(tmp, ret_dollar(env, str, i));
-			while (str[i] != ' ' && str[i] != '\0')
-				i++;
+			if (tmp)
+				tmp = ft_strjoin(tmp, ret_dollar(env, str, i));
+			while (str[i] != ' ' && str[i] != '\0' && str[i] != '\"' && str[i] != '\'')
+				i++; 
 			tmp = ft_strjoin(tmp, &str[i]);
-			//free(str);
-			str = tmp;
+			if (ft_strcmp(tmp, "") == 0)
+				tmp = " ";
 			i = 0;
+			str = tmp;
 		}
 		i++;
 	}
+	if (!tmp)
+		tmp = " ";
 	return (tmp);
 }
 
@@ -72,17 +81,21 @@ char *ret_dollar(t_env *env, char *str, int i)
 {
 	t_env 	*tmp;
 	char 	**str2;
+	char	**str3;
 	char 	*ret;
 
 	tmp = env;
 	i++;
 	str2 = ft_split(&str[i], ' ');
+	str3 = ft_split(str2[0], '\"');
+	str3 = ft_split(str3[0], '\'');
+	i = 1;
 	ret = NULL;
-	if (str2[0][0] == '?')
-		return (ft_strjoin(ft_itoa(g_global.error_num), ft_strtrim(str2[0], "?")));
+	if (str3[0][0] == '?')
+		return (ft_strjoin(ft_itoa(g_global.error_num), ft_strtrim(str3[0], "?")));
 	while (tmp)
 	{
-		if (ft_strcmp(tmp->env_name, str2[0]) == 0)
+		if (ft_strcmp(tmp->env_name, str3[0]) == 0)
 		{
 			ret = malloc(sizeof(char) * ft_strlen(tmp->env));
 			ret = ft_strdup(tmp->env);
@@ -90,7 +103,13 @@ char *ret_dollar(t_env *env, char *str, int i)
 		}
 		tmp = tmp->next;
 	}
-	if (!ret)
-		return (" ");
+	if (str3[1] && !ret)
+	{
+		ret = "";
+		while (str3[i])
+			ret = ft_strjoin(ret, str3[i++]);
+	}
+	else if (!ret)
+		return ("");
 	return (ret);
 }

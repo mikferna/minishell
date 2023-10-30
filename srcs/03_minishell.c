@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:13:23 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/27 11:45:31 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/10/30 12:50:34 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	minishell(t_ldata *line, t_env *env)
 	hola[3] = NULL; */
 	hola = ft_split_comillas(line->inp_line, ' ');
 	g_global.error_num = 0;
-	
 	while (hola[i])
 	{
 		printf("%s\n", hola[i]);

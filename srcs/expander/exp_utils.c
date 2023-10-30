@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:15:03 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/26 13:12:56 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/10/30 12:51:20 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ size_t	dollar_sign(char *str)
 	}
 	return (0);
 }
-
 
 char	**ft_split_comillas(char const *s, char c)
 {

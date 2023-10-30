@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 10:39:27 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/09 15:55:53 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/10/30 11:51:30 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t	i;
 
 	i = 0;
+	if (len == 0)
+		return ("");
 	if (len > ft_strlen(s))
 		p = malloc(sizeof(char) * (ft_strlen(s) + 1));
 	else
