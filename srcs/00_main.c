@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:59:02 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/27 12:03:43 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/10/30 12:02:34 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	main(int argc, char **argv, char **envp)
 		line->inp_line = readline("miñishell> ");
 		if (line->inp_line)
 		{
-			printf("entra");
 			check = check_line_quote(line);
 			if (check >= 1)
 			{

@@ -6,34 +6,32 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 11:28:49 by jumoncad          #+#    #+#             */
-/*   Updated: 2023/10/27 13:56:36 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/10/30 12:15:56 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	restore_prompt(int sig)
+void	restore_prompt()
 {
 	g_global.error_num = 130;
 	write(1, "\n", 1);
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
-	(void)sig;
 }
 
-void	ctrl_c(int sig)
+/* void	ctrl_c(int sig)
 {
 	g_global.error_num = 130;
 	write(1, "\n", 1);
 	(void)sig;
-}
+} */
 
-void	back_slash(int sig)
+void	back_slash()
 {
 	g_global.error_num = 131;
 	printf("Quit (core dumped)\n");
-	(void)sig;
 }
 
 void run_singl(int num)
@@ -51,7 +49,7 @@ void run_singl(int num)
 	if (num == 3)
 	{
 		ft_putstr_fd("exit\n", 1);
-		exit(0);
+		exit(130);
 	}
 }
 
