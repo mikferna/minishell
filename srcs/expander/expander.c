@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:10:24 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/27 13:45:04 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/10/30 11:56:04 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,22 +55,20 @@ char	*ret_doll_str(t_env *env, char *str)
 
 	i = 0;
 	tmp = NULL;
-	printf("[%s]LOL\n", str);
 	while (str[i])
 	{
 		if (str[i] == '$')
 		{
 			tmp = ft_substr(str, 0, i);
-			printf("tmp1->[%s]\n", tmp);
 			if (tmp)
 				tmp = ft_strjoin(tmp, ret_dollar(env, str, i));
-			printf("tmp2->[%s]\n", tmp);
 			while (str[i] != ' ' && str[i] != '\0' && str[i] != '\"' && str[i] != '\'')
 				i++; 
 			tmp = ft_strjoin(tmp, &str[i]);
-			printf("tmp3->[%s]\n", tmp);
+			if (ft_strcmp(tmp, "") == 0)
+				tmp = " ";
 			i = 0;
-			break;
+			str = tmp;
 		}
 		i++;
 	}
