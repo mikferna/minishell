@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:10:24 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/30 11:56:04 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/10/31 13:07:04 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	**expander(t_env *env, char **str)
 		if (str[i][j] != '\'' && dollar_sign(str[i]) != 0
 			&& str[i][dollar_sign(str[i])] != '\0')
 		{
-			tmp = ret_doll_str(env, str[i]);
+			tmp = ret_doll_str(env, str[i], 0);
 			free(str[i]); //aqui tiene que devolver la frase con el dolar cambiado o sin cambiar
 			str[i] = tmp;
 		}
@@ -48,26 +48,25 @@ char	**expander(t_env *env, char **str)
 	return (str);
 }
 
-char	*ret_doll_str(t_env *env, char *str)
+char	*ret_doll_str(t_env *env, char *str, int i)
 {
 	char	*tmp;
-	int		i;
 
-	i = 0;
 	tmp = NULL;
 	while (str[i])
 	{
 		if (str[i] == '$')
 		{
-			tmp = ft_substr(str, 0, i);
+			i++;
+			tmp = ft_substr(str, 0, i - 1);
 			if (tmp)
-				tmp = ft_strjoin(tmp, ret_dollar(env, str, i));
-			while (str[i] != ' ' && str[i] != '\0' && str[i] != '\"' && str[i] != '\'')
-				i++; 
+				tmp = ft_strjoin(tmp, ret_dollar(env, str, i - 1));
+			while (str[i] != ' ' && str[i] != '\0' && str[i] != '\"' && str[i] != '\'' && str[i] != '$')
+				i++;
 			tmp = ft_strjoin(tmp, &str[i]);
 			if (ft_strcmp(tmp, "") == 0)
 				tmp = " ";
-			i = 0;
+			i = 1;
 			str = tmp;
 		}
 		i++;
@@ -89,6 +88,9 @@ char *ret_dollar(t_env *env, char *str, int i)
 	str2 = ft_split(&str[i], ' ');
 	str3 = ft_split(str2[0], '\"');
 	str3 = ft_split(str3[0], '\'');
+	printf("str3.1[0]->[%s]\n", str3[0]);
+	str3 = ft_split(str3[0], '$');
+	printf("str3.2[0]->[%s]\n", str3[0]);
 	i = 1;
 	ret = NULL;
 	if (str3[0][0] == '?')
