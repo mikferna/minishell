@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   03_minishell.c                                     :+:      :+:    :+:   */
+/*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/02 13:13:23 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/31 14:22:10 by mikferna         ###   ########.fr       */
+/*   Created: 2023/10/31 13:37:49 by mikferna          #+#    #+#             */
+/*   Updated: 2023/10/31 14:22:28 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#ifndef EXECUTION_H
+# define EXECUTION_H
 
-void	minishell(t_ldata *line, t_env *env)
-{
-	char	**input;
+# include <unistd.h>
+# include <stdlib.h>
+# include "minishell.h"
 
-	input = ft_split_comillas(line->inp_line, ' ');
-	execution(input, env);
-}
+/*-execution.c-*/
+void	execution(char **input, t_env *env);
+
+#endif

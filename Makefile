@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+         #
+#    By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/04 16:06:29 by mikferna          #+#    #+#              #
-#    Updated: 2023/10/26 12:00:10 by jumoncad         ###   ########.fr        #
+#    Updated: 2023/10/31 14:28:13 by mikferna         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,8 @@ SRCS = srcs/00_main.c \
 	srcs/builtins/utils.c \
 	srcs/builtins/echo.c \
 	srcs/expander/expander.c \
-	srcs/expander/exp_utils.c
+	srcs/expander/exp_utils.c \
+	srcs/execution/execution.c
 
 # Directorios de objetos correspondientes a las rutas de los archivos de origen
 OBJS = $(addprefix $(DIR_OBJS), $(SRCS:.c=.o))
