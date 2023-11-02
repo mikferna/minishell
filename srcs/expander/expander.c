@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:10:24 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/31 13:07:04 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/10/31 15:50:32 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ char	**expander(t_env *env, char **str)
 			free(str[i]); //aqui tiene que devolver la frase con el dolar cambiado o sin cambiar
 			str[i] = tmp;
 		}
-		printf("str[i]->[%s]\n", str[i]);
 		j = 0;
 		while (str[i][j] && (str[i][j] != '\'' && str[i][j] != '\"'))
 			j++;
@@ -59,8 +58,7 @@ char	*ret_doll_str(t_env *env, char *str, int i)
 		{
 			i++;
 			tmp = ft_substr(str, 0, i - 1);
-			if (tmp)
-				tmp = ft_strjoin(tmp, ret_dollar(env, str, i - 1));
+			tmp = ft_strjoin(tmp, ret_dollar(env, str, i - 1));
 			while (str[i] != ' ' && str[i] != '\0' && str[i] != '\"' && str[i] != '\'' && str[i] != '$')
 				i++;
 			tmp = ft_strjoin(tmp, &str[i]);
@@ -88,9 +86,7 @@ char *ret_dollar(t_env *env, char *str, int i)
 	str2 = ft_split(&str[i], ' ');
 	str3 = ft_split(str2[0], '\"');
 	str3 = ft_split(str3[0], '\'');
-	printf("str3.1[0]->[%s]\n", str3[0]);
 	str3 = ft_split(str3[0], '$');
-	printf("str3.2[0]->[%s]\n", str3[0]);
 	i = 1;
 	ret = NULL;
 	if (str3[0][0] == '?')
