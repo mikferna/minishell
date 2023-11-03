@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 12:35:45 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/02 13:08:19 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/03 13:26:26 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,7 @@ int unset(t_env **env, char **args)
 		while (temp)
 		{
 			if (ft_strcmp(temp->env_name, args[i]) == 0)
-			{
 				do_unset(env, temp, temp2, x);
-			}
 			x++;
 			temp2 = temp;
 			temp = temp->next;
@@ -43,7 +41,8 @@ int unset(t_env **env, char **args)
 void do_unset(t_env **env, t_env *temp, t_env *temp2, int x)
 {
 	if (x == 0)
-		*env = (*env)->next;
+		*env = temp->next;
 	else
 		temp2->next = temp->next;
 }
+
