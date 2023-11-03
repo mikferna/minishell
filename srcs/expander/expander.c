@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:10:24 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/03 11:39:28 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/03 12:36:50 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*ret_doll_str(t_env *env, char *str, int i)
 			tmp = ft_strjoin(tmp, &str[i]);
 			if (ft_strcmp(tmp, "") == 0)
 				tmp = " ";
-			i = 1;
+			i = -1;
 			str = tmp;
 		}
 		i++;
@@ -101,13 +101,7 @@ char *ret_dollar(t_env *env, char *str, int i)
 		}
 		tmp = tmp->next;
 	}
-	if (str3[1] && !ret)
-	{
-		ret = "";
-		while (str3[i])
-			ret = ft_strjoin(ret, str3[i++]);
-	}
-	else if (!ret)
+	if (!ret)
 		return ("");
 	return (ret);
 }
