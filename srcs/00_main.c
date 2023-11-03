@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:59:02 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/26 11:58:54 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/10/30 12:50:57 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,25 @@ int	main(int argc, char **argv, char **envp)
 	init_structs(&line, &env, envp);
 	while (1)
 	{
+		run_singl(1);
 		line->inp_line = readline("miñishell> ");
-		check = check_line_quote(line);
-		if (check >= 1)
+		if (line->inp_line)
 		{
-			if (check == 1)
-				printf("Input Error\n");
-			continue ;
+			check = check_line_quote(line);
+			if (check >= 1)
+			{
+				if (check == 1)
+					printf("Input Error\n");
+				continue ;
+			}
+			if (*line->inp_line != 0)
+				add_history(line->inp_line);
+			else
+				continue ;
+			minishell(line, env);
 		}
-		if (*line->inp_line != 0)
-			add_history(line->inp_line);
 		else
-			continue ;
-		minishell(line, env);
+			run_singl(3);
 	}
 	return (0);
 }

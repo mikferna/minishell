@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 16:01:16 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/30 13:15:39 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/03 11:28:08 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	ft_strlen(const char *str)
 	int	c;
 
 	c = 0;
+	if (!str)
+		return (0);
 	while (*str != '\0')
 	{
 		c++;

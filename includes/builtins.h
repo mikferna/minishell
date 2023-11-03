@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 12:12:33 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/24 13:38:04 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/02 13:08:54 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int		export(t_env *env, char **args);
 int		do_export(t_env *env, t_env	*temp, char **args);
 
 /*-unset.c-*/
-int		unset(t_env *env, char **args);
-void	do_unset(t_env *temp, t_env *temp2, t_env *env, int x);
+int		unset(t_env **env, char **args);
+void	do_unset(t_env **env, t_env *temp, t_env *temp2, int x);
 
 /*-env.c-*/
 int		envi(t_env *env, char **args);
