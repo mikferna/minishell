@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 11:54:21 by jumoncad          #+#    #+#             */
-/*   Updated: 2023/10/26 11:33:42 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/03 15:54:41 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,15 @@ int	check_stdout(char *s, int k)
 
 int	check_pipe(char *s, int k)
 {
-	if (s[k + 1] == ' ' || s[k + 1] == '\0')
+	if (s[k + 1] == ' ' && s[k + 2] == '\0')
 		return (1);
-	if (s[k + 1] == '|' && (s[k + 2] != '>' || s[k + 2] != '<' || s[k
-			+ 2] != '|'))
-		return (1);
-	else
+	if (s[k + 1] == ' ' && s[k + 2] != '\0')
 		return (0);
+	if (s[k + 1] == '>' && (s[k + 2] == '>' || s[k + 2] == '<' || s[k
+			+ 2] == '|'))
+		return (1);
+	if (s[k + 1] == '\0')
+		return (1);
 	return (1);
 }
 

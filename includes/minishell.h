@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:44:19 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/06 13:10:31 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/06 13:13:00 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ typedef struct s_env
 {
 	char			*env_name;
 	char			*env;
+	char			*key;
+	char			*value;
 	struct s_env	*next;
 }				t_env;
 
