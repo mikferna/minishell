@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:44:19 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/03 13:08:22 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/03 16:18:10 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ typedef struct s_env
 {
 	char			*env_name;
 	char			*env;
+	char			*key;
+	char			*value;
 	struct s_env	*next;
 }				t_env;
 
