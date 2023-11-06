@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:44:19 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/03 13:08:22 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/06 13:10:31 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct s_global
 t_global	g_global;
 
 //readline
-void rl_replace_line(const char *text, int clear_undo);
+void	rl_replace_line(const char *text, int clear_undo);
 
 /*-00_main.c-*/
 int		main(int argc, char **argv, char **envp);
@@ -83,10 +83,10 @@ char	**ft_split_comillas(char const *s, char c);
 void	minishell(t_ldata *line, t_env **env);
 
 /*-04_check_redir.c-*/
-int			ft_check_redir(char *s);
-int	ft_doublesize(const char *s, char c);
+int		ft_check_redir(char *s);
+int		ft_doublesize(const char *s, char c);
 
 /*-05_signal.c*/
-void run_singl(int num);
+void	run_singl(int num);
 
 #endif
