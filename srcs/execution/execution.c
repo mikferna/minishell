@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:34:39 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/06 13:31:34 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/07 11:36:42 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,6 @@ void	exec_cmd(char **input, t_env **env)
 
 void	execution(char **input, t_env **env)
 {
-	printf("input[0]: [%s]\n", input[0]);
 	if (ft_strcmp(input[0], "echo") == 0)
 		mini_echo(*env, input);
 	else if (ft_strcmp(input[0], "cd") == 0)
