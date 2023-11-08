@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 14:02:50 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/04 14:17:25 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/08 12:09:22 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ int	absolute_path(t_env *env, char *path)
 	else
 	{
 		if (access(path, F_OK) == -1)
-			printf("no such file or directory: ");
+			ft_putstr_fd("no such file or directory: ", 1);
 		else if (access(path, R_OK) == -1)
-			printf("permission denied: ");
-		printf("Chdir failed in absolute_path\n");
+			ft_putstr_fd("permission denied: ", 1);
+		ft_putstr_fd("Chdir failed in absolute_path\n", 1);
 		return (1);
 	}
 	return (0);
@@ -42,10 +42,10 @@ int	do_nothing(void)
 	else
 	{
 		if (access(".", F_OK) == -1)
-			printf("no such file or directory: ");
+			ft_putstr_fd("no such file or directory: ", 1);
 		else if (access(".", R_OK) == -1)
-			printf("permission denied: ");
-		printf("Chdir failed in do_nothing\n");
+			ft_putstr_fd("permission denied: ", 1);
+		ft_putstr_fd("Chdir failed in do_nothing\n", 1);
 		return (1);
 	}
 	return (0);

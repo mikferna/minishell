@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 12:11:51 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/31 15:44:35 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/08 12:08:43 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int	home_cd(t_env *env)
 	}
 	else
 	{
-		printf("cd: HOME not set\n");
-		printf("Chdir failed in home_cd\n");
+		ft_putstr_fd("cd: HOME not set\n", 1);
+		ft_putstr_fd("Chdir failed in home_cd\n", 1);
 		return (1);
 	}
 	return (0);
@@ -70,10 +70,10 @@ int	s_case(t_env *env)
 	else
 	{
 		if (access("/", F_OK) == -1)
-			printf("no such file or directory: ");
+			ft_putstr_fd("no such file or directory: ", 1);
 		else if (access("/", R_OK) == -1)
-			printf("permission denied: ");
-		printf("Chdir failed in s_case\n");
+			ft_putstr_fd("permission denied: ", 1);
+		ft_putstr_fd("Chdir failed in s_case\n", 1);
 		return (1);
 	}
 	return (0);
@@ -92,10 +92,10 @@ int	go_back(t_env *env)
 	else
 	{
 		if (access("..", F_OK) == -1)
-			printf("no such file or directory: ");
+			ft_putstr_fd("no such file or directory: ", 1);
 		else if (access("..", R_OK) == -1)
-			printf("permission denied: ");
-		printf("Chdir failed in go_back\n");
+			ft_putstr_fd("permission denied: ", 1);
+		ft_putstr_fd("Chdir failed in go_back\n", 1);
 		return (1);
 	}
 	return (0);

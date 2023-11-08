@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:34:39 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/07 11:36:42 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/08 12:16:59 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,19 +129,19 @@ void	exec_cmd(char **input, t_env **env)
 void	execution(char **input, t_env **env)
 {
 	if (ft_strcmp(input[0], "echo") == 0)
-		mini_echo(*env, input);
+		g_global.error_num = mini_echo(*env, input);
 	else if (ft_strcmp(input[0], "cd") == 0)
-		cd(*env, input);
+		g_global.error_num = cd(*env, input);
 	else if (ft_strcmp(input[0], "pwd") == 0)
-		pwd(input);
+		g_global.error_num = pwd(input);
 	else if (ft_strcmp(input[0], "export") == 0)
-		export(*env, input);
+		g_global.error_num = export(*env, input);
 	else if (ft_strcmp(input[0], "unset") == 0)
-		unset(env, input);
+		g_global.error_num = unset(env, input);
 	else if (ft_strcmp(input[0], "env") == 0)
-		envi(*env, input);
+		g_global.error_num = envi(*env, input);
 	else if (ft_strcmp(input[0], "exit") == 0)
-		exitt(input);
+		g_global.error_num = exitt(input);
 	else
 		exec_cmd(input, env);
 }
