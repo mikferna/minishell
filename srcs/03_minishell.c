@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   03_minishell.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:13:23 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/09 13:07:09 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/09 13:19:46 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ void	minishell(t_ldata *line, t_env **env)
 		if (input[0] && ft_strncmp(input[0], "	", 1) != 0)
 			execution(input, env);
 	}
-
-	
 	/**
 		comprobar si hay redireccion
 		if (true)

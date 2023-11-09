@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:34:39 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/09 13:09:36 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/09 14:00:23 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ char	*exec_bin(char **input, t_env **env)
 
 void	exec_cmd(char **input, t_env **env)
 {
-	
 	char	*path;
 	pid_t	pid;
 	int		fd[2];
@@ -129,20 +128,9 @@ void	exec_cmd(char **input, t_env **env)
 
 void redir_out(char **input, t_env **env, int i)
 {
-    int fd;
-	//(void) env;
+	int fd;
 	//(void) i;
-	//printf("input[0]: %s\n", input[i + 1]);
-	envi(*env, NULL);
-	printf("i-> %d\n",i);
-	int x = 0;
-	while (input[x])
-	{
-		printf("input[%d]: %s\n", x, input[x]);
-		x++;
-	}
-	/* fd = open(input[i + 1], O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	printf("fd: %d\n", fd);
+	fd = open(input[i + 1], O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd < 0)
 	{
 		ft_putstr_fd("minishell: ", 2);
@@ -151,12 +139,10 @@ void redir_out(char **input, t_env **env, int i)
 	}
 	else
 	{
-		printf("env: %s\n", (*env)->env);
-		printf("input[0]: %s\n", input[0]);
 		dup2(fd, 1);
 		close(fd);
 		exec_cmd(input, env);
-	} */
+	}
 }
 
 void	execution(char **input, t_env **env)
