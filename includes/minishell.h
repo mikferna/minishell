@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:44:19 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/06 13:13:00 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/08 13:15:31 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "builtins.h"
 # include "expander.h"
 # include "execution.h"
+# include "redirections.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
