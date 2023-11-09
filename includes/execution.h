@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:37:49 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/06 13:11:21 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/09 12:49:09 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@
 
 /*-execution.c-*/
 void	execution(char **input, t_env **env);
+void redir_out(char **input, t_env **env, int i);
 
 #endif
