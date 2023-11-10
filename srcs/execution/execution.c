@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:34:39 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/09 14:00:23 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/10 14:02:37 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void	exec_cmd(char **input, t_env **env)
 	char	*path;
 	pid_t	pid;
 	int		fd[2];
+
 	if (pipe(fd) == -1)
 		exit(1);
 	pid = fork();
@@ -111,7 +112,9 @@ void	exec_cmd(char **input, t_env **env)
 	if (pid == 0)
 	{
 		path = exec_bin(input, env);
-		if (execve(path, input, NULL) == -1)
+		if ((*env)->data->envp)
+			printf("(*env)->data->envp: %s\n", (*env)->data->envp[0]);
+		if (execve(path, input, (*env)->data->envp) == -1)
 		{
 			printf("minishell: %s: command not found\n", input[0]);
 			exit(1);
@@ -129,7 +132,7 @@ void	exec_cmd(char **input, t_env **env)
 void redir_out(char **input, t_env **env, int i)
 {
 	int fd;
-	//(void) i;
+	int stdout_cpy;
 	fd = open(input[i + 1], O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd < 0)
 	{
@@ -139,9 +142,13 @@ void redir_out(char **input, t_env **env, int i)
 	}
 	else
 	{
-		dup2(fd, 1);
+		printf("env->env: %s\n", (*env)->env_name);
+		stdout_cpy = dup(STDOUT_FILENO);
+		dup2(fd, STDOUT_FILENO);
 		close(fd);
 		exec_cmd(input, env);
+		dup2(stdout_cpy, STDOUT_FILENO);
+		close(stdout_cpy);
 	}
 }
 

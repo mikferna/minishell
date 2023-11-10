@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:44:19 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/08 13:15:31 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/10 14:15:11 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 typedef struct s_ldata
 {
 	char *inp_line;
+	char **envp;
 }		t_ldata;
 
 typedef struct s_token
@@ -50,6 +51,7 @@ typedef struct s_env
 	char			*env;
 	char			*key;
 	char			*value;
+	struct s_ldata	*data;
 	struct s_env	*next;
 }				t_env;
 
@@ -74,8 +76,8 @@ int		check_sides(char *s, char w, int i);
 int		ft_check_quotes(char *s, int comillasd, int comillas, int i);
 
 /*-02_node_utils.c-*/
-void	env_addback(t_env	*list, char *str, char *str2);
-t_env	*ft_lstnew(char *str, char *str2);
+void	env_addback(t_env	*list, char *str, char *str2, t_ldata *line);
+t_env	*ft_lstnew(char *str, char *str2, t_ldata *line);
 int		ft_lstsize(t_env *lst);
 void	ft_lstadd_back(t_env *lst, t_env *new);
 char	*start_strchar(char *str, char c);

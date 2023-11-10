@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 12:12:33 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/03 13:09:18 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/10 14:11:34 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 //puede que lo de abajo de error no lo he probado
 typedef struct s_env t_env;
+typedef struct s_ldata t_ldata;
 
 /*-cd.c-*/
 int		cd(t_env *env, char **args);
@@ -49,7 +50,7 @@ int		envi(t_env *env, char **args);
 int		exitt(char **args);
 
 /*-env_gen.c-*/
-void	get_env(char **envp, t_env **env);
+void	get_env(char **envp, t_env **env, t_ldata **line);
 
 /*-echo.c-*/
 int		mini_echo(t_env *env, char **args);

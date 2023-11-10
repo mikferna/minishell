@@ -6,13 +6,13 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:15:54 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/18 11:30:39 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/10 14:15:02 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	env_addback(t_env	*list, char *str, char *str2)
+void	env_addback(t_env	*list, char *str, char *str2, t_ldata *line)
 {
 	t_env	*c;
 
@@ -21,11 +21,12 @@ void	env_addback(t_env	*list, char *str, char *str2)
 	c = malloc(sizeof(t_env));
 	c->env = str;
 	c->env_name = str2;
+	c->data = line;
 	c->next = NULL;
 	list->next = c;
 }
 
-t_env	*ft_lstnew(char *str, char *str2)
+t_env	*ft_lstnew(char *str, char *str2, t_ldata *line)
 {
 	t_env	*new;
 
@@ -34,6 +35,7 @@ t_env	*ft_lstnew(char *str, char *str2)
 		return (NULL);
 	new->env = str;
 	new->env_name = str2;
+	new->data = line;
 	new->next = NULL;
 	return (new);
 }

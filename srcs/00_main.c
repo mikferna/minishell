@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:59:02 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/09 14:05:41 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/10 14:13:02 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,21 @@ int	main(int argc, char **argv, char **envp)
 	return (0);
 }
 
-void	init_structs(t_ldata **line, t_env **env, char **envp)
+void init_structs(t_ldata **line, t_env **env, char **envp)
 {
 	*line = malloc(sizeof(t_ldata));
-	get_env(envp, env);
+	if (*line == NULL)
+	{
+		fprintf(stderr, "Error: No se pudo asignar memoria para t_ldata\n");
+		exit(EXIT_FAILURE);
+	}
+	if (envp != NULL)
+		(*line)->envp = envp;
+	else
+	{
+		fprintf(stderr, "Error: envp es nulo\n");
+		exit(EXIT_FAILURE);
+	}
+	get_env(envp, env, line);
+	printf("envp[1]: %s\n", (*env)->data->envp[1]);
 }
