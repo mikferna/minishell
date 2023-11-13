@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   03_minishell.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:13:23 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/10 13:42:22 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/13 13:48:41 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,19 @@ int	ft_redirection(t_ldata *line)
 void ft_redir(t_ldata *line, t_env **env)
 {
 	int		i;
-	char	**input;
+	//char	**input;
 
 	i = 0;
-	input = ft_split_comillas(line->inp_line, ' ');
-	while (input[i])
+	//input = ft_split_comillas(line->inp_line, ' ');
+	line->input_cpy = ft_split_comillas(line->inp_line, ' ');
+	while (line->input_cpy[i])
 	{
-		if (ft_strncmp(input[i], ">", 1) == 0)
-			redir_out(input, env, i);
+		if (ft_strncmp(line->input_cpy[i], ">", 1) == 0)
+		{
+			redir_out(line->input_cpy, env, i);
+			i = 0;
+		}
+			//redir_out(line->input_cpy, env, i);
 /* 		else if (ft_strncmp(input[i], ">>", 2) == 0)
 			redir_out(input, env, i);
 		else if (ft_strncmp(input[i], "<", 1) == 0)
@@ -57,6 +62,10 @@ void ft_redir(t_ldata *line, t_env **env)
 			pipe(input, env, i); */
 		i++;
 	}
+	execution(line->input_cpy, env);
+	printf("stdout_cpy = %d\n", line->stdout_cpy);
+	dup2(line->stdout_cpy, STDOUT_FILENO);
+	//mclose(line->stdout_cpy);
 }
 
 void	minishell(t_ldata *line, t_env **env)

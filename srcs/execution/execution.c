@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:34:39 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/13 12:02:59 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/13 14:04:54 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,10 +127,57 @@ void	exec_cmd(char **input, t_env **env)
 		execve(path, input, NULL); */
 }
 
+char **obtener_input(char **input, char *c)
+{
+	int x;
+	char **input2;
+	
+	x = 0;
+	int i = 0;
+	
+	while (ft_strcmp(input[x], c) != 0)
+		x++;
+	while (input[i])
+		i++;
+	input2 = malloc(sizeof(char *) * (i - 1));
+	x = 0;
+	while (ft_strcmp(input[x], c) != 0)
+	{
+		input2[x] = ft_strdup(input[x]);
+		x++;
+	}
+	i = x;
+	x += 2;
+	while (input[x])
+	{
+		input2[i] = ft_strdup(input[x]);
+		x++;
+		i++;
+	}
+	input2[i] = NULL;
+	//free (input);
+	return (input2);
+}
+
+//echo hola > a d > b > c
+
+char **convert_input(char **input)
+{
+	/**añadir espacio cada vez que encuentre > */
+	int i;
+
+	i = 0;
+	
+}
+
 void redir_out(char **input, t_env **env, int i)
 {
 	int fd;
 	//int stdout_cpy;
+	char **input2;
+	
+	input2 = convert_input(input);
+	(*env)->data->input_cpy = obtener_input(input, ">");
 	fd = open(input[i + 1], O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd < 0)
 	{
@@ -140,12 +187,14 @@ void redir_out(char **input, t_env **env, int i)
 	}
 	else
 	{
-		//stdout_cpy = dup(STDOUT_FILENO);
-		//dup2(fd, STDOUT_FILENO);
-		//close(fd);
-		exec_cmd(input, env);
-		//dup2(stdout_cpy, STDOUT_FILENO);
-		//close(stdout_cpy);
+		(*env)->data->stdout_cpy = dup(STDOUT_FILENO);
+		dup2(fd, STDOUT_FILENO);
+		close(fd);
+		printf("stdout_cpy = %d\n",(*env)->data->stdout_cpy);
+		//exec_cmd(input2, env);
+		/* execution((*env)->data->input_cpy, env);
+		dup2((*env)->data->stdout_cpy, STDOUT_FILENO);
+		close((*env)->data->stdout_cpy); */
 	}
 }
 
