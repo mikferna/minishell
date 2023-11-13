@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:34:39 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/13 12:02:59 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/13 14:06:31 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,6 @@ void	exec_cmd(char **input, t_env **env)
 void redir_out(char **input, t_env **env, int i)
 {
 	int fd;
-	//int stdout_cpy;
 	fd = open(input[i + 1], O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd < 0)
 	{
@@ -143,7 +142,7 @@ void redir_out(char **input, t_env **env, int i)
 		//stdout_cpy = dup(STDOUT_FILENO);
 		//dup2(fd, STDOUT_FILENO);
 		//close(fd);
-		exec_cmd(input, env);
+		//exec_cmd(pathv2, env);
 		//dup2(stdout_cpy, STDOUT_FILENO);
 		//close(stdout_cpy);
 	}
