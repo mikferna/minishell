@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:34:39 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/15 12:20:36 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/15 12:49:04 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,13 +173,8 @@ void redir_out(char **input, t_env **env, int i)
 	}
 	else
 	{
-		//(*env)->data->stdout_cpy = dup(STDOUT_FILENO);
 		dup2(fd, STDOUT_FILENO);
 		close(fd);
-		//execution(input, env);
-		//exec_cmd(pathv2, env);
-		//dup2((*env)->data->stdout_cpy, STDOUT_FILENO);
-		//close((*env)->data->stdout_cpy);
 	}
 }
 

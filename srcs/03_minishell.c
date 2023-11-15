@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:13:23 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/15 12:21:13 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/15 13:11:27 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,44 @@ int	ft_redirection(t_ldata *line)
 	return (0);
 }
 
+char *procesar_redirecciones(const char *cadena, size_t len, char *ptr)
+{
+	char *cadena_modificada = (char *)malloc((len * 3 + 1) * sizeof(char));
+	if (cadena_modificada == NULL)
+		exit(EXIT_FAILURE);
+	ptr = cadena_modificada;
+	while (*cadena != '\0')
+	{
+		if ((*cadena == '<' || *cadena == '>'))
+		{
+			*ptr = ' ';
+			ptr++;
+			*ptr = *cadena;
+			ptr++;
+			*ptr = ' ';
+			ptr++;
+		}
+		else
+		{
+			*ptr = *cadena;
+			ptr++;
+		}
+		cadena++;
+	}
+	*ptr = '\0';
+	return (cadena_modificada);
+}
+
 void ft_redir(t_ldata *line, t_env **env)
 {
 	int		i;
 	//char	**input;
 
 	i = 0;
+	//funcion para dejar espacios entre redirecciones
+	printf("line->inp_line: %s\n", line->inp_line);
+	line->inp_line = procesar_redirecciones(line->inp_line, ft_strlen(line->inp_line), NULL);
+	printf("line->inp_line: %s\n", line->inp_line);
 	line->input_cpy = ft_split_comillas(line->inp_line, ' ');
 	(*env)->data->stdout_cpy = dup(STDOUT_FILENO);
 	while (line->input_cpy[i])
