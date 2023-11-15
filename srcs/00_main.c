@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:59:02 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/10 14:13:02 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/15 11:16:56 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void init_structs(t_ldata **line, t_env **env, char **envp)
 		fprintf(stderr, "Error: No se pudo asignar memoria para t_ldata\n");
 		exit(EXIT_FAILURE);
 	}
+	(*line)->input_cpy = NULL;
+	(*line)->stdout_cpy = 0;
 	if (envp != NULL)
 		(*line)->envp = envp;
 	else
