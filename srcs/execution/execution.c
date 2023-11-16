@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:34:39 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/15 12:49:04 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/16 12:43:54 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,11 @@ void	exec_cmd(char **input, t_env **env)
 	if (pid == 0)
 	{
 		path = exec_bin(input, env);
-		if (execve(path, input, (*env)->data->envp) == -1) //aqui no se si merece la pena usar el &(*env)->env), parece que si hay que probarlo, lo que pasa es que si eso funciona deberiamoss quitar lo de mandar la t_ldata por todo el env, que es lo que he hecho
+		if (execve(path, input, (*env)->data->envp) == -1 && ft_strcmp(input[0], ">") != 0)
 		{
-			printf("minishell: %s: command not found\n", input[0]);
+			ft_putstr_fd("minishell: ", (*env)->data->stdout_cpy);
+			ft_putstr_fd(input[0], (*env)->data->stdout_cpy);
+			ft_putstr_fd(": command not found\n", (*env)->data->stdout_cpy);
 			exit(1);
 		}
 	}
@@ -134,7 +136,6 @@ char **obtener_input(char **input, char *c)
 	
 	x = 0;
 	int i = 0;
-	
 	while (ft_strcmp(input[x], c) != 0)
 		x++;
 	while (input[i])
@@ -163,7 +164,8 @@ void redir_out(char **input, t_env **env, int i)
 {
 	int fd;
 
-	(*env)->data->input_cpy = obtener_input(input, ">");
+	if (ft_strcmp(input[0], ">") != 0)
+		(*env)->data->input_cpy = obtener_input(input, ">");
 	fd = open(input[i + 1], O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd < 0)
 	{

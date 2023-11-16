@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:13:23 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/15 13:11:27 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/16 12:39:57 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,10 @@ void ft_redir(t_ldata *line, t_env **env)
 
 	i = 0;
 	//funcion para dejar espacios entre redirecciones
-	printf("line->inp_line: %s\n", line->inp_line);
 	line->inp_line = procesar_redirecciones(line->inp_line, ft_strlen(line->inp_line), NULL);
-	printf("line->inp_line: %s\n", line->inp_line);
 	line->input_cpy = ft_split_comillas(line->inp_line, ' ');
 	(*env)->data->stdout_cpy = dup(STDOUT_FILENO);
-	while (line->input_cpy[i])
+	while (line->input_cpy && line->input_cpy[i])
 	{
 		if (ft_strncmp(line->input_cpy[i], ">", 1) == 0)
 		{
