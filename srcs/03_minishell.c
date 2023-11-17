@@ -6,19 +6,19 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:13:23 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/16 12:39:57 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/17 12:14:25 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_redirection(t_ldata *line)
+int	ft_redirection(char *line)
 {
 	int	i;
 	char	**input;
 	
 	i = 0;
-	input = ft_split_comillas(line->inp_line, ' ');
+	input = ft_split_comillas(line, ' ');
 	while (input[i])
 	{
 		if (ft_strncmp(input[i], ">", 1) == 0)
@@ -64,15 +64,15 @@ char *procesar_redirecciones(const char *cadena, size_t len, char *ptr)
 	return (cadena_modificada);
 }
 
-void ft_redir(t_ldata *line, t_env **env)
+void ft_redir(t_ldata *line, t_env **env, char *pipe_line)
 {
 	int		i;
 	//char	**input;
 
 	i = 0;
 	//funcion para dejar espacios entre redirecciones
-	line->inp_line = procesar_redirecciones(line->inp_line, ft_strlen(line->inp_line), NULL);
-	line->input_cpy = ft_split_comillas(line->inp_line, ' ');
+	pipe_line = procesar_redirecciones(pipe_line, ft_strlen(pipe_line), NULL);
+	line->input_cpy = ft_split_comillas(pipe_line, ' ');
 	(*env)->data->stdout_cpy = dup(STDOUT_FILENO);
 	while (line->input_cpy && line->input_cpy[i])
 	{
@@ -101,33 +101,40 @@ void	minishell(t_ldata *line, t_env **env)
 {
 	char	**input;
 	int		redir;
+	int		i;
 
-	redir = ft_redirection(line);
-	if (redir == 1)
-		ft_redir(line, env);
-	else
+	i = 0;
+	line->split_pipes = ft_split_comillas(line->inp_line, '|');
+	while(line->split_pipes[i])
 	{
-		input = ft_split_comillas(line->inp_line, ' ');
-		input = expander(*env, input);
-		if (input[0] && ft_strncmp(input[0], "	", 1) != 0)
-			execution(input, env);
-	}
-	/**
-		comprobar si hay redireccion
-		if (true)
+		redir = ft_redirection(line->split_pipes[i]);
+		if (redir == 1)
+			ft_redir(line, env, line->split_pipes[i]);
+		else
 		{
-		if (redirection(line) == 1)
+			input = ft_split_comillas(line->split_pipes[i], ' ');
+			input = expander(*env, input);
+			if (input[0] && ft_strncmp(input[0], "	", 1) != 0)
+				execution(input, env);
+		}
+		/**
+			comprobar si hay redireccion
+			if (true)
+			{
+			if (redirection(line) == 1)
+				input = expander(*env, input);
+				execution(input, env);
+			}
+			else {
+			input = ft_split_comillas(line->inp_line, ' ');
 			input = expander(*env, input);
 			execution(input, env);
-		}
-		else {
-		input = ft_split_comillas(line->inp_line, ' ');
+			}
+		*/
+		/* input = ft_split_comillas(line->inp_line, ' ');
 		input = expander(*env, input);
-		execution(input, env);
-		}
-	*/
-	/* input = ft_split_comillas(line->inp_line, ' ');
-	input = expander(*env, input);
-	if (input[0] && ft_strncmp(input[0], "	", 1) != 0)
-		execution(input, env); */
+		if (input[0] && ft_strncmp(input[0], "	", 1) != 0)
+			execution(input, env); */
+		i++;
+	}
 }
