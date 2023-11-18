@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:13:23 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/18 12:45:13 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/18 13:07:40 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,26 +36,38 @@ int	ft_redirection(char *line)
 
 char *procesar_redirecciones(const char *cadena, size_t len, char *ptr)
 {
-    char *cadena_modificada = (char *)malloc((len * 3 + 1) * sizeof(char));
-    if (cadena_modificada == NULL)
-        exit(EXIT_FAILURE);
-    ptr = cadena_modificada;
+	char *cadena_modificada;
 
-    while (*cadena != '\0')
-    {
-        *ptr = *cadena;
-        ptr++;
-
-        if ((*cadena == '<' || *cadena == '>') && (*(cadena + 1) != *cadena))
-        {
-            *ptr = ' ';
-            ptr++;
-        }
-
-        cadena++;
-    }
-    *ptr = '\0';
-    return cadena_modificada;
+	cadena_modificada = (char *)malloc((len * 3 + 1) * sizeof(char));
+	if (cadena_modificada == NULL)
+		exit(EXIT_FAILURE);
+	ptr = cadena_modificada;
+	while (*cadena != '\0')
+	{
+		if (*cadena == '<' || *cadena == '>')
+		{
+			*ptr = ' ';
+			ptr++;
+			*ptr = *cadena;
+			ptr++;
+			if (*(cadena + 1) == *cadena)
+			{
+				*ptr = *cadena;
+				ptr++;
+				cadena++;
+			}
+			*ptr = ' ';
+			ptr++;
+		}
+		else
+		{
+			*ptr = *cadena;
+			ptr++;
+		}
+		cadena++;
+	}
+	*ptr = '\0';
+	return cadena_modificada;
 }
 
 void ft_redir(t_ldata *line, t_env **env, char *pipe_line)
