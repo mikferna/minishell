@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:34:39 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/13 14:04:54 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/16 12:58:43 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,11 @@ void	exec_cmd(char **input, t_env **env)
 	if (pid == 0)
 	{
 		path = exec_bin(input, env);
-		if (execve(path, input, (*env)->data->envp) == -1) //aqui no se si merece la pena usar el &(*env)->env), parece que si hay que probarlo, lo que pasa es que si eso funciona deberiamoss quitar lo de mandar la t_ldata por todo el env, que es lo que he hecho
+		if (execve(path, input, (*env)->data->envp) == -1 && ft_strcmp(input[0], ">") != 0)
 		{
-			printf("minishell: %s: command not found\n", input[0]);
+			ft_putstr_fd("minishell: ", (*env)->data->stdout_cpy);
+			ft_putstr_fd(input[0], (*env)->data->stdout_cpy);
+			ft_putstr_fd(": command not found\n", (*env)->data->stdout_cpy);
 			exit(1);
 		}
 	}
@@ -134,7 +136,6 @@ char **obtener_input(char **input, char *c)
 	
 	x = 0;
 	int i = 0;
-	
 	while (ft_strcmp(input[x], c) != 0)
 		x++;
 	while (input[i])
@@ -159,25 +160,12 @@ char **obtener_input(char **input, char *c)
 	return (input2);
 }
 
-//echo hola > a d > b > c
-
-char **convert_input(char **input)
-{
-	/**añadir espacio cada vez que encuentre > */
-	int i;
-
-	i = 0;
-	
-}
-
 void redir_out(char **input, t_env **env, int i)
 {
 	int fd;
-	//int stdout_cpy;
-	char **input2;
-	
-	input2 = convert_input(input);
-	(*env)->data->input_cpy = obtener_input(input, ">");
+
+	if (ft_strcmp(input[0], ">") != 0)
+		(*env)->data->input_cpy = obtener_input(input, ">");
 	fd = open(input[i + 1], O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd < 0)
 	{
@@ -187,14 +175,8 @@ void redir_out(char **input, t_env **env, int i)
 	}
 	else
 	{
-		(*env)->data->stdout_cpy = dup(STDOUT_FILENO);
 		dup2(fd, STDOUT_FILENO);
 		close(fd);
-		printf("stdout_cpy = %d\n",(*env)->data->stdout_cpy);
-		//exec_cmd(input2, env);
-		/* execution((*env)->data->input_cpy, env);
-		dup2((*env)->data->stdout_cpy, STDOUT_FILENO);
-		close((*env)->data->stdout_cpy); */
 	}
 }
 

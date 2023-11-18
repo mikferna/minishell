@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:13:23 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/13 13:48:41 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/16 12:58:27 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,51 @@ int	ft_redirection(t_ldata *line)
 	return (0);
 }
 
+char *procesar_redirecciones(const char *cadena, size_t len, char *ptr)
+{
+	char *cadena_modificada = (char *)malloc((len * 3 + 1) * sizeof(char));
+	if (cadena_modificada == NULL)
+		exit(EXIT_FAILURE);
+	ptr = cadena_modificada;
+	while (*cadena != '\0')
+	{
+		if ((*cadena == '<' || *cadena == '>'))
+		{
+			*ptr = ' ';
+			ptr++;
+			*ptr = *cadena;
+			ptr++;
+			*ptr = ' ';
+			ptr++;
+		}
+		else
+		{
+			*ptr = *cadena;
+			ptr++;
+		}
+		cadena++;
+	}
+	*ptr = '\0';
+	return (cadena_modificada);
+}
+
 void ft_redir(t_ldata *line, t_env **env)
 {
 	int		i;
 	//char	**input;
 
 	i = 0;
-	//input = ft_split_comillas(line->inp_line, ' ');
+	//funcion para dejar espacios entre redirecciones
+	line->inp_line = procesar_redirecciones(line->inp_line, ft_strlen(line->inp_line), NULL);
 	line->input_cpy = ft_split_comillas(line->inp_line, ' ');
-	while (line->input_cpy[i])
+	(*env)->data->stdout_cpy = dup(STDOUT_FILENO);
+	while (line->input_cpy && line->input_cpy[i])
 	{
 		if (ft_strncmp(line->input_cpy[i], ">", 1) == 0)
 		{
 			redir_out(line->input_cpy, env, i);
 			i = 0;
 		}
-			//redir_out(line->input_cpy, env, i);
 /* 		else if (ft_strncmp(input[i], ">>", 2) == 0)
 			redir_out(input, env, i);
 		else if (ft_strncmp(input[i], "<", 1) == 0)
@@ -63,9 +92,9 @@ void ft_redir(t_ldata *line, t_env **env)
 		i++;
 	}
 	execution(line->input_cpy, env);
-	printf("stdout_cpy = %d\n", line->stdout_cpy);
-	dup2(line->stdout_cpy, STDOUT_FILENO);
-	//mclose(line->stdout_cpy);
+	//exec_cmd(pathv2, env);
+	dup2((*env)->data->stdout_cpy, STDOUT_FILENO);
+	close((*env)->data->stdout_cpy);
 }
 
 void	minishell(t_ldata *line, t_env **env)

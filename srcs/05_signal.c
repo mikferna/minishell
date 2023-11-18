@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   05_signal.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 11:28:49 by jumoncad          #+#    #+#             */
-/*   Updated: 2023/11/08 12:52:23 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/16 12:51:37 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void run_singl(int num)
 {
 	if (num == 1)
 	{
+		printf("entro1\n");
 		signal(SIGINT, restore_prompt);
 		signal(SIGQUIT, SIG_IGN);
 	}
@@ -48,6 +49,7 @@ void run_singl(int num)
 	} */
 	if (num == 3)
 	{
+		printf("entro3\n");
 		ft_putstr_fd("exit\n", 1);
 		exit(130);
 	}
