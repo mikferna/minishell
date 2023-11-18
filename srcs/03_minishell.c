@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:13:23 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/18 12:45:48 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/18 12:47:33 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,13 @@ int	ft_redirection(char *line)
 	input = ft_split_comillas(line, ' ');
 	while (input[i])
 	{
-		if (ft_strncmp(input[i], ">", 1) == 0)
+		if (ft_strnstr(input[i], ">", ft_strlen(input[i])) == 0)
 			return (1);
-		else if (ft_strncmp(input[i], ">>", 2) == 0)
+		else if (ft_strnstr(input[i], ">>", ft_strlen(input[i])) == 0)
 			return (1);
-		else if (ft_strncmp(input[i], "<", 1) == 0)
+		else if (ft_strnstr(input[i], "<", ft_strlen(input[i])) == 0)
 			return (1);
-		else if (ft_strncmp(input[i], "<<", 2) == 0)
-			return (1);
-		else if (ft_strncmp(input[i], "|", 1) == 0)
+		else if (ft_strnstr(input[i], "<<", ft_strlen(input[i])) == 0)
 			return (1);
 		i++;
 	}
@@ -66,6 +64,7 @@ void ft_redir(t_ldata *line, t_env **env, char *pipe_line)
 
 	i = 0;
 	pipe_line = procesar_redirecciones(pipe_line, ft_strlen(pipe_line), NULL);
+	printf("pipe_line: %s\n", pipe_line);
 	line->input_cpy = expander(*env, ft_split_comillas(pipe_line, ' '));
 	(*env)->data->stdout_cpy = dup(STDOUT_FILENO);
 	(*env)->data->stdin_cpy = dup(STDIN_FILENO);

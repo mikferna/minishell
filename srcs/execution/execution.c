@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:34:39 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/18 12:46:40 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/18 12:47:53 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,8 +183,29 @@ int redir_out(char **input, t_env **env, int i)
 
 /* int redir_in(char **input, t_env **env, int i)
 {
-	return (0);
-} */
+	int fd;
+
+	if (ft_strcmp(input[0], "<") != 0)
+		(*env)->data->input_cpy = obtener_input(input, "<");
+	fd = open(input[i + 1], O_RDONLY, 0644);
+	if (fd < 0)
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(input[i + 1], 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
+	}
+	else
+	{
+		dup2(fd, STDIN_FILENO);
+		close(fd);
+	}
+	return 0;
+}*/
+
+//int redir_here_document(char **input, t_env **env, int i)
+//{
+//	return (0);
+//}
 
 int redir_append(char **input, t_env **env, int i)
 {
