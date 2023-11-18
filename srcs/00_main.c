@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:59:02 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/16 12:58:10 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/18 12:45:35 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void init_structs(t_ldata **line, t_env **env, char **envp)
 		exit(EXIT_FAILURE);
 	}
 	(*line)->input_cpy = NULL;
+	(*line)->split_pipes = NULL;
 	(*line)->stdout_cpy = 0;
 	if (envp != NULL)
 		(*line)->envp = envp;

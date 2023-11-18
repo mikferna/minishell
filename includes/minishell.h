@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:44:19 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/16 12:58:03 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/18 12:45:30 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ typedef struct s_ldata
 	char *inp_line;
 	char **envp;
 	char **input_cpy;
+	char **split_pipes;
 	int	stdout_cpy;
+	int	stdin_cpy;
 }		t_ldata;
 
 typedef struct s_token

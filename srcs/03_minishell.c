@@ -6,19 +6,19 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:13:23 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/16 12:58:27 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/18 12:45:48 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_redirection(t_ldata *line)
+int	ft_redirection(char *line)
 {
 	int	i;
 	char	**input;
 	
 	i = 0;
-	input = ft_split_comillas(line->inp_line, ' ');
+	input = ft_split_comillas(line, ' ');
 	while (input[i])
 	{
 		if (ft_strncmp(input[i], ">", 1) == 0)
@@ -38,62 +38,53 @@ int	ft_redirection(t_ldata *line)
 
 char *procesar_redirecciones(const char *cadena, size_t len, char *ptr)
 {
-	char *cadena_modificada = (char *)malloc((len * 3 + 1) * sizeof(char));
-	if (cadena_modificada == NULL)
-		exit(EXIT_FAILURE);
-	ptr = cadena_modificada;
-	while (*cadena != '\0')
-	{
-		if ((*cadena == '<' || *cadena == '>'))
-		{
-			*ptr = ' ';
-			ptr++;
-			*ptr = *cadena;
-			ptr++;
-			*ptr = ' ';
-			ptr++;
-		}
-		else
-		{
-			*ptr = *cadena;
-			ptr++;
-		}
-		cadena++;
-	}
-	*ptr = '\0';
-	return (cadena_modificada);
+    char *cadena_modificada = (char *)malloc((len * 3 + 1) * sizeof(char));
+    if (cadena_modificada == NULL)
+        exit(EXIT_FAILURE);
+    ptr = cadena_modificada;
+
+    while (*cadena != '\0')
+    {
+        *ptr = *cadena;
+        ptr++;
+
+        if ((*cadena == '<' || *cadena == '>') && (*(cadena + 1) != *cadena))
+        {
+            *ptr = ' ';
+            ptr++;
+        }
+
+        cadena++;
+    }
+    *ptr = '\0';
+    return cadena_modificada;
 }
 
-void ft_redir(t_ldata *line, t_env **env)
+void ft_redir(t_ldata *line, t_env **env, char *pipe_line)
 {
 	int		i;
-	//char	**input;
 
 	i = 0;
-	//funcion para dejar espacios entre redirecciones
-	line->inp_line = procesar_redirecciones(line->inp_line, ft_strlen(line->inp_line), NULL);
-	line->input_cpy = ft_split_comillas(line->inp_line, ' ');
+	pipe_line = procesar_redirecciones(pipe_line, ft_strlen(pipe_line), NULL);
+	line->input_cpy = expander(*env, ft_split_comillas(pipe_line, ' '));
 	(*env)->data->stdout_cpy = dup(STDOUT_FILENO);
+	(*env)->data->stdin_cpy = dup(STDIN_FILENO);
 	while (line->input_cpy && line->input_cpy[i])
 	{
-		if (ft_strncmp(line->input_cpy[i], ">", 1) == 0)
-		{
-			redir_out(line->input_cpy, env, i);
-			i = 0;
-		}
-/* 		else if (ft_strncmp(input[i], ">>", 2) == 0)
-			redir_out(input, env, i);
-		else if (ft_strncmp(input[i], "<", 1) == 0)
-			redir_in(input, env, i);
-		else if (ft_strncmp(input[i], "<<", 2) == 0)
-			redir_in(input, env, i);
-		else if (ft_strncmp(input[i], "|", 1) == 0)
-			pipe(input, env, i); */
+		if (ft_strncmp(line->input_cpy[i], ">", 2) == 0)
+			i = redir_out(line->input_cpy, env, i);
+ 		else if (ft_strncmp(line->input_cpy[i], ">>", 2) == 0)
+			i = redir_append(line->input_cpy, env, i);
+		else if (ft_strncmp(line->input_cpy[i], "<", 2) == 0)
+			i = redir_in(line->input_cpy, env, i);
+		//else if (ft_strncmp(line->input_cpy[i], "<<", 2) == 0)
+		//	i = redir_here_document(line->input_cpy, env, i);
 		i++;
 	}
 	execution(line->input_cpy, env);
-	//exec_cmd(pathv2, env);
 	dup2((*env)->data->stdout_cpy, STDOUT_FILENO);
+	dup2((*env)->data->stdin_cpy, STDIN_FILENO);
+	close((*env)->data->stdout_cpy);
 	close((*env)->data->stdout_cpy);
 }
 
@@ -101,33 +92,40 @@ void	minishell(t_ldata *line, t_env **env)
 {
 	char	**input;
 	int		redir;
+	int		i;
 
-	redir = ft_redirection(line);
-	if (redir == 1)
-		ft_redir(line, env);
-	else
+	i = 0;
+	line->split_pipes = ft_split_comillas(line->inp_line, '|');
+	while(line->split_pipes[i])
 	{
-		input = ft_split_comillas(line->inp_line, ' ');
-		input = expander(*env, input);
-		if (input[0] && ft_strncmp(input[0], "	", 1) != 0)
-			execution(input, env);
-	}
-	/**
-		comprobar si hay redireccion
-		if (true)
+		redir = ft_redirection(line->split_pipes[i]);
+		if (redir == 1)
+			ft_redir(line, env, line->split_pipes[i]);
+		else
 		{
-		if (redirection(line) == 1)
+			input = ft_split_comillas(line->split_pipes[i], ' ');
+			input = expander(*env, input);
+			if (input[0] && ft_strncmp(input[0], "	", 1) != 0)
+				execution(input, env);
+		}
+		/**
+			comprobar si hay redireccion
+			if (true)
+			{
+			if (redirection(line) == 1)
+				input = expander(*env, input);
+				execution(input, env);
+			}
+			else {
+			input = ft_split_comillas(line->inp_line, ' ');
 			input = expander(*env, input);
 			execution(input, env);
-		}
-		else {
-		input = ft_split_comillas(line->inp_line, ' ');
+			}
+		*/
+		/* input = ft_split_comillas(line->inp_line, ' ');
 		input = expander(*env, input);
-		execution(input, env);
-		}
-	*/
-	/* input = ft_split_comillas(line->inp_line, ' ');
-	input = expander(*env, input);
-	if (input[0] && ft_strncmp(input[0], "	", 1) != 0)
-		execution(input, env); */
+		if (input[0] && ft_strncmp(input[0], "	", 1) != 0)
+			execution(input, env); */
+		i++;
+	}
 }
