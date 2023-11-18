@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:13:23 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/17 12:14:25 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/18 12:15:31 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,62 +38,53 @@ int	ft_redirection(char *line)
 
 char *procesar_redirecciones(const char *cadena, size_t len, char *ptr)
 {
-	char *cadena_modificada = (char *)malloc((len * 3 + 1) * sizeof(char));
-	if (cadena_modificada == NULL)
-		exit(EXIT_FAILURE);
-	ptr = cadena_modificada;
-	while (*cadena != '\0')
-	{
-		if ((*cadena == '<' || *cadena == '>'))
-		{
-			*ptr = ' ';
-			ptr++;
-			*ptr = *cadena;
-			ptr++;
-			*ptr = ' ';
-			ptr++;
-		}
-		else
-		{
-			*ptr = *cadena;
-			ptr++;
-		}
-		cadena++;
-	}
-	*ptr = '\0';
-	return (cadena_modificada);
+    char *cadena_modificada = (char *)malloc((len * 3 + 1) * sizeof(char));
+    if (cadena_modificada == NULL)
+        exit(EXIT_FAILURE);
+    ptr = cadena_modificada;
+
+    while (*cadena != '\0')
+    {
+        *ptr = *cadena;
+        ptr++;
+
+        if ((*cadena == '<' || *cadena == '>') && (*(cadena + 1) != *cadena))
+        {
+            *ptr = ' ';
+            ptr++;
+        }
+
+        cadena++;
+    }
+    *ptr = '\0';
+    return cadena_modificada;
 }
 
 void ft_redir(t_ldata *line, t_env **env, char *pipe_line)
 {
 	int		i;
-	//char	**input;
 
 	i = 0;
-	//funcion para dejar espacios entre redirecciones
 	pipe_line = procesar_redirecciones(pipe_line, ft_strlen(pipe_line), NULL);
-	line->input_cpy = ft_split_comillas(pipe_line, ' ');
+	line->input_cpy = expander(*env, ft_split_comillas(pipe_line, ' '));
 	(*env)->data->stdout_cpy = dup(STDOUT_FILENO);
+	(*env)->data->stdin_cpy = dup(STDIN_FILENO);
 	while (line->input_cpy && line->input_cpy[i])
 	{
-		if (ft_strncmp(line->input_cpy[i], ">", 1) == 0)
-		{
-			redir_out(line->input_cpy, env, i);
-			i = 0;
-		}
-/* 		else if (ft_strncmp(input[i], ">>", 2) == 0)
-			redir_out(input, env, i);
-		else if (ft_strncmp(input[i], "<", 1) == 0)
-			redir_in(input, env, i);
-		else if (ft_strncmp(input[i], "<<", 2) == 0)
-			redir_in(input, env, i);
-		else if (ft_strncmp(input[i], "|", 1) == 0)
-			pipe(input, env, i); */
+		if (ft_strncmp(line->input_cpy[i], ">", 2) == 0)
+			i = redir_out(line->input_cpy, env, i);
+ 		else if (ft_strncmp(line->input_cpy[i], ">>", 2) == 0)
+			i = redir_append(line->input_cpy, env, i);
+		else if (ft_strncmp(line->input_cpy[i], "<", 2) == 0)
+			i = redir_in(line->input_cpy, env, i);
+		//else if (ft_strncmp(line->input_cpy[i], "<<", 2) == 0)
+		//	i = redir_here_document(line->input_cpy, env, i);
 		i++;
 	}
 	execution(line->input_cpy, env);
-	//exec_cmd(pathv2, env);
 	dup2((*env)->data->stdout_cpy, STDOUT_FILENO);
+	dup2((*env)->data->stdin_cpy, STDIN_FILENO);
+	close((*env)->data->stdout_cpy);
 	close((*env)->data->stdout_cpy);
 }
 

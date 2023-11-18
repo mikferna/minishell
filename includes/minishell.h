@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:44:19 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/17 11:36:50 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/18 11:24:53 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_ldata
 	char **input_cpy;
 	char **split_pipes;
 	int	stdout_cpy;
+	int	stdin_cpy;
 }		t_ldata;
 
 typedef struct s_token

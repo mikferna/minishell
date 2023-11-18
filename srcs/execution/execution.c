@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:34:39 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/16 12:43:54 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/18 12:14:36 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ char **obtener_input(char **input, char *c)
 	return (input2);
 }
 
-void redir_out(char **input, t_env **env, int i)
+int redir_out(char **input, t_env **env, int i)
 {
 	int fd;
 
@@ -178,6 +178,32 @@ void redir_out(char **input, t_env **env, int i)
 		dup2(fd, STDOUT_FILENO);
 		close(fd);
 	}
+	return 0;
+}
+
+int redir_in(char **input, t_env **env, int i)
+{
+	return (0);
+}
+
+int redir_append(char **input, t_env **env, int i)
+{
+	int fd;
+	if (ft_strcmp(input[0], ">>") != 0)
+		(*env)->data->input_cpy = obtener_input(input, ">>");
+	fd = open(input[i + 1], O_CREAT | O_WRONLY | O_APPEND, 0644);
+	if (fd < 0)
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(input[i + 1], 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
+	}
+	else
+	{
+		dup2(fd, STDOUT_FILENO);
+		close(fd);
+	}
+	return 0;
 }
 
 void	execution(char **input, t_env **env)
