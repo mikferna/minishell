@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   04_check_redir.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 11:54:21 by jumoncad          #+#    #+#             */
-/*   Updated: 2023/11/03 15:54:41 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/18 13:10:27 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	check_pipe(char *s, int k)
 		return (1);
 	if (s[k + 1] == '\0')
 		return (1);
-	return (1);
+	return (0);
 }
 
 int	check_aux(char *s, int k)

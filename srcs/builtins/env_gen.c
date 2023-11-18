@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 13:21:44 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/10 14:14:38 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/18 13:26:23 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,3 @@ void	get_env(char **envp, t_env **env, t_ldata **line)
 		i++;
 	}
 }
- 
