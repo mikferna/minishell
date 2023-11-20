@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:59:02 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/17 11:37:02 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/20 09:56:07 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,5 @@ void init_structs(t_ldata **line, t_env **env, char **envp)
 		exit(EXIT_FAILURE);
 	}
 	get_env(envp, env, line);
-	printf("envp[1]: %s\n", (*env)->data->envp[1]);
+	//printf("envp[1]: %s\n", (*env)->data->envp[1]);
 }
