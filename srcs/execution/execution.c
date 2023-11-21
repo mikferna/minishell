@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:34:39 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/18 12:38:47 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/20 16:22:08 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,13 +172,14 @@ int redir_out(char **input, t_env **env, int i)
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(input[i + 1], 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
+		g_global.error_num = 1;
 	}
 	else
 	{
 		dup2(fd, STDOUT_FILENO);
 		close(fd);
 	}
-	return 0;
+	return (0);
 }
 
 int redir_in(char **input, t_env **env, int i)
@@ -188,11 +189,13 @@ int redir_in(char **input, t_env **env, int i)
 	if (ft_strcmp(input[0], "<") != 0)
 		(*env)->data->input_cpy = obtener_input(input, "<");
 	fd = open(input[i + 1], O_RDONLY, 0644);
+	printf("fd: %d\n", fd);
 	if (fd < 0)
 	{
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(input[i + 1], 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
+		g_global.error_num = 1;
 	}
 	else
 	{
@@ -218,6 +221,7 @@ int redir_append(char **input, t_env **env, int i)
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(input[i + 1], 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
+		g_global.error_num = 1;
 	}
 	else
 	{

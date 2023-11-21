@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:13:23 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/20 11:56:54 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/21 11:31:29 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,43 +91,45 @@ void ft_redir(t_ldata *line, t_env **env, char *pipe_line)
 		//	i = redir_here_document(line->input_cpy, env, i);
 		i++;
 	}
-	execution(line->input_cpy, env);
+	if (g_global.error_num != 1)
+		execution(line->input_cpy, env);
 	dup2((*env)->data->stdout_cpy, STDOUT_FILENO);
 	dup2((*env)->data->stdin_cpy, STDIN_FILENO);
 	close((*env)->data->stdout_cpy);
 	close((*env)->data->stdout_cpy);
 }
 
-void minishell(t_ldata *line, t_env **env)
+void	minishell(t_ldata *line, t_env **env)
 {
-    char **input;
-    int pipe_fd[2];
-    int prev_pipe = STDIN_FILENO;
-    int i = 0;
-    int redir;
+	char	**input;
+	int		redir;
+	int		i;
+    int		pipe_fd[2];
+    int		prev_pipe = STDIN_FILENO;
+	pid_t	pid;
 
-    line->split_pipes = ft_split_comillas(line->inp_line, '|');
-    
-    while (line->split_pipes[i])
+	i = 0;
+	line->split_pipes = ft_split_comillas(line->inp_line, '|');
+	while(line->split_pipes[i])
 	{
-        redir = ft_redirection(line->split_pipes[i]);
-        input = ft_split_comillas(line->split_pipes[i], ' ');
-        input = expander(*env, input);
-        if (redir == 1)
-            ft_redir(line, env, line->split_pipes[i]);
-        else
+		redir = ft_redirection(line->split_pipes[i]);
+		if (redir == 1)
+			ft_redir(line, env, line->split_pipes[i]);
+		else
 		{
             if (pipe(pipe_fd) == -1)
                 perror("pipe");
-            pid_t pid = fork();
-            if (pid == 0)			{
-                dup2(prev_pipe, STDIN_FILENO);
+            pid = fork();
+            if (pid == 0)
+			{                dup2(prev_pipe, STDIN_FILENO);
                 if (line->split_pipes[i + 1])
                     dup2(pipe_fd[1], STDOUT_FILENO);
                 close(pipe_fd[0]);
                 close(pipe_fd[1]);
-
-                execution(input, env);
+            	input = ft_split_comillas(line->split_pipes[i], ' ');
+				input = expander(*env, input);
+				if (input[0] && ft_strncmp(input[0], "	", 1) != 0)
+					execution(input, env);
                 exit(EXIT_SUCCESS);
             }
 			else if (pid > 0)
@@ -139,6 +141,6 @@ void minishell(t_ldata *line, t_env **env)
 			else
                 perror("fork");
         }
-        i++;
-    }
+		i++;
+	}
 }
