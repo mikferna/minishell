@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:34:39 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/21 12:15:42 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/21 12:17:37 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,7 @@ int redir_out(char **input, t_env **env, int i)
 	return (0);
 }
 
-/* int redir_in(char **input, t_env **env, int i)
+int redir_in(char **input, t_env **env, int i)
 {
 	int fd;
 
@@ -203,7 +203,7 @@ int redir_out(char **input, t_env **env, int i)
 		close(fd);
 	}
 	return 0;
-}*/
+}
 
 //int redir_here_document(char **input, t_env **env, int i)
 //{
