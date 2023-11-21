@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 11:54:21 by jumoncad          #+#    #+#             */
-/*   Updated: 2023/11/18 13:10:27 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/20 10:31:28 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ int	ft_check_redir(char *s)
 	int	k;
 
 	i = 0;
+	if (s == NULL)
+		return (0);
 	while (s[i])
 	{
 		if (s[i] == '>' || s[i] == '<' || s[i] == '|')

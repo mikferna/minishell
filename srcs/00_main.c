@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:59:02 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/18 12:45:35 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/21 12:15:21 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,5 @@ void init_structs(t_ldata **line, t_env **env, char **envp)
 		exit(EXIT_FAILURE);
 	}
 	get_env(envp, env, line);
-	printf("envp[1]: %s\n", (*env)->data->envp[1]);
+	//printf("envp[1]: %s\n", (*env)->data->envp[1]);
 }
