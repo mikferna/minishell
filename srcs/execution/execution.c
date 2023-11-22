@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:34:39 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/22 16:12:46 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/22 16:16:02 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,7 @@ int redir_in(char **input, t_env **env, int i)
 	if (ft_strcmp(input[0], "<") != 0)
 		(*env)->data->input_cpy = obtener_input(input, "<");
 	fd = open(input[i + 1], O_RDONLY, 0644);
+	printf("fd: %d\n", fd);
 	if (fd < 0)
 	{
 		ft_putstr_fd("minishell: ", 2);
