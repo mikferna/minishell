@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:34:39 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/22 14:00:27 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/22 16:12:46 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,7 +215,6 @@ char** change_heredoc(char** original)
 	int		i;
 
 	i = 0;
-	if (original[0])
 	while (original[i])
 	{
 		if (ft_strcmp(original[i], "<<") == 0)
