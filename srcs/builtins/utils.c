@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 12:16:45 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/06 13:25:52 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/21 14:18:57 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,13 @@ int	ft_strcmp(char *s1, char *s2)
 	size_t	i;
 
 	i = 0;
+	if (!s1 || !s2)
+		return (-1);
 	while (s1[i] == s2[i])
 	{
 		if (s1[i] == '\0' && s2[i] == '\0')
 			return (0);
 		i++;
 	}
-	return (s1[i] - s2[i]);
+	return (1);
 }

@@ -6,24 +6,51 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 12:09:00 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/07 14:19:54 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/22 11:06:47 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 //entra en el 0-exit 1-un numero 2+-nada o si entra algo va a dar mal
+
+int	is_digit2(char *arg)
+{
+	int	n;
+
+	n = 0;
+	while (arg[n])
+	{
+		if (arg[n] >= '0' && arg[n] <= '9')
+			n++;
+		else
+			return (1);
+	}
+	return (0);
+}
+
 int	exitt(char **args)
 {
-	if (!args || !args[1])
+	if (args[1] && is_digit2(args[1]))
+	{
+		ft_putstr_fd("exit\npipehell: exit: : numeric argument required\n"\
+					, 2);
+		return (255);
+	}
+	if (!args[1])
 	{
 		ft_putstr_fd("exit\n", 2);
-		exit (0);
+		return (0);
 	}
-	if (args[0] && args[1])
+	if (args[1] && args[2])
 	{
-		ft_putstr_fd("exit\nminishell: exit: too many arguments\n", 2);
-		exit (1);
+		ft_putstr_fd("pipehell: exit too many arguments\n", 2);
+		return (-358);
+	}
+	else
+	{	
+		ft_putstr_fd("exit\n", 2);
+		return (ft_atoi(args[1]));
 	}
 	return (ft_atoi(args[1]));
 }

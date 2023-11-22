@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:10:24 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/21 11:22:44 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/22 10:56:22 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,10 @@ char	*ret_doll_str(t_env *env, char *str, int i)
 		{
 			i++;
 			tmp = ft_substr(str, 0, i - 1);
-			tmp = ft_strjoin(tmp, ret_dollar(env, str, i - 1));
+			if (str[i] != '\'')
+				tmp = ft_strjoin(tmp, ret_dollar(env, str, i - 1));
+			while(str[i] == '\"')
+				i++;
 			while (str[i] != ' ' && str[i] != '\0' && str[i] != '\"' && str[i] != '\'' && str[i] != '$')
 				i++;
 			tmp = ft_strjoin(tmp, &str[i]);
