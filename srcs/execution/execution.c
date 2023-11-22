@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:34:39 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/21 12:17:37 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/22 12:22:17 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,12 +136,9 @@ char **obtener_input(char **input, char *c)
 	
 	x = 0;
 	int i = 0;
-	while (ft_strcmp(input[x], c) != 0)
-		x++;
 	while (input[i])
 		i++;
 	input2 = malloc(sizeof(char *) * (i - 1));
-	x = 0;
 	while (ft_strcmp(input[x], c) != 0)
 	{
 		input2[x] = ft_strdup(input[x]);
@@ -205,10 +202,41 @@ int redir_in(char **input, t_env **env, int i)
 	return 0;
 }
 
-//int redir_here_document(char **input, t_env **env, int i)
-//{
-//	return (0);
-//}
+int redir_here_document(char **input, t_env **env, int i)
+{
+	int		fd;
+	int		diff;
+	char	*line;
+
+	diff = 1;
+	//if (ft_strcmp(input[0], "<<") != 0)
+	(*env)->data->input_cpy = obtener_input(input, "<<");
+	printf("(*env)->data->input_cpy = %s\n", (*env)->data->input_cpy[0]);
+	fd = open(".temp", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	if (fd < 0)
+	{
+		ft_putstr_fd("Error creating heredoc\n", 2);
+		g_global.error_num = 1;
+	}
+	else
+	{
+        while (diff != 0)
+		{
+			line = readline("heredoc> ");
+			if (ft_strcmp(line, input[i + 1]) == 0)
+				diff = 0;
+			else
+			{
+				ft_putstr_fd(line, fd);
+				ft_putstr_fd("\n", fd);
+			}
+			if (line)
+				free (line);
+		}
+		
+    }
+	return (0);
+}
 
 int redir_append(char **input, t_env **env, int i)
 {

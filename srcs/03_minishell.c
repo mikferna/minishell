@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:13:23 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/21 12:15:30 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/22 12:22:09 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void ft_redir(t_ldata *line, t_env **env, char *pipe_line)
 	line->input_cpy = expander(*env, ft_split_comillas(pipe_line, ' '));
 	(*env)->data->stdout_cpy = dup(STDOUT_FILENO);
 	(*env)->data->stdin_cpy = dup(STDIN_FILENO);
-	while (line->input_cpy && line->input_cpy[i])
+	while (line->input_cpy && line->input_cpy[0] && line->input_cpy[i] )
 	{
 		if (ft_strncmp(line->input_cpy[i], ">", 2) == 0)
 			i = redir_out(line->input_cpy, env, i);
@@ -87,8 +87,8 @@ void ft_redir(t_ldata *line, t_env **env, char *pipe_line)
 			i = redir_append(line->input_cpy, env, i);
 		else if (ft_strncmp(line->input_cpy[i], "<", 2) == 0)
 			i = redir_in(line->input_cpy, env, i);
-		//else if (ft_strncmp(line->input_cpy[i], "<<", 2) == 0)
-		//	i = redir_here_document(line->input_cpy, env, i);
+		else if (ft_strncmp(line->input_cpy[i], "<<", 2) == 0)
+			i = redir_here_document(line->input_cpy, env, i);
 		i++;
 	}
 	if (g_global.error_num != 1)
@@ -115,13 +115,14 @@ void	minishell(t_ldata *line, t_env **env)
 		redir = ft_redirection(line->split_pipes[i]);
 		if (redir == 1)
 			ft_redir(line, env, line->split_pipes[i]);
-		else
+		else if (line->split_pipes[1])
 		{
             if (pipe(pipe_fd) == -1)
                 perror("pipe");
             pid = fork();
             if (pid == 0)
-			{                dup2(prev_pipe, STDIN_FILENO);
+			{   
+				dup2(prev_pipe, STDIN_FILENO);
                 if (line->split_pipes[i + 1])
                     dup2(pipe_fd[1], STDOUT_FILENO);
                 close(pipe_fd[0]);
@@ -141,6 +142,13 @@ void	minishell(t_ldata *line, t_env **env)
 			else
                 perror("fork");
         }
+		else
+		{
+			input = ft_split_comillas(line->split_pipes[i], ' ');
+			input = expander(*env, input);
+			if (input[0] && ft_strncmp(input[0], "	", 1) != 0)
+				execution(input, env);
+		}	
 		i++;
 	}
 }
