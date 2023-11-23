@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 12:11:51 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/22 16:15:53 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/23 11:32:00 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,14 @@ int	cd(t_env *env, char **args)
 		i = home_cd(env);
 	else if (args[1][0] == '/' && args[1][1] == '\0')
 		i = s_case(env);
-	else if (args[1])
-		i = absolute_path(env, args[1]);
 	else if (args[1][0] == '.' && args[1][1] == '.')
 		i = go_back(env);
 	else if (args[1][0] == '.')
 		i = do_nothing();
+	else if (ft_strcmp(args[1], "-") == 0)
+		i = do_slash(env);
+	else if (args[1])
+		i = absolute_path(env, args[1]);
 	return (i);
 }
 

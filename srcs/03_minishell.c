@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:13:23 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/22 16:15:40 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/23 11:04:48 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@ int	ft_redirection(char *line)
 	
 	i = 0;
 	input = ft_split_comillas(line, ' ');
+	while (input[i])
+	{
+		printf("input[%d]: %s\n", i, input[i]);
+		i++;
+	}
+	i = 0;
 	while (input[i])
 	{
 		if (ft_strnstr(input[i], ">", ft_strlen(input[i])) == 0)
@@ -113,7 +119,7 @@ void	minishell(t_ldata *line, t_env **env)
 	while(line->split_pipes[i])
 	{
 		redir = ft_redirection(line->split_pipes[i]);
-		if (redir == 1)
+		if (redir == 1) 
 			ft_redir(line, env, line->split_pipes[i]);
 		else if (line->split_pipes[1])
 		{

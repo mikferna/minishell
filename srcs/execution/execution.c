@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:34:39 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/22 16:16:02 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/23 11:00:35 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,11 +122,6 @@ void	exec_cmd(char **input, t_env **env)
 	}
 	else
 		waitpid(pid, NULL, 0);
-	/* 	printf("input[0]: %s\n", input[0]);
-		path = exec_bin(input, env);
-		if (!path)
-			exit(1);
-		execve(path, input, NULL); */
 }
 
 char **obtener_input(char **input, char *c)
