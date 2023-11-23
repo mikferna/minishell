@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:34:39 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/23 11:58:22 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/23 12:43:56 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,15 +197,6 @@ int redir_in(char **input, t_env **env, int i)
 	return 0;
 }
 
-void ft_strcpy(char* destino, const char* fuente) {
-    while (*fuente != '\0') {
-        *destino = *fuente;
-        destino++;
-        fuente++;
-    }
-    *destino = '\0'; // Agregar el caracter nulo al final de la cadena destino
-}
-
 char** change_heredoc(char** original)
 {
 	int		i;
@@ -236,18 +227,15 @@ int redir_here_document(char **input, t_env **env, int i)
 		g_global.error_num = 1;
 	else
 	{
-        while (diff != 0)
+		write(1, "> ", 1);
+		while (get_next_line(0, &line) && line && g_global.error_num != 130)
 		{
-			line = readline("> ");
 			if (ft_strcmp(line, input[i + 1]) == 0)
-				diff = 0;
-			else
-			{
-				ft_putstr_fd(line, fd);
-				ft_putstr_fd("\n", fd);
-			}
-			if (line)
-				free (line);
+				break ;	
+			ft_putstr_fd(line, fd);
+			ft_putstr_fd("\n", fd);
+			free(line);
+			write(1, "> ", 1);
 		}
 		(*env)->data->input_cpy = change_heredoc((*env)->data->input_cpy);
 		close(fd);

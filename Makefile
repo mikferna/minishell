@@ -6,7 +6,7 @@
 #    By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/04 16:06:29 by mikferna          #+#    #+#              #
-#    Updated: 2023/11/23 12:32:23 by jumoncad         ###   ########.fr        #
+#    Updated: 2023/11/23 12:36:44 by jumoncad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,9 @@ SRCS = srcs/00_main.c \
 	srcs/libft/ft_strlcpy.c \
 	srcs/libft/ft_memmove.c \
 	srcs/libft/ft_strnstr.c \
+	srcs/libft/get_next_line.c \
+	srcs/libft/ft_calloc.c \
+	srcs/libft/ft_strcpy.c  \
 	srcs/builtins/cd.c \
 	srcs/builtins/cd1.c \
 	srcs/builtins/env_gen.c \
