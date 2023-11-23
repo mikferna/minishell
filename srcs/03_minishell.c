@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:13:23 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/23 11:58:10 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/23 12:32:30 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ int	ft_redirection(char *line)
 	i = 0;
 	while (input[i])
 	{
-		if (ft_strnstr(input[i], ">", ft_strlen(input[i])) == 0)
+		if (ft_strnstr(input[i], ">", ft_strlen(input[i]), 0) == 0)
 			return (1);
-		else if (ft_strnstr(input[i], ">>", ft_strlen(input[i])) == 0)
+		else if (ft_strnstr(input[i], ">>", ft_strlen(input[i]), 0) == 0)
 			return (1);
-		else if (ft_strnstr(input[i], "<", ft_strlen(input[i])) == 0)
+		else if (ft_strnstr(input[i], "<", ft_strlen(input[i]), 0) == 0)
 			return (1);
-		else if (ft_strnstr(input[i], "<<", ft_strlen(input[i])) == 0)
+		else if (ft_strnstr(input[i], "<<", ft_strlen(input[i]), 0) == 0)
 			return (1);
 		i++;
 	}
