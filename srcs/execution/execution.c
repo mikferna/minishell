@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:34:39 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/23 12:43:03 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/23 12:45:33 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,18 +227,15 @@ int redir_here_document(char **input, t_env **env, int i)
 		g_global.error_num = 1;
 	else
 	{
-        while (diff != 0)
+		write(1, "> ", 1);
+		while (get_next_line(0, &line) && line && g_global.error_num != 130)
 		{
-			line = readline("> ");
 			if (ft_strcmp(line, input[i + 1]) == 0)
-				diff = 0;
-			else
-			{
-				ft_putstr_fd(line, fd);
-				ft_putstr_fd("\n", fd);
-			}
-			if (line)
-				free (line);
+				break ;	
+			ft_putstr_fd(line, fd);
+			ft_putstr_fd("\n", fd);
+			free(line);
+			write(1, "> ", 1);
 		}
 		(*env)->data->input_cpy = change_heredoc((*env)->data->input_cpy);
 		close(fd);

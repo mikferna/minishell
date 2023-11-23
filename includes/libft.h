@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 08:57:58 by aarrien-          #+#    #+#             */
-/*   Updated: 2023/11/23 12:28:10 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/23 12:37:24 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+
+# define BUFFER_SIZE 2048
 
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
@@ -32,4 +34,8 @@ char	*ft_itoa(int n);
 int		ft_atoi(const char *str);
 void	*ft_memmove(void *dst, const void *src, size_t n);
 int		ft_strnstr(const char *haystack, const char *needle, size_t len, int ks);
+int		get_next_line(int fd, char **line);
+void	*ft_calloc(size_t count, size_t size);
+char	*ft_strcpy(char *dst, const char *src);
+
 #endif

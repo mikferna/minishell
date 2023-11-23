@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+         #
+#    By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/04 16:06:29 by mikferna          #+#    #+#              #
-#    Updated: 2023/11/23 12:02:43 by mikferna         ###   ########.fr        #
+#    Updated: 2023/11/23 12:36:44 by jumoncad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,9 @@ SRCS = srcs/00_main.c \
 	srcs/libft/ft_strlcpy.c \
 	srcs/libft/ft_memmove.c \
 	srcs/libft/ft_strnstr.c \
+	srcs/libft/get_next_line.c \
+	srcs/libft/ft_calloc.c \
+	srcs/libft/ft_strcpy.c  \
 	srcs/builtins/cd.c \
 	srcs/builtins/cd1.c \
 	srcs/builtins/env_gen.c \
@@ -56,7 +59,7 @@ SRCS = srcs/00_main.c \
 	srcs/builtins/echo.c \
 	srcs/expander/expander.c \
 	srcs/expander/exp_utils.c \
-	srcs/execution/execution.c 
+	srcs/execution/execution.c \
 
 # Directorios de objetos correspondientes a las rutas de los archivos de origen
 OBJS = $(addprefix $(DIR_OBJS), $(SRCS:.c=.o))
