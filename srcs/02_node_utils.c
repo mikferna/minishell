@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   02_node_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:15:54 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/10 14:15:02 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:08:17 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,58 +62,4 @@ void	ft_lstadd_back(t_env *lst, t_env *new)
 		lst = lst->next;
 	}
 	lst->next = new;
-}
-
-char *end_strchar(char *str, char c)
-{
-	int		len;
-	int		i;
-	int		start;
-	char	*ret;
-
-	i = 0;
-	start = 0;
-	if (!str)
-		return NULL;
-	len = ft_strlen(str);
-	while (str[i] && str[i] != c)
-		i++;
-	if (i == len)
-		return (NULL);
-	ret = (char *)malloc(sizeof(char) * (len - i));
-	i++;
-	if (!ret)
-		return NULL;
-	while (str[i])
-		ret[start++] = str[i++];
-	ret[start] = '\0';
-	return (ret);
-}
-
-char *start_strchar(char *str, char c)
-{
-	int		i;
-	int		start;
-	char	*ret;
-	int		len;
-
-	if (!str)
-		return NULL;
-	len = ft_strlen(str);
-	i = 0;
-	while (str[i] != '\0' && str[i] != c)
-		i++;
-	if (i == len)
-		return (NULL);
-	ret = (char *)malloc(sizeof(char) * (i + 1));
-	if (!ret)
-		return NULL;
-	start = 0;
-	while (start < i)
-	{
-		ret[start] = str[start];
-		start++;
-	}
-	ret[start] = '\0';
-	return (ret);
 }

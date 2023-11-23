@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:02:12 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/26 12:49:37 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:28:29 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ int	check_line_quote(t_ldata *s)
 		return (2);
 	if (check_redirections(s->inp_line) == 1)
 		return (1);
-	/* if (ft_splitted(s) == 1)
-		return (1); */
 	return (0);
 }
 
@@ -48,10 +46,9 @@ int	ft_check_quotes(char *s, int comillasd, int comillas, int i)
 {
 	while (s[i])
 	{
-		if (s[i] == '\"')
+		if (s[i] == '\"' && ++comillasd)
 		{
 			i++;
-			comillasd++;
 			while (s[i] != '\"' && s[i] != '\0')
 				i++;
 			if (s[i] == '\"')
@@ -66,34 +63,10 @@ int	ft_check_quotes(char *s, int comillasd, int comillas, int i)
 			if (s[i] == '\'')
 				comillas++;
 		}
-		if(s[i] != '\0')
+		if (s[i] != '\0')
 			i++;
 	}
 	if (comillasd % 2 != 0 || comillas % 2 != 0)
 		return (1);
 	return (0);
 }
-
-/* int	ft_splitted(t_ldata *s)
-{
-	char	**temp;
-	int		i;
-
-	temp = ft_split(s->inp_line, ' ');
-	i = 0;
-	while (temp[i])
-	{
-		printf("temp[%d]: %s\n", i, temp[i]);
-		i++;
-	}
-	return (0);
-} */
-
-/*
-ls "safasf'sfas"sf"sfsf"
-ls "safasf'sfas" sf "sfsf"
-ls "safasf'sfa's" sf "sfsf"
-ls 'safasf'sfassf"sfsf"
-ls 'safasf'sfas'sf"sfsf"'
-ls 'safasf'sfassf"sfsf"'
-*/
