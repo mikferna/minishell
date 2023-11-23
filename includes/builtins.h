@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 12:12:33 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/10 14:11:34 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/23 11:31:00 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int		home_cd(t_env *env);
 void	update_pwd(char *pwd, t_env *env, char *path);
 int		go_back(t_env *env);
 int		s_case(t_env *env);
+int		do_slash(t_env *env);
 
 /*-cd1.c-*/
 int		absolute_path(t_env *env, char *path);

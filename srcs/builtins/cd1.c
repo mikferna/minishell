@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 14:02:50 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/13 12:03:04 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/23 11:32:32 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,18 @@ int	do_nothing(void)
 		ft_putstr_fd("Chdir failed in do_nothing\n", 1);
 		return (1);
 	}
+	return (0);
+}
+
+int	do_slash(t_env *env)
+{
+	char	*path;
+	int		ret;
+
+	path = get_path(env, "OLDPWD");
+	ret = chdir(path);
+	free(path);
+	if (ret != 0)
+		ft_putstr_fd("minishell: cd: OLDPWD not set\n", STDERR_FILENO);
 	return (0);
 }

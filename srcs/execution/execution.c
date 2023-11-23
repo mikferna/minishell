@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:34:39 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/22 12:22:17 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/23 11:58:22 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,11 +122,6 @@ void	exec_cmd(char **input, t_env **env)
 	}
 	else
 		waitpid(pid, NULL, 0);
-	/* 	printf("input[0]: %s\n", input[0]);
-		path = exec_bin(input, env);
-		if (!path)
-			exit(1);
-		execve(path, input, NULL); */
 }
 
 char **obtener_input(char **input, char *c)
@@ -202,6 +197,33 @@ int redir_in(char **input, t_env **env, int i)
 	return 0;
 }
 
+void ft_strcpy(char* destino, const char* fuente) {
+    while (*fuente != '\0') {
+        *destino = *fuente;
+        destino++;
+        fuente++;
+    }
+    *destino = '\0'; // Agregar el caracter nulo al final de la cadena destino
+}
+
+char** change_heredoc(char** original)
+{
+	int		i;
+
+	i = 0;
+	while (original[i])
+	{
+		if (ft_strcmp(original[i], "<<") == 0)
+		{
+			original[i] = ft_strdup("<");
+			original[i + 1] = ft_strdup(".temp");
+			break;
+		}
+		i++;
+	}
+	return (original);
+}
+
 int redir_here_document(char **input, t_env **env, int i)
 {
 	int		fd;
@@ -209,20 +231,14 @@ int redir_here_document(char **input, t_env **env, int i)
 	char	*line;
 
 	diff = 1;
-	//if (ft_strcmp(input[0], "<<") != 0)
-	(*env)->data->input_cpy = obtener_input(input, "<<");
-	printf("(*env)->data->input_cpy = %s\n", (*env)->data->input_cpy[0]);
 	fd = open(".temp", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd < 0)
-	{
-		ft_putstr_fd("Error creating heredoc\n", 2);
 		g_global.error_num = 1;
-	}
 	else
 	{
         while (diff != 0)
 		{
-			line = readline("heredoc> ");
+			line = readline("> ");
 			if (ft_strcmp(line, input[i + 1]) == 0)
 				diff = 0;
 			else
@@ -233,7 +249,8 @@ int redir_here_document(char **input, t_env **env, int i)
 			if (line)
 				free (line);
 		}
-		
+		(*env)->data->input_cpy = change_heredoc((*env)->data->input_cpy);
+		close(fd);
     }
 	return (0);
 }
