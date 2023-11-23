@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:13:23 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/23 11:04:48 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/23 12:28:50 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ int	ft_redirection(char *line)
 	i = 0;
 	while (input[i])
 	{
-		if (ft_strnstr(input[i], ">", ft_strlen(input[i])) == 0)
+		if (ft_strnstr(input[i], ">", ft_strlen(input[i]), 0) == 0)
 			return (1);
-		else if (ft_strnstr(input[i], ">>", ft_strlen(input[i])) == 0)
+		else if (ft_strnstr(input[i], ">>", ft_strlen(input[i]), 0) == 0)
 			return (1);
-		else if (ft_strnstr(input[i], "<", ft_strlen(input[i])) == 0)
+		else if (ft_strnstr(input[i], "<", ft_strlen(input[i]), 0) == 0)
 			return (1);
-		else if (ft_strnstr(input[i], "<<", ft_strlen(input[i])) == 0)
+		else if (ft_strnstr(input[i], "<<", ft_strlen(input[i]), 0) == 0)
 			return (1);
 		i++;
 	}

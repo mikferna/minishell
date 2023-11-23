@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 08:57:58 by aarrien-          #+#    #+#             */
-/*   Updated: 2023/11/18 13:07:10 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/23 12:28:10 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ char	*ft_strdup(const char *s1);
 char	*ft_itoa(int n);
 int		ft_atoi(const char *str);
 void	*ft_memmove(void *dst, const void *src, size_t n);
-int		ft_strnstr(const char *haystack, const char *needle, size_t len);
+int		ft_strnstr(const char *haystack, const char *needle, size_t len, int ks);
 #endif
