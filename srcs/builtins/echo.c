@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:57:09 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/23 12:48:56 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:02:56 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 int	mini_echo(t_env *env, char **args, int n, int i)
 {
-	int	n;
-	int	i;
-
 	env = 0;
 	if (args[1] && args[1][0] == '-')
 	{

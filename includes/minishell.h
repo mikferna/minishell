@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:44:19 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/23 11:57:12 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:08:14 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,17 @@
 
 typedef struct s_ldata
 {
-	char *inp_line;
-	char **envp;
-	char **input_cpy;
-	char **split_pipes;
-	int	stdout_cpy;
-	int	stdin_cpy;
+	char	*inp_line;
+	char	**envp;
+	char	**input_cpy;
+	char	**split_pipes;
+	int		stdout_cpy;
+	int		stdin_cpy;
 }		t_ldata;
 
 typedef struct s_token
 {
-	char *inp_line;
+	char	*inp_line;
 }		t_token;
 
 typedef struct s_env

@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:15:03 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/23 12:41:33 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:09:13 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ char	**ft_split_comillas(char const *s, char c)
 			comillas = 0;
 		if (s[i] != c && start < 0)
 			start = i;
-		else if (start >= 0 && (s[i] == c || i == ft_strlen(s)) && (comillad == 0 && comillas == 0))
+		else if (start >= 0 && (s[i] == c || i == ft_strlen(s))
+			&& (comillad == 0 && comillas == 0))
 		{
 			result[j++] = ft_substr(s, start, (i - start));
 			start = -1;
