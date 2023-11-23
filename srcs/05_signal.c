@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   05_signal.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 11:28:49 by jumoncad          #+#    #+#             */
-/*   Updated: 2023/11/23 13:04:23 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/23 17:49:56 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	restore_prompt(int sig)
 {
-	g_global.error_num = 130;
+	g_error_num = 130;
 	write(1, "\n", 1);
 	rl_replace_line("", 0);
 	rl_on_new_line();
@@ -24,14 +24,14 @@ void	restore_prompt(int sig)
 
 void	ctrl_c(int sig)
 {
-	g_global.error_num = 130;
+	g_error_num = 130;
 	write(1, "\n", 1);
 	(void)sig;
 }
 
 void	back_slash(int sig)
 {
-	g_global.error_num = 131;
+	g_error_num = 131;
 	printf("Quit (core dumped)\n");
 	(void)sig;
 }

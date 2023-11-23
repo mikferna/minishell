@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:58:42 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/23 15:31:33 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/23 17:49:56 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@ void	exec_cmd(char **input, t_env **env)
 	if (pid == 0)
 	{
 		path = exec_bin(input, env);
-		if (execve(path, input, (*env)->data->envp) == -1
-			&& ft_strcmp(input[0], ">") != 0)
+		g_error_num = execve(path, input, (*env)->data->envp);
+		if (g_error_num == -1 && ft_strcmp(input[0], ">") != 0)
 		{
+			g_error_num = 1;
 			ft_putstr_fd("minishell: ", (*env)->data->stdout_cpy);
 			ft_putstr_fd(input[0], (*env)->data->stdout_cpy);
 			ft_putstr_fd(": command not found\n", (*env)->data->stdout_cpy);
@@ -64,7 +65,7 @@ char	**obtener_input(char **input, char *c)
 		i++;
 	}
 	input2[i] = NULL;
-	free (input);
+	//free (input);
 	return (input2);
 }
 
@@ -80,7 +81,7 @@ int	redir_out(char **input, t_env **env, int i)
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(input[i + 1], 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
-		g_global.error_num = 1;
+		g_error_num = 1;
 	}
 	else
 	{
@@ -103,7 +104,7 @@ int	redir_in(char **input, t_env **env, int i)
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(input[i + 1], 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
-		g_global.error_num = 1;
+		g_error_num = 1;
 	}
 	else
 	{

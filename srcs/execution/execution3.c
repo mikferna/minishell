@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 13:00:52 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/23 13:01:41 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/23 17:49:56 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ int	redir_here_document(char **input, t_env **env, int i)
 	diff = 1;
 	fd = open(".temp", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd < 0)
-		g_global.error_num = 1;
+		g_error_num = 1;
 	else
 	{
 		write(1, "> ", 1);
-		while (get_next_line(0, &line) && line && g_global.error_num != 130)
+		while (get_next_line(0, &line) && line && g_error_num != 130)
 		{
 			if (ft_strcmp(line, input[i + 1]) == 0)
 				break ;
@@ -52,7 +52,7 @@ int	redir_append(char **input, t_env **env, int i)
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(input[i + 1], 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
-		g_global.error_num = 1;
+		g_error_num = 1;
 	}
 	else
 	{
@@ -65,19 +65,19 @@ int	redir_append(char **input, t_env **env, int i)
 void	execution(char **input, t_env **env)
 {
 	if (ft_strcmp(input[0], "echo") == 0)
-		g_global.error_num = mini_echo(*env, input, 0, 1);
+		g_error_num = mini_echo(*env, input, 0, 1);
 	else if (ft_strcmp(input[0], "cd") == 0)
-		g_global.error_num = cd(*env, input);
+		g_error_num = cd(*env, input);
 	else if (ft_strcmp(input[0], "pwd") == 0)
-		g_global.error_num = pwd(input);
+		g_error_num = pwd(input);
 	else if (ft_strcmp(input[0], "export") == 0)
-		g_global.error_num = export(*env, input);
+		g_error_num = export(*env, input);
 	else if (ft_strcmp(input[0], "unset") == 0)
-		g_global.error_num = unset(env, input);
+		g_error_num = unset(env, input);
 	else if (ft_strcmp(input[0], "env") == 0)
-		g_global.error_num = envi(*env, input);
+		g_error_num = envi(*env, input);
 	else if (ft_strcmp(input[0], "exit") == 0)
-		g_global.error_num = exitt(input);
+		g_error_num = exitt(input);
 	else
 		exec_cmd(input, env);
 }

@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:44:19 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/23 15:38:00 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/23 17:50:08 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,7 @@ typedef struct s_env
 	struct s_env	*next;
 }				t_env;
 
-typedef struct s_global
-{
-	int	error_num;
-}	t_global;
-
-t_global	g_global;
+int		g_error_num;
 
 //readline
 void	rl_replace_line(const char *text, int clear_undo);
