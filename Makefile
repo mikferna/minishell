@@ -6,7 +6,7 @@
 #    By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/04 16:06:29 by mikferna          #+#    #+#              #
-#    Updated: 2023/11/23 13:02:03 by mikferna         ###   ########.fr        #
+#    Updated: 2023/11/23 15:37:52 by mikferna         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRCS = srcs/00_main.c \
 	srcs/03_minishell.c \
 	srcs/04_check_redir.c \
 	srcs/05_signal.c \
+	srcs/06_node_utils.c \
 	srcs/libft/ft_itoa.c \
 	srcs/libft/ft_atoi.c \
 	srcs/libft/ft_putchar_fd.c \
