@@ -6,19 +6,19 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 12:35:45 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/20 16:27:01 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/23 12:55:45 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-//entra el env, y en args entra 0-unset 1-la variable a hacer unset
-int unset(t_env **env, char **args)
+int	unset(t_env **env, char **args)
 {
-	t_env   *temp;
-	t_env   *temp2;
-	int     i;
-	int     x;
+	t_env	*temp;
+	t_env	*temp2;
+	int		i;
+	int		x;
+
 	i = 1;
 	temp = *env;
 	temp2 = NULL;
@@ -38,7 +38,8 @@ int unset(t_env **env, char **args)
 	}
 	return (0);
 }
-void do_unset(t_env **env, t_env *temp, t_env *temp2, int x)
+
+void	do_unset(t_env **env, t_env *temp, t_env *temp2, int x)
 {
 	if (x == 0)
 		*env = temp->next;

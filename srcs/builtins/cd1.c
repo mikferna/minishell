@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 14:02:50 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/23 11:32:32 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/23 12:47:46 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	absolute_path(t_env *env, char *path)
 {
 	char	n_cwd[8500];
 	char	o_cwd[8500];
+
 	getcwd(o_cwd, sizeof(o_cwd));
 	if (chdir(path) == 0)
 	{

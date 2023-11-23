@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 12:11:51 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/23 12:45:20 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/23 12:47:42 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	s_case(t_env *env)
 {
 	char	n_cwd[8500];
 	char	o_cwd[8500];
+
 	getcwd(o_cwd, sizeof(o_cwd));
 	if (chdir("/") == 0)
 	{
@@ -84,6 +85,7 @@ int	go_back(t_env *env)
 {
 	char	n_cwd[8500];
 	char	o_cwd[8500];
+
 	getcwd(o_cwd, sizeof(o_cwd));
 	if (chdir("..") == 0)
 	{
@@ -112,7 +114,6 @@ void	update_pwd(char *name, t_env *env, char *path)
 	{
 		if (ft_strcmp(temp->env_name, name) == 0)
 		{
-			//free (temp->env);
 			temp->env = path;
 			break ;
 		}

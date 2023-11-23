@@ -6,13 +6,11 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 12:09:00 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/23 10:54:42 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/23 12:52:53 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-//entra en el 0-exit 1-un numero 2+-nada o si entra algo va a dar mal
 
 int	is_digit2(char *arg)
 {

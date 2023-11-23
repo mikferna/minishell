@@ -6,26 +6,24 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:57:09 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/16 12:32:20 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/23 12:48:56 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	mini_echo(t_env *env, char **args)
+int	mini_echo(t_env *env, char **args, int n, int i)
 {
 	int	n;
 	int	i;
 
-	n = 0;
-	i = 1;
 	env = 0;
 	if (args[1] && args[1][0] == '-')
 	{
 		n = 1;
 		while (args[1][i])
 		{
-			if(args[1][i] != 'n')
+			if (args[1][i] != 'n')
 				n = 0;
 			i++;
 		}
