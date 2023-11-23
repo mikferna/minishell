@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   03_minishell.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:13:23 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/23 12:32:30 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/23 15:32:47 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ int	ft_redirection(char *line)
 	
 	i = 0;
 	input = ft_split_comillas(line, ' ');
-	while (input[i])
-	{
-		printf("input[%d]: %s\n", i, input[i]);
-		i++;
-	}
-	i = 0;
+	//while (input[i])
+	//{
+	//	printf("input[%d]: %s\n", i, input[i]);
+	//	i++;
+	//
+	//i = 0;
 	while (input[i])
 	{
 		if (ft_strnstr(input[i], ">", ft_strlen(input[i]), 0) == 0)
@@ -85,7 +85,7 @@ void ft_redir(t_ldata *line, t_env **env, char *pipe_line)
 	line->input_cpy = expander(*env, ft_split_comillas(pipe_line, ' '));
 	(*env)->data->stdout_cpy = dup(STDOUT_FILENO);
 	(*env)->data->stdin_cpy = dup(STDIN_FILENO);
-	while (line->input_cpy && line->input_cpy[0] && line->input_cpy[i] )
+	while (line->input_cpy && line->input_cpy[0] && line->input_cpy[i])
 	{
 		if (ft_strncmp(line->input_cpy[i], ">", 2) == 0)
 			i = redir_out(line->input_cpy, env, i);
