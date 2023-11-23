@@ -6,13 +6,12 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 12:11:51 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/23 11:32:00 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/23 12:41:06 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-//aqui entra el env y como args 1-cd 2-lo que venga o vacio
 int	cd(t_env *env, char **args)
 {
 	int	i;
@@ -80,6 +79,7 @@ int	s_case(t_env *env)
 	}
 	return (0);
 }
+
 int	go_back(t_env *env)
 {
 	char	n_cwd[8500];

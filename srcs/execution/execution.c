@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:34:39 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/23 11:00:35 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/23 12:43:03 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,15 +195,6 @@ int redir_in(char **input, t_env **env, int i)
 		close(fd);
 	}
 	return 0;
-}
-
-void ft_strcpy(char* destino, const char* fuente) {
-    while (*fuente != '\0') {
-        *destino = *fuente;
-        destino++;
-        fuente++;
-    }
-    *destino = '\0'; // Agregar el caracter nulo al final de la cadena destino
 }
 
 char** change_heredoc(char** original)

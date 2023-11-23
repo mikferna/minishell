@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 12:20:38 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/23 12:27:47 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/23 12:44:21 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int	ft_strnstr(const char *haystack, const char *needle, size_t len, int ks)
 			kd++;
 		if (haystack[i] == '\'')
 			ks++;
-		while (haystack[i + j] == needle[j] && i + j < len && (kd % 2) == 0 && (ks % 2) == 0)
+		while (haystack[i + j] == needle[j] && i + j < len
+			&& (kd % 2) == 0 && (ks % 2) == 0)
 		{
 			if (needle[j + 1] == '\0')
 				return (0);
