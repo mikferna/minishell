@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:13:23 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/24 12:49:42 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/24 12:52:04 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ char	*procesar_redirecciones(const char *cadena, size_t len, char *ptr)
 	return (cadena_modificada);
 }
 
-void	ft_redir(t_ldata *line, t_env **env, char *pipe_line)
+void	ft_redir(t_ldata *line, t_env **env, char *pipe)
 {
 	int	i;
 
 	i = 0;
-	pipe_line = procesar_redirecciones(pipe_line, ft_strlen(pipe_line), NULL);
-	line->input_cpy = expander(*env, ft_split_comillas(pipe_line, ' ', 0, 0), NULL, 0);
+	pipe = procesar_redirecciones(pipe, ft_strlen(pipe), NULL);
+	line->input_cpy = expander(*env, ft_splt_cmls(pipe, ' ', 0, 0), NULL, 0);
 	(*env)->data->stdout_cpy = dup(STDOUT_FILENO);
 	(*env)->data->stdin_cpy = dup(STDIN_FILENO);
 	while (line->input_cpy && line->input_cpy[0] && line->input_cpy[i])
@@ -95,7 +95,7 @@ void	ft_aux_pipe(t_ldata *line, t_env **env, int i)
 		if (line->split_pipes[i + 1])
 			dup2(line->pipe_fd[1], STDOUT_FILENO);
 		close(line->pipe_fd[0]);
-		line->input = ft_split_comillas(line->split_pipes[i], ' ', 0, 0);
+		line->input = ft_splt_cmls(line->split_pipes[i], ' ', 0, 0);
 		line->input = expander(*env, line->input, NULL, 0);
 		if (line->input[0] && ft_strncmp(line->input[0], "	", 1) != 0)
 			ft_redir(line, env, line->split_pipes[i]);
@@ -117,7 +117,7 @@ void	minishell(t_ldata *line, t_env **env)
 
 	line->prev_pipe = STDIN_FILENO;
 	i = 0;
-	line->split_pipes = ft_split_comillas(line->inp_line, '|', 0, 0);
+	line->split_pipes = ft_splt_cmls(line->inp_line, '|', 0, 0);
 	run_singl(2);
 	while (line->split_pipes[i])
 	{
@@ -125,7 +125,7 @@ void	minishell(t_ldata *line, t_env **env)
 			ft_aux_pipe(line, env, i);
 		else
 		{
-			line->input = ft_split_comillas(line->split_pipes[i], ' ', 0, 0);
+			line->input = ft_splt_cmls(line->split_pipes[i], ' ', 0, 0);
 			line->input = expander(*env, line->input, NULL, 0);
 			if (line->input[0] && ft_strncmp(line->input[0], "	", 1) != 0)
 				ft_redir(line, env, line->split_pipes[i]);
