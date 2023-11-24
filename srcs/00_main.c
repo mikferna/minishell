@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:59:02 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/23 13:34:29 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/24 12:45:22 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,8 @@ void	init_minishell(t_ldata *line, t_env *env)
 		if (line->inp_line)
 		{
 			check = check_line_quote(line);
-			if (check >= 1)
-			{
-				if (check == 1)
-					printf("Input Error\n");
-				continue ;
-			}
+			if (check == 1)
+				printf("Input Error\n");
 			if (*line->inp_line != 0)
 				add_history(line->inp_line);
 			else

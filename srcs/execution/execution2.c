@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:58:42 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/23 17:49:56 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/24 12:46:13 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ char	**obtener_input(char **input, char *c)
 		i++;
 	}
 	input2[i] = NULL;
-	//free (input);
 	return (input2);
 }
 
