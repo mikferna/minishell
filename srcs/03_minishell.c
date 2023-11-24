@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:13:23 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/23 19:25:52 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/24 11:28:29 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_redirection(char *line)
 	char	**input;
 
 	i = 0;
-	input = ft_split_comillas(line, ' ');
+	input = ft_split_comillas(line, ' ', 0, 0);
 	while (input[i])
 	{
 		if (ft_strnstr(input[i], ">", ft_strlen(input[i]), 0) == 0)
@@ -76,7 +76,7 @@ void	ft_redir(t_ldata *line, t_env **env, char *pipe_line)
 
 	i = 0;
 	pipe_line = procesar_redirecciones(pipe_line, ft_strlen(pipe_line), NULL);
-	line->input_cpy = expander(*env, ft_split_comillas(pipe_line, ' '));
+	line->input_cpy = expander(*env, ft_split_comillas(pipe_line, ' ', 0, 0));
 	(*env)->data->stdout_cpy = dup(STDOUT_FILENO);
 	(*env)->data->stdin_cpy = dup(STDIN_FILENO);
 	while (line->input_cpy && line->input_cpy[0] && line->input_cpy[i])
@@ -125,7 +125,7 @@ void	minishell(t_ldata *line, t_env **env)
 
 	prev_pipe = STDIN_FILENO;
 	i = 0;
-	line->split_pipes = ft_split_comillas(line->inp_line, '|');
+	line->split_pipes = ft_split_comillas(line->inp_line, '|', 0, 0);
 	while (line->split_pipes[i])
 	{
 		if (line->split_pipes[1])
@@ -139,7 +139,7 @@ void	minishell(t_ldata *line, t_env **env)
 				if (line->split_pipes[i + 1])
 					dup2(pipe_fd[1], STDOUT_FILENO);
 				close(pipe_fd[0]);
-				input = ft_split_comillas(line->split_pipes[i], ' ');
+				input = ft_split_comillas(line->split_pipes[i], ' ', 0, 0);
 				int l = 0;
 				while (input[l])
 				{
@@ -162,7 +162,7 @@ void	minishell(t_ldata *line, t_env **env)
 		}
 		else
 		{
-			input = ft_split_comillas(line->split_pipes[i], ' ');
+			input = ft_split_comillas(line->split_pipes[i], ' ', 0, 0);
 			input = expander(*env, input);
 			if (input[0] && ft_strncmp(input[0], "	", 1) != 0)
 				ft_redir(line, env, line->split_pipes[i]);

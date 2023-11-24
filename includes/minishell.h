@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:44:19 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/23 17:50:08 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/24 11:28:37 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int		ft_lstsize(t_env *lst);
 void	ft_lstadd_back(t_env *lst, t_env *new);
 char	*start_strchar(char *str, char c);
 char	*end_strchar(char *str, char c);
-char	**ft_split_comillas(char const *s, char c);
+char	**ft_split_comillas(char const *s, char c, int comillad, int comillas);
 
 /*-03_minishell.c-*/
 void	minishell(t_ldata *line, t_env **env);
