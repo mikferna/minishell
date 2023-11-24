@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:10:24 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/23 11:58:26 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/23 17:49:56 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ char *ret_dollar(t_env *env, char *str, int i)
 	if (!str3[0])
 		return ("");
 	if (str3[0][0] == '?')
-		return (ft_strjoin(ft_itoa(g_global.error_num), ft_strtrim(str3[0], "?")));
+		return (ft_strjoin(ft_itoa(g_error_num), ft_strtrim(str3[0], "?")));
 	while (tmp)
 	{
 		if (ft_strcmp(tmp->env_name, str3[0]) == 0)

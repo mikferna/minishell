@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:15:03 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/09 14:31:54 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/24 11:27:23 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,8 @@ char	*delete_quotes(char *str, char c)
 	split = ft_split(str, c);
 	if (split[0])
 		tmp = ft_substr(split[0], 0, ft_strlen(split[0]));
-	while(split[0] && split[i])
+	while (split[0] && split[i])
 	{
-		//printf("split[%d] = %s\n", i, split[i]);
 		tmp = ft_strjoin(tmp, split[i]);
 		i++;
 	}
@@ -50,17 +49,13 @@ size_t	dollar_sign(char *str)
 	return (0);
 }
 
-char	**ft_split_comillas(char const *s, char c)
+char	**ft_split_comillas(char const *s, char c, int comillad, int comillas)
 {
 	char	**result;
 	size_t	i;
 	int		j;
 	int		start;
-	int		comillad;
-	int		comillas;
 
-	comillad = 0;
-	comillas = 0;
 	if (!s)
 		return (NULL);
 	result = (char **)malloc(sizeof(char *) * (ft_doublesize(s, c) + 1));
@@ -81,7 +76,8 @@ char	**ft_split_comillas(char const *s, char c)
 			comillas = 0;
 		if (s[i] != c && start < 0)
 			start = i;
-		else if (start >= 0 && (s[i] == c || i == ft_strlen(s)) && (comillad == 0 && comillas == 0))
+		else if (start >= 0 && (s[i] == c || i == ft_strlen(s))
+			&& (comillad == 0 && comillas == 0))
 		{
 			result[j++] = ft_substr(s, start, (i - start));
 			start = -1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:44:19 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/23 13:24:51 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/24 11:28:37 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,17 @@
 
 typedef struct s_ldata
 {
-	char *inp_line;
-	char **envp;
-	char **input_cpy;
-	char **split_pipes;
-	int	stdout_cpy;
-	int	stdin_cpy;
+	char	*inp_line;
+	char	**envp;
+	char	**input_cpy;
+	char	**split_pipes;
+	int		stdout_cpy;
+	int		stdin_cpy;
 }		t_ldata;
 
 typedef struct s_token
 {
-	char *inp_line;
+	char	*inp_line;
 }		t_token;
 
 typedef struct s_env
@@ -58,12 +58,7 @@ typedef struct s_env
 	struct s_env	*next;
 }				t_env;
 
-typedef struct s_global
-{
-	int	error_num;
-}	t_global;
-
-t_global	g_global;
+int		g_error_num;
 
 //readline
 void	rl_replace_line(const char *text, int clear_undo);
@@ -86,7 +81,7 @@ int		ft_lstsize(t_env *lst);
 void	ft_lstadd_back(t_env *lst, t_env *new);
 char	*start_strchar(char *str, char c);
 char	*end_strchar(char *str, char c);
-char	**ft_split_comillas(char const *s, char c);
+char	**ft_split_comillas(char const *s, char c, int comillad, int comillas);
 
 /*-03_minishell.c-*/
 void	minishell(t_ldata *line, t_env **env);

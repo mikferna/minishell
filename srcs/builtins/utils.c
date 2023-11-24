@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 12:16:45 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/21 14:18:57 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/23 12:46:35 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*get_path(t_env *env, char *dir)
 			return (env->env);
 		env = env->next;
 	}
-	return (NULL);	
+	return (NULL);
 }
 
 int	ft_strcmp(char *s1, char *s2)

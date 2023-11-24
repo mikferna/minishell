@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 11:28:49 by jumoncad          #+#    #+#             */
-/*   Updated: 2023/11/24 11:39:43 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/24 11:41:18 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	restore_prompt(int sig)
 {
-	g_global.error_num = 130;
+	g_error_num = 130;
 	write(1, "\n", 1);
 	rl_replace_line("", 0);
 	rl_on_new_line();
@@ -24,7 +24,7 @@ void	restore_prompt(int sig)
 
 void	ctrl_c(int sig)
 {
-	g_global.error_num = 130;
+	g_error_num = 130;
 	write(1, "\n", 1);
 	(void)sig;
 }

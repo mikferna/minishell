@@ -6,13 +6,12 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 10:44:43 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/10 14:22:38 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/23 12:58:02 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-//me llega en el arg en el 0 export y en ls proximos me llega la variable entera, con el igual y todo, ejemp: HOLA=ADIOS
 int	export(t_env *env, char **args)
 {
 	int		ret;
@@ -35,7 +34,22 @@ int	export(t_env *env, char **args)
 	return (ret);
 }
 
-int	do_export(t_env *env, t_env	*temp, char **args)
+t_env	*ft_temp_aux(t_env *temp, char *name, char *path, int x)
+{
+	while (temp)
+	{
+		if (ft_strcmp(temp->env_name, name) == 0)
+		{
+			free(temp->env);
+			temp->env = path;
+			x = 1;
+		}
+		temp = temp->next;
+	}
+	return (temp);
+}
+
+int	do_export(t_env *env, t_env *temp, char **args)
 {
 	char	*name;
 	char	*path;
@@ -51,16 +65,7 @@ int	do_export(t_env *env, t_env	*temp, char **args)
 		path = end_strchar(args[i], '=');
 		if (!name || !path)
 			return (1);
-		while (temp)
-		{
-			if (ft_strcmp(temp->env_name, name) == 0)
-			{
-				free(temp->env);
-				temp->env = path;
-				x = 1;
-			}
-			temp = temp->next;
-		}
+		temp = ft_temp_aux(temp, name, path, x);
 		temp = env;
 		if (x == 0)
 			env_addback(temp, path, name, env->data);

@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 12:11:51 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/23 11:58:16 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/23 12:47:42 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-//aqui entra el env y como args 1-cd 2-lo que venga o vacio
 int	cd(t_env *env, char **args)
 {
 	int	i;
@@ -62,6 +61,7 @@ int	s_case(t_env *env)
 {
 	char	n_cwd[8500];
 	char	o_cwd[8500];
+
 	getcwd(o_cwd, sizeof(o_cwd));
 	if (chdir("/") == 0)
 	{
@@ -80,10 +80,12 @@ int	s_case(t_env *env)
 	}
 	return (0);
 }
+
 int	go_back(t_env *env)
 {
 	char	n_cwd[8500];
 	char	o_cwd[8500];
+
 	getcwd(o_cwd, sizeof(o_cwd));
 	if (chdir("..") == 0)
 	{
@@ -112,7 +114,6 @@ void	update_pwd(char *name, t_env *env, char *path)
 	{
 		if (ft_strcmp(temp->env_name, name) == 0)
 		{
-			//free (temp->env);
 			temp->env = path;
 			break ;
 		}

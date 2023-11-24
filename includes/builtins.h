@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 12:12:33 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/23 11:31:00 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/23 12:50:21 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include "minishell.h"
 
 //puede que lo de abajo de error no lo he probado
-typedef struct s_env t_env;
-typedef struct s_ldata t_ldata;
+typedef struct s_env	t_env;
+typedef struct s_ldata	t_ldata;
 
 /*-cd.c-*/
 int		cd(t_env *env, char **args);
@@ -54,11 +54,10 @@ int		exitt(char **args);
 void	get_env(char **envp, t_env **env, t_ldata **line);
 
 /*-echo.c-*/
-int		mini_echo(t_env *env, char **args);
+int		mini_echo(t_env *env, char **args, int n, int i);
 
 /*-utils.c-*/
 char	*get_path(t_env *env, char *dir);
 int		ft_strcmp(char *s1, char *s2);
-
 
 #endif
