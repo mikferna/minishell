@@ -6,52 +6,43 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:10:24 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/23 17:49:56 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/24 12:46:12 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	**expander(t_env *env, char **str)
+char	**expander(t_env *env, char **s, char *tmp, int i)
 {
-	int		i;
-	int		j;
-	char	*tmp;
+	int	j;
 
-	i = 0;
-	tmp = NULL;
-	while (str[i])
+	while (++i && s[i])
 	{
 		j = 0;
-		while (str[i][j] && (str[i][j] != '\'' && str[i][j] != '\"') && str[i][j] != '$')
+		while (s[i][j] && (s[i][j] != '\'' && s[i][j] != '"') && s[i][j] != '$')
 			j++;
-		if (str[i][j] != '\'' && dollar_sign(str[i]) != 0
-			&& str[i][dollar_sign(str[i])] != '\0')
+		if (s[i][j] != '\'' && dllar_sign(s[i]) != 0 && s[i][dllar_sign(s[i])])
 		{
-			tmp = ret_doll_str(env, str[i], 0);
-			free(str[i]); //aqui tiene que devolver la frase con el dolar cambiado o sin cambiar
-			str[i] = tmp;
+			tmp = ret_doll_str(env, s[i], 0, NULL);
+			free(s[i]);
+			s[i] = tmp;
 		}
 		j = 0;
-		while (str[i][j] && (str[i][j] != '\'' && str[i][j] != '\"'))
+		while (s[i][j] && (s[i][j] != '\'' && s[i][j] != '\"'))
 			j++;
-		if (ft_strncmp(str[0], "export", ft_strlen(str[0]) - 1) != 0)
+		if (ft_strncmp(s[0], "export", ft_strlen(s[0]) - 1) != 0)
 		{
-			if (str[i][j] == '\'')
-				str[i] = delete_quotes(str[i], '\'');
-			else if (str[i][j] == '\"')
-				str[i] = delete_quotes(str[i], '\"');
+			if (s[i][j] == '\'')
+				s[i] = delete_quotes(s[i], '\'');
+			else if (s[i][j] == '\"')
+				s[i] = delete_quotes(s[i], '\"');
 		}
-		i++;
 	}
-	return (str);
+	return (s);
 }
 
-char	*ret_doll_str(t_env *env, char *str, int i)
+char	*ret_doll_str(t_env *env, char *str, int i, char *tmp)
 {
-	char	*tmp;
-
-	tmp = NULL;
 	while (str[i])
 	{
 		if (str[i] == '$')
@@ -59,10 +50,11 @@ char	*ret_doll_str(t_env *env, char *str, int i)
 			i++;
 			tmp = ft_substr(str, 0, i - 1);
 			if (str[i] != '\'')
-				tmp = ft_strjoin(tmp, ret_dollar(env, str, i - 1));
-			while(str[i] == '\"')
+				tmp = ft_strjoin(tmp, ret_dollar(env, str, i - 1, NULL));
+			while (str[i] == '\"')
 				i++;
-			while (str[i] != ' ' && str[i] != '\0' && str[i] != '\"' && str[i] != '\'' && str[i] != '$')
+			while (str[i] != ' ' && str[i] != '\0' && str[i] != '\"'
+				&& str[i] != '\'' && str[i] != '$')
 				i++;
 			tmp = ft_strjoin(tmp, &str[i]);
 			if (ft_strcmp(tmp, "") == 0)
@@ -77,23 +69,26 @@ char	*ret_doll_str(t_env *env, char *str, int i)
 	return (tmp);
 }
 
-char *ret_dollar(t_env *env, char *str, int i)
+char	**splitted(char *str, char **str2, char **str3, int i)
 {
-	t_env 	*tmp;
-	char 	**str2;
-	char	**str3;
-	char 	*ret;
-
-	tmp = env;
-	i++;
 	str2 = ft_split(&str[i], ' ');
 	if (!str2[0])
-		return ("");
+		return (NULL);
 	str3 = ft_split(str2[0], '\"');
 	str3 = ft_split(str3[0], '\'');
 	str3 = ft_split(str3[0], '$');
+	return (str3);
+}
+
+char	*ret_dollar(t_env *env, char *str, int i, char *ret)
+{
+	t_env	*tmp;
+	char	**str3;
+
+	tmp = env;
+	i++;
+	str3 = splitted(str, NULL, NULL, i);
 	i = 1;
-	ret = NULL;
 	if (!str3[0])
 		return ("");
 	if (str3[0][0] == '?')

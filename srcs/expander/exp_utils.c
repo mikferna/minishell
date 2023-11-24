@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:15:03 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/24 11:27:23 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/24 12:18:08 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*delete_quotes(char *str, char c)
 	return (tmp);
 }
 
-size_t	dollar_sign(char *str)
+size_t	dllar_sign(char *str)
 {
 	size_t	i;
 

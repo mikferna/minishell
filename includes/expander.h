@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 13:22:31 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/31 13:37:23 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/24 12:30:25 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,13 @@
 # include "minishell.h"
 
 /*-expander.c-*/
-char	**expander(t_env *env, char **str);
+char	**expander(t_env *env, char **s, char *tmp, int i);
 
 /*-exp_utils.c-*/
 char	*delete_quotes(char *str, char c);
-size_t	dollar_sign(char *str);
-char	*ret_doll_str(t_env *env, char *str, int i);
-char	*ret_dollar(t_env *env, char *str, int i);
+size_t	dllar_sign(char *str);
+char	*ret_doll_str(t_env *env, char *str, int i, char *tmp);
+char	**splitted(char *str, char **str2, char **str3, int i);
+char	*ret_dollar(t_env *env, char *str, int i, char *ret);
 
 #endif

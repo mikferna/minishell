@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:13:23 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/24 11:28:29 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/24 12:21:48 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	ft_redir(t_ldata *line, t_env **env, char *pipe_line)
 
 	i = 0;
 	pipe_line = procesar_redirecciones(pipe_line, ft_strlen(pipe_line), NULL);
-	line->input_cpy = expander(*env, ft_split_comillas(pipe_line, ' ', 0, 0));
+	line->input_cpy = expander(*env, ft_split_comillas(pipe_line, ' ', 0, 0), NULL, 0);
 	(*env)->data->stdout_cpy = dup(STDOUT_FILENO);
 	(*env)->data->stdin_cpy = dup(STDIN_FILENO);
 	while (line->input_cpy && line->input_cpy[0] && line->input_cpy[i])
@@ -97,22 +97,6 @@ void	ft_redir(t_ldata *line, t_env **env, char *pipe_line)
 	dup2((*env)->data->stdin_cpy, STDIN_FILENO);
 	close((*env)->data->stdout_cpy);
 	close((*env)->data->stdout_cpy);
-}
-
-void eliminarespaciostabulaciones(char **cadena) {
-    if (cadena == NULL || *cadena == NULL) {
-        return;
-    }
-
-    char **ptr = cadena;
-    while (*ptr != NULL) {
-        char *inicio = *ptr;
-        while (*inicio != '\0' && (*inicio == ' ' || *inicio == '\t')) {
-            inicio++;
-        }
-        ft_memmove(*ptr, inicio, ft_strlen(inicio) + 1); // Mover el contenido sin espacios al principio
-        ptr++;
-    }
 }
 
 void	minishell(t_ldata *line, t_env **env)
@@ -140,13 +124,7 @@ void	minishell(t_ldata *line, t_env **env)
 					dup2(pipe_fd[1], STDOUT_FILENO);
 				close(pipe_fd[0]);
 				input = ft_split_comillas(line->split_pipes[i], ' ', 0, 0);
-				int l = 0;
-				while (input[l])
-				{
-					printf("input[%d]: [%s]\n", l, input[l]);
-					l++;
-				}
-				input = expander(*env, input);
+				input = expander(*env, input, NULL, 0);
 				if (input[0] && ft_strncmp(input[0], "	", 1) != 0)
 					ft_redir(line, env, line->split_pipes[i]);
 				exit(EXIT_SUCCESS);
@@ -163,7 +141,7 @@ void	minishell(t_ldata *line, t_env **env)
 		else
 		{
 			input = ft_split_comillas(line->split_pipes[i], ' ', 0, 0);
-			input = expander(*env, input);
+			input = expander(*env, input, NULL, 0);
 			if (input[0] && ft_strncmp(input[0], "	", 1) != 0)
 				ft_redir(line, env, line->split_pipes[i]);
 		}
