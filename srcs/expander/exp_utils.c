@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:15:03 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/24 12:51:30 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/24 13:16:00 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,25 @@ size_t	dllar_sign(char *str)
 	return (0);
 }
 
+void	init_ji(int *j, size_t *i, int *start)
+{
+	*j = 0;
+	*i = -1;
+	*start = -1;
+}
+
+void	ft_splt_cmls_if(int *comillad, int *comillas, int i, char *s)
+{
+	if (s[i] == '"' && *comillad == 0 && *comillas == 0)
+		*comillad = 1;
+	else if (s[i] == '\'' && *comillad == 0 && *comillas == 0)
+		*comillas = 1;
+	else if (s[i] == '"' && *comillad == 1 && *comillas == 0)
+		*comillad = 0;
+	else if (s[i] == '\'' && *comillad == 0 && *comillas == 1)
+		*comillas = 0;
+}
+
 char	**ft_splt_cmls(char const *s, char c, int comillad, int comillas)
 {
 	char	**result;
@@ -61,19 +80,10 @@ char	**ft_splt_cmls(char const *s, char c, int comillad, int comillas)
 	result = (char **)malloc(sizeof(char *) * (ft_doublesize(s, c) + 1));
 	if (!result)
 		return (NULL);
-	start = -1;
-	i = -1;
-	j = 0;
+	init_ji(&j, &i, &start);
 	while (++i <= ft_strlen(s))
 	{
-		if (s[i] == '"' && comillad == 0 && comillas == 0)
-			comillad = 1;
-		else if (s[i] == '\'' && comillad == 0 && comillas == 0)
-			comillas = 1;
-		else if (s[i] == '"' && comillad == 1 && comillas == 0)
-			comillad = 0;
-		else if (s[i] == '\'' && comillad == 0 && comillas == 1)
-			comillas = 0;
+		ft_splt_cmls_if(&comillad, &comillas, i, (char *)s);
 		if (s[i] != c && start < 0)
 			start = i;
 		else if (start >= 0 && (s[i] == c || i == ft_strlen(s))
