@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 11:28:49 by jumoncad          #+#    #+#             */
-/*   Updated: 2023/11/24 11:41:18 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/24 11:43:28 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ctrl_c(int sig)
 
 void	back_slash(int sig)
 {
-	g_global.error_num = 131;
+	g_error_num = 131;
 	printf("Quit: 3\n");
 	(void)sig;
 }

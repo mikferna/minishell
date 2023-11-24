@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   04_check_redir.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 11:54:21 by jumoncad          #+#    #+#             */
-/*   Updated: 2023/11/23 15:42:34 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/24 12:02:49 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,35 @@
 
 int	check_stdin(char *s, int k)
 {
-	if (s[k + 2] == '\0')
+	if (s[k + 1] == ' ' && s[k + 2] == '\0')
 		return (1);
+	if (s[k + 1] == ' ' && s[k + 2] != '\0')
+		return (0);
 	if (s[k + 1] == ' ')
 		return (0);
-	if (s[k + 1] == '>' && (s[k + 2] == '>' || \
-		s[k + 2] == '<' || s[k + 2] == '|'))
+	if (s[k + 1] == '>' && (s[k + 2] == '>' || s[k + 2] == '<' || s[k
+			+ 2] == '|'))
 		return (1);
-	else if (s[k + 1] == '<' || s[k + 1] == '|' || \
-		s[k + 1] == '\0' || s[k + 1] == ' ')
+	else if (s[k + 1] == '<' || s[k + 1] == '|' || s[k + 1] == '\0' || s[k
+		+ 1] == ' ')
 		return (1);
 	return (0);
 }
 
 int	check_stdout(char *s, int k)
 {
-	if (s[k + 2] == '\0')
+	if (s[k + 1] == ' ' && s[k + 2] == '\0')
 		return (1);
+	if (s[k + 1] == ' ' && s[k + 2] != '\0')
+		return (0);
 	if (s[k + 1] == ' ')
 		return (0);
-	if (s[k + 1] == '<' && (s[k + 2] == '>' || \
-		s[k + 2] == '<' || s[k + 2] == '|'))
+	if (s[k + 1] == '<' && (s[k + 2] == '>' || s[k + 2] == '<' || s[k
+			+ 2] == '|'))
 		return (1);
 	else if (s[k + 1] == '>')
 		return (1);
-	else if (s[k + 1] == '|' || s[k + 1] == ' ' || \
-		s[k + 1] == '\0')
+	else if (s[k + 1] == '|' || s[k + 1] == ' ' || s[k + 1] == '\0')
 		return (1);
 	return (0);
 }
@@ -50,8 +53,8 @@ int	check_pipe(char *s, int k)
 		return (1);
 	if (s[k + 1] == ' ' && s[k + 2] != '\0')
 		return (0);
-	if (s[k + 1] == '>' && (s[k + 2] == '>' || \
-		s[k + 2] == '<' || s[k + 2] == '|'))
+	if (s[k + 1] == '>' && (s[k + 2] == '>' || s[k + 2] == '<' || s[k
+			+ 2] == '|'))
 		return (1);
 	if (s[k + 1] == '\0')
 		return (1);

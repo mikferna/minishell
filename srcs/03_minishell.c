@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:13:23 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/24 11:41:02 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/24 11:42:57 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ void	minishell(t_ldata *line, t_env **env)
 
 	prev_pipe = STDIN_FILENO;
 	i = 0;
-	line->split_pipes = ft_split_comillas(line->inp_line, '|');
+	line->split_pipes = ft_split_comillas(line->inp_line, '|', 0, 0);
 	run_singl(2);
 	while (line->split_pipes[i])
 	{
@@ -134,7 +134,6 @@ void	minishell(t_ldata *line, t_env **env)
 			if (pipe(pipe_fd) == -1)
 				perror("pipe");
 			pid = fork();
-			
 			if (pid == 0)
 			{
 				dup2(prev_pipe, STDIN_FILENO);
