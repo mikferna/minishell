@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:58:42 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/24 12:46:13 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/24 13:30:44 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	exec_cmd(char **input, t_env **env)
 			ft_putstr_fd("minishell: ", (*env)->data->stdout_cpy);
 			ft_putstr_fd(input[0], (*env)->data->stdout_cpy);
 			ft_putstr_fd(": command not found\n", (*env)->data->stdout_cpy);
-			exit(1);
+			exit(127);
 		}
 	}
 	else

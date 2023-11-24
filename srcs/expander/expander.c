@@ -6,17 +6,27 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:10:24 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/24 12:46:12 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/24 13:38:14 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+void	init_j(int *j, char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] && (s[i] != '\'' && s[i] != '\"'))
+		i++;
+	*j = i;
+}
+
 char	**expander(t_env *env, char **s, char *tmp, int i)
 {
 	int	j;
 
-	while (++i && s[i])
+	while (s[i])
 	{
 		j = 0;
 		while (s[i][j] && (s[i][j] != '\'' && s[i][j] != '"') && s[i][j] != '$')
@@ -27,9 +37,7 @@ char	**expander(t_env *env, char **s, char *tmp, int i)
 			free(s[i]);
 			s[i] = tmp;
 		}
-		j = 0;
-		while (s[i][j] && (s[i][j] != '\'' && s[i][j] != '\"'))
-			j++;
+		init_j(&j, s[i]);
 		if (ft_strncmp(s[0], "export", ft_strlen(s[0]) - 1) != 0)
 		{
 			if (s[i][j] == '\'')
@@ -37,6 +45,7 @@ char	**expander(t_env *env, char **s, char *tmp, int i)
 			else if (s[i][j] == '\"')
 				s[i] = delete_quotes(s[i], '\"');
 		}
+		i++;
 	}
 	return (s);
 }
