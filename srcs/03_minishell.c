@@ -6,42 +6,14 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:13:23 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/24 12:21:48 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/24 12:49:42 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_redirection(char *line)
+void	ft_aux_procesar_redirecciones(const char *cadena, char *ptr)
 {
-	int		i;
-	char	**input;
-
-	i = 0;
-	input = ft_split_comillas(line, ' ', 0, 0);
-	while (input[i])
-	{
-		if (ft_strnstr(input[i], ">", ft_strlen(input[i]), 0) == 0)
-			return (1);
-		else if (ft_strnstr(input[i], ">>", ft_strlen(input[i]), 0) == 0)
-			return (1);
-		else if (ft_strnstr(input[i], "<", ft_strlen(input[i]), 0) == 0)
-			return (1);
-		else if (ft_strnstr(input[i], "<<", ft_strlen(input[i]), 0) == 0)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-char	*procesar_redirecciones(const char *cadena, size_t len, char *ptr)
-{
-	char	*cadena_modificada;
-
-	cadena_modificada = (char *)malloc((len * 3 + 1) * sizeof(char));
-	if (cadena_modificada == NULL)
-		exit(EXIT_FAILURE);
-	ptr = cadena_modificada;
 	while (*cadena != '\0')
 	{
 		if (*cadena == '<' || *cadena == '>')
@@ -67,6 +39,17 @@ char	*procesar_redirecciones(const char *cadena, size_t len, char *ptr)
 		cadena++;
 	}
 	*ptr = '\0';
+}
+
+char	*procesar_redirecciones(const char *cadena, size_t len, char *ptr)
+{
+	char	*cadena_modificada;
+
+	cadena_modificada = (char *)malloc((len * 3 + 1) * sizeof(char));
+	if (cadena_modificada == NULL)
+		exit(EXIT_FAILURE);
+	ptr = cadena_modificada;
+	ft_aux_procesar_redirecciones(cadena, ptr);
 	return (cadena_modificada);
 }
 
@@ -99,50 +82,52 @@ void	ft_redir(t_ldata *line, t_env **env, char *pipe_line)
 	close((*env)->data->stdout_cpy);
 }
 
-void	minishell(t_ldata *line, t_env **env)
+void	ft_aux_pipe(t_ldata *line, t_env **env, int i)
 {
-	char	**input;
-	int		i;
-	int		pipe_fd[2];
-	int		prev_pipe;
 	pid_t	pid;
 
-	prev_pipe = STDIN_FILENO;
+	if (pipe(line->pipe_fd) == -1)
+		perror("pipe");
+	pid = fork();
+	if (pid == 0)
+	{
+		dup2(line->prev_pipe, STDIN_FILENO);
+		if (line->split_pipes[i + 1])
+			dup2(line->pipe_fd[1], STDOUT_FILENO);
+		close(line->pipe_fd[0]);
+		line->input = ft_split_comillas(line->split_pipes[i], ' ', 0, 0);
+		line->input = expander(*env, line->input, NULL, 0);
+		if (line->input[0] && ft_strncmp(line->input[0], "	", 1) != 0)
+			ft_redir(line, env, line->split_pipes[i]);
+		exit(EXIT_SUCCESS);
+	}
+	else if (pid > 0)
+	{
+		wait(NULL);
+		close(line->pipe_fd[1]);
+		line->prev_pipe = line->pipe_fd[0];
+	}
+	else
+		perror("fork");
+}
+
+void	minishell(t_ldata *line, t_env **env)
+{
+	int	i;
+
+	line->prev_pipe = STDIN_FILENO;
 	i = 0;
 	line->split_pipes = ft_split_comillas(line->inp_line, '|', 0, 0);
+	run_singl(2);
 	while (line->split_pipes[i])
 	{
 		if (line->split_pipes[1])
-		{
-			if (pipe(pipe_fd) == -1)
-				perror("pipe");
-			pid = fork();
-			if (pid == 0)
-			{
-				dup2(prev_pipe, STDIN_FILENO);
-				if (line->split_pipes[i + 1])
-					dup2(pipe_fd[1], STDOUT_FILENO);
-				close(pipe_fd[0]);
-				input = ft_split_comillas(line->split_pipes[i], ' ', 0, 0);
-				input = expander(*env, input, NULL, 0);
-				if (input[0] && ft_strncmp(input[0], "	", 1) != 0)
-					ft_redir(line, env, line->split_pipes[i]);
-				exit(EXIT_SUCCESS);
-			}
-			else if (pid > 0)
-			{
-				wait(NULL);
-				close(pipe_fd[1]);
-				prev_pipe = pipe_fd[0];
-			}
-			else
-				perror("fork");
-		}
+			ft_aux_pipe(line, env, i);
 		else
 		{
-			input = ft_split_comillas(line->split_pipes[i], ' ', 0, 0);
-			input = expander(*env, input, NULL, 0);
-			if (input[0] && ft_strncmp(input[0], "	", 1) != 0)
+			line->input = ft_split_comillas(line->split_pipes[i], ' ', 0, 0);
+			line->input = expander(*env, line->input, NULL, 0);
+			if (line->input[0] && ft_strncmp(line->input[0], "	", 1) != 0)
 				ft_redir(line, env, line->split_pipes[i]);
 		}
 		i++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   05_signal.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 11:28:49 by jumoncad          #+#    #+#             */
-/*   Updated: 2023/11/23 17:49:56 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/24 11:43:28 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ctrl_c(int sig)
 void	back_slash(int sig)
 {
 	g_error_num = 131;
-	printf("Quit (core dumped)\n");
+	printf("Quit: 3\n");
 	(void)sig;
 }
 
