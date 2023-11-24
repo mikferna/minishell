@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   01_checker.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:02:12 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/23 13:28:29 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/24 14:03:59 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,16 @@ int	check_line_quote(t_ldata *s)
 int	check_redirections(char *s)
 {
 	int		i;
+	int		result;
 	char	**temp;
 
 	i = 0;
 	temp = ft_split(s, '\'');
-	if (ft_check_redir(temp[0]) == 0)
+	if (temp == NULL)
 		return (0);
-	return (1);
+	result = ft_check_redir(temp[0]);
+	free_split(temp);
+	return (result);
 }
 
 int	ft_check_quotes(char *s, int comillasd, int comillas, int i)

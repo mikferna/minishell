@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 14:02:50 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/23 12:47:46 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/24 14:42:50 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,11 @@ int	do_nothing(void)
 int	do_slash(t_env *env)
 {
 	char	*path;
-	int		ret;
 
 	path = get_path(env, "OLDPWD");
-	ret = chdir(path);
-	free(path);
-	if (ret != 0)
+	if (!path)
 		ft_putstr_fd("minishell: cd: OLDPWD not set\n", STDERR_FILENO);
+	else
+		absolute_path(env, path);
 	return (0);
 }

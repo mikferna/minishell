@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 11:20:16 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/13 12:03:01 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/24 14:32:17 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	envi(t_env *env, char **args)
 	{
 		ft_putstr_fd("env: ", 2);
 		ft_putstr_fd(args[1], 2);
-		ft_putstr_fd(": No such file or directory", 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
 		return (127);
 	}
 	while (temp)

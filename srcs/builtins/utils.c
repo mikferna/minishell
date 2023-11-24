@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 12:16:45 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/23 12:46:35 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/24 13:57:18 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,22 @@ int	ft_strcmp(char *s1, char *s2)
 		i++;
 	}
 	return (1);
+}
+
+void	free_split(char **input)
+{
+	int	i;
+	int	len;
+
+	len = 0;
+	while (input[len])
+	{
+		len++;
+	}
+	i = 0;
+	while (i < len)
+	{
+		free (input[i]);
+		i++;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 12:12:33 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/23 12:50:21 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/24 13:57:31 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,6 @@ int		mini_echo(t_env *env, char **args, int n, int i);
 /*-utils.c-*/
 char	*get_path(t_env *env, char *dir);
 int		ft_strcmp(char *s1, char *s2);
+void	free_split(char **input);
 
 #endif

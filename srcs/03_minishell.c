@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:13:23 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/24 12:52:04 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/24 13:53:15 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	ft_redir(t_ldata *line, t_env **env, char *pipe)
 	i = 0;
 	pipe = procesar_redirecciones(pipe, ft_strlen(pipe), NULL);
 	line->input_cpy = expander(*env, ft_splt_cmls(pipe, ' ', 0, 0), NULL, 0);
+	free(pipe);
 	(*env)->data->stdout_cpy = dup(STDOUT_FILENO);
 	(*env)->data->stdin_cpy = dup(STDIN_FILENO);
 	while (line->input_cpy && line->input_cpy[0] && line->input_cpy[i])
