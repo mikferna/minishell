@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:58:42 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/27 11:26:01 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/27 12:01:01 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ char	**obtener_input(char **input, char *c)
 	i = 0;
 	while (input[i])
 		i++;
-	input2 = malloc(sizeof(char *) * (i - 1));
+	//aqui
+	input2 = malloc(sizeof(char *) * (i));
 	while (ft_strcmp(input[x], c) != 0)
 	{
 		input2[x] = ft_strdup(input[x]);

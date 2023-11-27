@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:13:23 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/24 13:53:15 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/27 12:05:11 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,13 @@ char	*procesar_redirecciones(const char *cadena, size_t len, char *ptr)
 
 void	ft_redir(t_ldata *line, t_env **env, char *pipe)
 {
-	int	i;
+	int		i;
+	char	**splt_comillas;
 
 	i = 0;
 	pipe = procesar_redirecciones(pipe, ft_strlen(pipe), NULL);
-	line->input_cpy = expander(*env, ft_splt_cmls(pipe, ' ', 0, 0), NULL, 0);
+	splt_comillas = ft_splt_cmls(pipe, ' ', 0, 0);
+	line->input_cpy = expander(*env, splt_comillas, NULL, 0);
 	free(pipe);
 	(*env)->data->stdout_cpy = dup(STDOUT_FILENO);
 	(*env)->data->stdin_cpy = dup(STDIN_FILENO);
@@ -81,6 +83,7 @@ void	ft_redir(t_ldata *line, t_env **env, char *pipe)
 	dup2((*env)->data->stdin_cpy, STDIN_FILENO);
 	close((*env)->data->stdout_cpy);
 	close((*env)->data->stdout_cpy);
+	free_split(splt_comillas);
 }
 
 void	ft_aux_pipe(t_ldata *line, t_env **env, int i)
