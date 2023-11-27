@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:59:02 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/24 14:12:40 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/27 11:35:17 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	main(int argc, char **argv, char **envp)
 	}
 	init_structs(&line, &env, envp);
 	init_minishell(line, env);
+	free_structs(line, env);
 	return (0);
 }
 
@@ -70,4 +71,14 @@ void	init_minishell(t_ldata *line, t_env *env)
 			minishell(line, &env);
 		}
 	}
+}
+
+void	free_structs(t_ldata *line, t_env *env)
+{
+	(void)env;
+	free(line->input_cpy);
+	free(line->inp_line);
+	free(line->split_pipes);
+	free(line);
+	//free(env);
 }

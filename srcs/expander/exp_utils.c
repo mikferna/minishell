@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:15:03 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/24 13:16:00 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/27 11:16:55 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ char	*delete_quotes(char *str, char c)
 	if (ft_strlen(str) == 2)
 		return ("");
 	split = ft_split(str, c);
+	if (!split)
+		return (NULL);
 	if (split[0])
 		tmp = ft_substr(split[0], 0, ft_strlen(split[0]));
 	while (split[0] && split[i])
@@ -32,6 +34,8 @@ char	*delete_quotes(char *str, char c)
 		tmp = ft_strjoin(tmp, split[i]);
 		i++;
 	}
+	//aqui
+	free_split(split);
 	return (tmp);
 }
 

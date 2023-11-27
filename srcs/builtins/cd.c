@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 12:11:51 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/24 14:22:19 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/27 11:27:44 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,8 @@ void	update_pwd(char *name, t_env *env, char *path)
 	{
 		if (ft_strcmp(temp->env_name, name) == 0)
 		{
+			//aqui
+			free(temp->env);
 			temp->env = path;
 			break ;
 		}

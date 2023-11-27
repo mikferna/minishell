@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:44:19 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/24 12:51:30 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/27 11:10:50 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void				rl_replace_line(const char *text, int clear_undo);
 int					main(int argc, char **argv, char **envp);
 void				init_structs(t_ldata **line, t_env **env, char **envp);
 void				init_minishell(t_ldata *line, t_env *env);
+void				free_structs(t_ldata *line, t_env *env);
 
 /*-01_checker.c-*/
 int					check_line_quote(t_ldata *s);

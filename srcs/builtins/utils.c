@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 12:16:45 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/24 13:57:18 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/27 11:34:19 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	free_split(char **input)
 	int	len;
 
 	len = 0;
+	if (input == NULL)
+		return ;
 	while (input[len])
 	{
 		len++;
@@ -55,4 +57,5 @@ void	free_split(char **input)
 		free (input[i]);
 		i++;
 	}
+	free(input);
 }
