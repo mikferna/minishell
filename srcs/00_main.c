@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:59:02 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/27 12:12:33 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/27 12:35:52 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,9 @@ void	init_minishell(t_ldata *line, t_env *env)
 
 void	free_structs(t_ldata *line, t_env *env)
 {
-	(void)env;
-	free(line->input_cpy);
-	//free(line->inp_line);
-	free(line->split_pipes);
-	free(line);
-	//free(env);
+	//(void)env;
+	free_split(line->input_cpy);
+    free_split(line->split_pipes);
+    free(line);
+    free(env);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exp_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:15:03 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/27 11:16:55 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/27 12:51:48 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,11 @@
 char	*delete_quotes(char *str, char c)
 {
 	int		i;
-	int		j;
 	char	*tmp;
 	char	**split;
-
+    char	*old_tmp;
+	
 	i = 1;
-	j = 0;
 	tmp = NULL;
 	if (ft_strlen(str) == 2)
 		return ("");
@@ -29,14 +28,21 @@ char	*delete_quotes(char *str, char c)
 		return (NULL);
 	if (split[0])
 		tmp = ft_substr(split[0], 0, ft_strlen(split[0]));
-	while (split[0] && split[i])
-	{
-		tmp = ft_strjoin(tmp, split[i]);
-		i++;
-	}
-	//aqui
-	free_split(split);
-	return (tmp);
+	else
+        tmp = NULL;
+    i = 1;
+    while (split[i])
+    {
+        old_tmp = tmp;
+        tmp = ft_strjoin(tmp, split[i]);
+        free(old_tmp); // Free the old tmp after creating a new string
+        i++;
+    }
+    // Free the split array
+    for (i = 0; split[i]; i++)
+        free(split[i]);
+    free(split);
+    return (tmp);
 }
 
 size_t	dllar_sign(char *str)

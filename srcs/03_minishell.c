@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   03_minishell.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:13:23 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/27 12:05:11 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/27 12:48:17 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,12 @@ void	ft_redir(t_ldata *line, t_env **env, char *pipe)
 	close((*env)->data->stdout_cpy);
 	close((*env)->data->stdout_cpy);
 	free_split(splt_comillas);
+	// Free memory allocated for line->input_cpy
+    if (line->input_cpy) {
+        for (i = 0; line->input_cpy[i]; i++)
+            free(line->input_cpy[i]);
+        free(line->input_cpy);
+    }
 }
 
 void	ft_aux_pipe(t_ldata *line, t_env **env, int i)
@@ -103,6 +109,12 @@ void	ft_aux_pipe(t_ldata *line, t_env **env, int i)
 		line->input = expander(*env, line->input, NULL, 0);
 		if (line->input[0] && ft_strncmp(line->input[0], "	", 1) != 0)
 			ft_redir(line, env, line->split_pipes[i]);
+		if (line->input)
+		{
+			for (i = 0; line->input[i]; i++)
+				free(line->input[i]);
+			free(line->input);
+		}
 		exit(EXIT_SUCCESS);
 	}
 	else if (pid > 0)
@@ -136,4 +148,15 @@ void	minishell(t_ldata *line, t_env **env)
 		}
 		i++;
 	}
+	// Free memory allocated for line->input and line->split_pipes
+    if (line->input) {
+        for (i = 0; line->input[i]; i++)
+            free(line->input[i]);
+        free(line->input);
+    }
+    if (line->split_pipes) {
+        for (i = 0; line->split_pipes[i]; i++)
+            free(line->split_pipes[i]);
+        free(line->split_pipes);
+    }
 }

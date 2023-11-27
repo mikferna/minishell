@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:58:42 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/27 12:01:01 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/27 12:42:04 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	**obtener_input(char **input, char *c)
 	i = 0;
 	while (input[i])
 		i++;
-	//aqui
+	// aqui
 	input2 = malloc(sizeof(char *) * (i));
 	while (ft_strcmp(input[x], c) != 0)
 	{
@@ -74,7 +74,10 @@ int	redir_out(char **input, t_env **env, int i)
 	int	fd;
 
 	if (ft_strcmp(input[0], ">") != 0)
+	{
+		free((*env)->data->input_cpy);
 		(*env)->data->input_cpy = obtener_input(input, ">");
+	}
 	fd = open(input[i + 1], O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd < 0)
 	{
@@ -96,7 +99,10 @@ int	redir_in(char **input, t_env **env, int i)
 	int	fd;
 
 	if (ft_strcmp(input[0], "<") != 0)
+	{	
+		free((*env)->data->input_cpy);
 		(*env)->data->input_cpy = obtener_input(input, "<");
+	}
 	fd = open(input[i + 1], O_RDONLY, 0644);
 	printf("fd: %d\n", fd);
 	if (fd < 0)
@@ -114,19 +120,19 @@ int	redir_in(char **input, t_env **env, int i)
 	return (0);
 }
 
-char	**change_heredoc(char	**original)
+char	**change_heredoc(char **original)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (original[i])
 	{
 		if (ft_strcmp(original[i], "<<") == 0)
 		{
-			//aqui
-			free(original[i]);
+			// aqui
+			// free(original[i]);
 			original[i] = ft_strdup("<");
-			free(original[i + 1]);
+			// free(original[i + 1]);
 			original[i + 1] = ft_strdup(".temp");
 			break ;
 		}
