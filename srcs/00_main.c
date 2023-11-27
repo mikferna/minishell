@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:59:02 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/27 12:27:55 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/27 12:38:54 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int argc, char **argv, char **envp)
 	}
 	init_structs(&line, &env, envp);
 	init_minishell(line, env);
-	free_structs(line, env);
+	//free_structs(line, env);
 	return (0);
 }
 
