@@ -6,13 +6,12 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 15:49:55 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/16 11:38:29 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/27 11:02:29 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-// en el 0 entra pwd y luego puede entrar cualquier cosa
 int	pwd(char **args)
 {
 	char	*pwd;

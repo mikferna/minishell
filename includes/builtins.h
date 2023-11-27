@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 12:12:33 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/24 13:57:31 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/27 11:02:16 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <stdlib.h>
 # include "minishell.h"
 
-//puede que lo de abajo de error no lo he probado
 typedef struct s_env	t_env;
 typedef struct s_ldata	t_ldata;
 
