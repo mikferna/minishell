@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   00_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:59:02 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/27 11:35:17 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/27 12:08:41 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,13 @@ void	init_minishell(t_ldata *line, t_env *env)
 			if (*line->inp_line != 0)
 				add_history(line->inp_line);
 			else
+			{	
+				free(line->inp_line);
 				continue ;
+			}
 			minishell(line, &env);
 		}
+		free(line->inp_line);
 	}
 }
 
