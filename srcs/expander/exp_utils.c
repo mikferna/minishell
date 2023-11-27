@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:15:03 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/27 11:16:55 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/27 12:20:08 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*delete_quotes(char *str, char c)
 		i++;
 	}
 	//aqui
-	free_split(split);
+	//free_split(split);
 	return (tmp);
 }
 

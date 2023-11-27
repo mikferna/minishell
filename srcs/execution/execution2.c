@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:58:42 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/27 12:01:01 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/27 12:20:06 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,9 +124,9 @@ char	**change_heredoc(char	**original)
 		if (ft_strcmp(original[i], "<<") == 0)
 		{
 			//aqui
-			free(original[i]);
+			//free(original[i]);
 			original[i] = ft_strdup("<");
-			free(original[i + 1]);
+			//free(original[i + 1]);
 			original[i + 1] = ft_strdup(".temp");
 			break ;
 		}

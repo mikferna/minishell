@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 10:44:43 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/27 11:14:53 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/27 12:26:02 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,10 @@ int	do_export(t_env *env, t_env *temp, char **args)
 		temp = env;
 		if (x == 0)
 			env_addback(temp, path, name, env->data);
-		//aqui
-		free(name);
-		free(path);
 		i++;
 	}
+	//aqui
+	free(name);
+	free(path);
 	return (0);
 }
