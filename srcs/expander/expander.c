@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:10:24 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/27 12:20:12 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/27 12:46:08 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,15 @@ char	**splitted(char *str, char **str2, char **str3, int i)
 {
 	str2 = ft_split(&str[i], ' ');
 	if (!str2[0])
+	{
+		free_split(str2);
 		return (NULL);
+	}
 	str3 = ft_split(str2[0], '\"');
 	str3 = ft_split(str3[0], '\'');
 	str3 = ft_split(str3[0], '$');
 	//aqui
-	//free_split(str2);
+	free_split(str2);
 	return (str3);
 }
 
@@ -115,7 +118,7 @@ char	*ret_dollar(t_env *env, char *str, int i, char *ret)
 		tmp = tmp->next;
 	}
 	//aqui
-	//free_split(str3);
+	free_split(str3);
 	if (!ret)
 		return ("");
 	return (ret);

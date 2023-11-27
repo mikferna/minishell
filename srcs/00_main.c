@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:59:02 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/27 12:35:52 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/27 12:59:05 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int argc, char **argv, char **envp)
 	}
 	init_structs(&line, &env, envp);
 	init_minishell(line, env);
-	free_structs(line, env);
+	//free_structs(line, env);
 	return (0);
 }
 

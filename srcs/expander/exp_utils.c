@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:15:03 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/27 12:51:48 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/27 13:00:06 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,7 @@ char	*delete_quotes(char *str, char c)
         i++;
     }
     // Free the split array
-    for (i = 0; split[i]; i++)
-        free(split[i]);
-    free(split);
+    free_split(split);
     return (tmp);
 }
 
