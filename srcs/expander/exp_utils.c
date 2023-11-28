@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:15:03 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/27 13:01:53 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/28 11:35:57 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,24 @@
 char	*delete_quotes(char *str, char c)
 {
 	int		i;
+	int		j;
 	char	*tmp;
 	char	**split;
-    char	*old_tmp;
 
 	i = 1;
+	j = 0;
 	tmp = NULL;
 	if (ft_strlen(str) == 2)
 		return ("");
 	split = ft_split(str, c);
-	if (!split)
-		return (NULL);
 	if (split[0])
 		tmp = ft_substr(split[0], 0, ft_strlen(split[0]));
-	else
-		tmp = NULL;
-	i = 1;
-	while (split[i])
+	while (split[0] && split[i])
 	{
-		old_tmp = tmp;
 		tmp = ft_strjoin(tmp, split[i]);
-		free(old_tmp);
 		i++;
 	}
+	free(str);
 	free_split(split);
 	return (tmp);
 }
@@ -75,6 +70,27 @@ void	ft_splt_cmls_if(int *comillad, int *comillas, int i, char *s)
 		*comillas = 0;
 }
 
+int	ft_doublesize2(const char *s, char c)
+{
+	int		size;
+	int		comillad;
+	int		comillas;
+	size_t	i;
+
+	size = 0;
+	comillad = 0;
+	comillas = 0;
+	i = 0;
+	while (++i <= ft_strlen(s))
+	{
+		ft_splt_cmls_if(&comillad, &comillas, i, (char *)s);
+		if ((s[1] == c || !s[1]) && (comillad == 0 && comillas == 0))
+			size++;
+		//i++;
+	}
+	return (size);
+}
+
 char	**ft_splt_cmls(char const *s, char c, int comillad, int comillas)
 {
 	char	**result;
@@ -84,7 +100,7 @@ char	**ft_splt_cmls(char const *s, char c, int comillad, int comillas)
 
 	if (!s)
 		return (NULL);
-	result = (char **)malloc(sizeof(char *) * (ft_doublesize(s, c) + 1));
+	result = (char **)malloc(sizeof(char *) * (ft_doublesize2(s, c) + 1));
 	if (!result)
 		return (NULL);
 	init_ji(&j, &i, &start);

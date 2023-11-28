@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:13:23 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/27 13:06:22 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/28 11:28:41 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,12 @@ void	ft_redir(t_ldata *line, t_env **env, char *pipe)
 	i = 0;
 	pipe = procesar_redirecciones(pipe, ft_strlen(pipe), NULL);
 	splt_comillas = ft_splt_cmls(pipe, ' ', 0, 0);
+	int x = 0;
+	while (splt_comillas[x])
+	{
+		printf("splt_comillas[%d]: %s\n", x, splt_comillas[x]);
+		x++;
+	}
 	line->input_cpy = expander(*env, splt_comillas, NULL, 0);
 	free(pipe);
 	(*env)->data->stdout_cpy = dup(STDOUT_FILENO);
@@ -84,7 +90,7 @@ void	ft_redir(t_ldata *line, t_env **env, char *pipe)
 	close((*env)->data->stdout_cpy);
 	close((*env)->data->stdout_cpy);
 	free_split(splt_comillas);
-	free_split(line->input_cpy);
+	//free_split(line->input_cpy);
 }
 
 void	ft_aux_pipe(t_ldata *line, t_env **env, int i)
@@ -135,9 +141,9 @@ void	minishell(t_ldata *line, t_env **env)
 			line->input = expander(*env, line->input, NULL, 0);
 			if (line->input[0] && ft_strncmp(line->input[0], "	", 1) != 0)
 				ft_redir(line, env, line->split_pipes[i]);
+			free_split(line->input);
 		}
 		i++;
 	}
-	free_split(line->input);
 	free_split(line->split_pipes);
 }
