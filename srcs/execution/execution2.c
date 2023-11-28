@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:58:42 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/28 13:25:48 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/28 19:03:45 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,9 @@ void	exec_cmd(char **input, t_env **env)
 	if (pid == 0)
 	{
 		path = exec_bin(input, env);
-		g_error_num = execve(path, input, (*env)->data->envp);
-		if (g_error_num == -1 && ft_strcmp(input[0], ">") != 0)
+		if (execve(path, input, (*env)->data->envp) == -1
+			&& ft_strcmp(input[0], ">") != 0)
 		{
-			g_error_num = 1;
 			ft_putstr_fd("minishell: ", (*env)->data->stdout_cpy);
 			ft_putstr_fd(input[0], (*env)->data->stdout_cpy);
 			ft_putstr_fd(": command not found\n", (*env)->data->stdout_cpy);
@@ -37,7 +36,10 @@ void	exec_cmd(char **input, t_env **env)
 		}
 	}
 	else
-		waitpid(pid, NULL, 0);
+	{
+		waitpid(pid, &g_error_num, 0);
+		g_error_num = WEXITSTATUS(g_error_num);
+	}
 }
 
 char	**obtener_input(char **input, char *c)
@@ -123,9 +125,9 @@ char	**change_heredoc(char **original)
 		if (ft_strcmp(original[i], "<<") == 0)
 		{
 			// aqui
-			// free(original[i]);
+			free(original[i]);
 			original[i] = ft_strdup("<");
-			// free(original[i + 1]);
+			free(original[i + 1]);
 			original[i + 1] = ft_strdup(".temp");
 			break ;
 		}
