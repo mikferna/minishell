@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 14:02:50 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/27 12:21:20 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/28 11:09:24 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,6 @@ int	do_slash(t_env *env)
 	if (!path)
 		ft_putstr_fd("minishell: cd: OLDPWD not set\n", STDERR_FILENO);
 	else
-	{
-		//aqui
 		absolute_path(env, path);
-		free(path);
-	}
 	return (0);
 }
