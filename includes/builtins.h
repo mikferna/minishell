@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 12:12:33 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/28 11:39:54 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/28 13:07:53 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,6 @@ int		mini_echo(t_env *env, char **args, int n, int i);
 char	*get_path(t_env *env, char *dir);
 int		ft_strcmp(char *s1, char *s2);
 void	free_split(char **arr);
-int		ft_doublesize2(const char *s, char c);
+int		ft_doublesize2(const char *s, char c, int comillas, int comillad);
 
 #endif

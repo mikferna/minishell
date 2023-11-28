@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:10:24 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/28 11:04:12 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/28 14:31:09 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,16 @@ char	**expander(t_env *env, char **s, char *tmp, int i)
 			tmp = ret_doll_str(env, s[i], 0, NULL);
 			free(s[i]);
 			s[i] = ft_strdup(tmp);
+			if (tmp)
+				free(tmp);
 		}
 		init_j(&j, s[i]);
 		if (ft_strncmp(s[0], "export", ft_strlen(s[0]) - 1) != 0)
 		{
 			if (s[i][j] == '\'')
-				s[i] = delete_quotes(s[i], '\'');
+				s[i] = ft_strdup(delete_quotes(s[i], '\''));
 			else if (s[i][j] == '\"')
-				s[i] = delete_quotes(s[i], '\"');
+				s[i] = ft_strdup(delete_quotes(s[i], '\"'));
 		}
 		i++;
 	}
@@ -74,19 +76,18 @@ char	*ret_doll_str(t_env *env, char *str, int i, char *tmp)
 				&& str[i] != '\'' && str[i] != '$')
 				i++;
 			tmp = ft_strjoin(ret, &str[i]);
-			if (ft_strlen(ret) > 0)
-				free(ret);
+			free(ret);
 			if (ft_strcmp(tmp, "") == 0)
-				tmp = " ";
+				tmp = ft_strdup(" ");
 			i = -1;
 			str = tmp;
-			if (ft_strlen(ret_dll) > 0)
+			if (ft_strlen(ret_dll) >= 0)
 				free(ret_dll);
 		}
 		i++;
 	}
 	if (!tmp)
-		tmp = " ";
+		tmp = ft_strdup(" ");
 	return (tmp);
 }
 
@@ -114,15 +115,23 @@ char	*ret_dollar(t_env *env, char *str, int i, char *ret)
 {
 	t_env	*tmp;
 	char	**str3;
+	char	*tmp3;
 
 	tmp = env;
 	i++;
 	str3 = splitted(str, NULL, NULL, i);
+	tmp3 = ft_strtrim(str3[0], "?");
 	i = 1;
 	if (!str3[0])
-		return ("");
+	{
+		free(tmp3);
+		return (ft_strdup(""));
+	}
 	if (str3[0][0] == '?')
-		return (ft_strjoin(ft_itoa(g_error_num), ft_strtrim(str3[0], "?")));
+	{
+		free_split(str3);
+		return (ft_strjoin2(ft_itoa(g_error_num), tmp3, 0));
+	}
 	while (tmp)
 	{
 		if (ft_strcmp(tmp->env_name, str3[0]) == 0)
@@ -132,8 +141,9 @@ char	*ret_dollar(t_env *env, char *str, int i, char *ret)
 		}
 		tmp = tmp->next;
 	}
+	free(tmp3);
 	free_split(str3);
 	if (!ret)
-		return ("");
+		return (ft_strdup(""));
 	return (ret);
 }

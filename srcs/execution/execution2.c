@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:58:42 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/28 11:17:30 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/28 13:25:48 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ char	**obtener_input(char **input, char *c)
 	i = 0;
 	while (input[i])
 		i++;
-	// aqui
-	input2 = malloc(sizeof(char *) * (i));
+	input2 = malloc(sizeof(char *) * (i - 1));
 	while (ft_strcmp(input[x], c) != 0)
 	{
 		input2[x] = ft_strdup(input[x]);
@@ -66,8 +65,6 @@ char	**obtener_input(char **input, char *c)
 		i++;
 	}
 	input2[i] = NULL;
-	//aqui
-	free_split(input);
 	return (input2);
 }
 
@@ -76,10 +73,7 @@ int	redir_out(char **input, t_env **env, int i)
 	int	fd;
 
 	if (ft_strcmp(input[0], ">") != 0)
-	{
-		free((*env)->data->input_cpy);
 		(*env)->data->input_cpy = obtener_input(input, ">");
-	}
 	fd = open(input[i + 1], O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd < 0)
 	{
@@ -101,10 +95,7 @@ int	redir_in(char **input, t_env **env, int i)
 	int	fd;
 
 	if (ft_strcmp(input[0], "<") != 0)
-	{	
-		free((*env)->data->input_cpy);
 		(*env)->data->input_cpy = obtener_input(input, "<");
-	}
 	fd = open(input[i + 1], O_RDONLY, 0644);
 	printf("fd: %d\n", fd);
 	if (fd < 0)

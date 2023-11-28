@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:13:23 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/28 12:01:26 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/28 13:40:11 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ void	ft_redir(t_ldata *line, t_env **env, char *pipe)
 	close((*env)->data->stdout_cpy);
 	close((*env)->data->stdout_cpy);
 	free_split(splt_comillas);
-	//free_split(line->input_cpy);
 }
 
 void	ft_aux_pipe(t_ldata *line, t_env **env, int i)

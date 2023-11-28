@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 08:57:58 by aarrien-          #+#    #+#             */
-/*   Updated: 2023/11/23 13:07:53 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/28 13:49:02 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,6 @@ int		ft_strnstr(const char *haystack,
 int		get_next_line(int fd, char **line);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strcpy(char *dst, const char *src);
+char	*ft_strjoin2(char const *s1, char const *s2, unsigned int i);
 
 #endif

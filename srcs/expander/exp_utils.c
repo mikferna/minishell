@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:15:03 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/28 11:39:32 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/28 14:40:12 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ char	*delete_quotes(char *str, char c)
 	int		i;
 	int		j;
 	char	*tmp;
+	char	*tmp2;
 	char	**split;
 
 	i = 1;
@@ -29,7 +30,9 @@ char	*delete_quotes(char *str, char c)
 		tmp = ft_substr(split[0], 0, ft_strlen(split[0]));
 	while (split[0] && split[i])
 	{
-		tmp = ft_strjoin(tmp, split[i]);
+		tmp2 = ft_strdup(tmp);
+		tmp = ft_strjoin(tmp2, split[i]);
+		free (tmp2);
 		i++;
 	}
 	free(str);
@@ -79,7 +82,7 @@ char	**ft_splt_cmls(char const *s, char c, int comillad, int comillas)
 
 	if (!s)
 		return (NULL);
-	result = (char **)malloc(sizeof(char *) * (ft_doublesize2(s, c) + 1));
+	result = (char **)malloc(sizeof(char *) * (ft_doublesize2(s, c, 0, 0) + 1));
 	if (!result)
 		return (NULL);
 	init_ji(&j, &i, &start);
