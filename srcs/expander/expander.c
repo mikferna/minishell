@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:10:24 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/28 14:31:09 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/28 15:49:29 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	*ret_doll_str(t_env *env, char *str, int i, char *tmp)
 
 	while (str[i])
 	{
-		if (str[i] == '$')
+		if (str[i + 1] && str[i] == '$')
 		{
 			i++;
 			ret_dll = ret_dollar(env, str, i - 1, NULL);
@@ -78,7 +78,10 @@ char	*ret_doll_str(t_env *env, char *str, int i, char *tmp)
 			tmp = ft_strjoin(ret, &str[i]);
 			free(ret);
 			if (ft_strcmp(tmp, "") == 0)
+			{
+				free(tmp);
 				tmp = ft_strdup(" ");
+			}
 			i = -1;
 			str = tmp;
 			if (ft_strlen(ret_dll) >= 0)
@@ -125,6 +128,7 @@ char	*ret_dollar(t_env *env, char *str, int i, char *ret)
 	if (!str3[0])
 	{
 		free(tmp3);
+		free_split(str3);
 		return (ft_strdup(""));
 	}
 	if (str3[0][0] == '?')

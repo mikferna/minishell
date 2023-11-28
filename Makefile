@@ -15,7 +15,7 @@ DIR_OBJS = objs/
 LREADLINE_FLAGS = -lreadline -L/Users/$(USER)/.brew/opt/readline/lib/
 READLINE = -I/Users/$(USER)/.brew/opt/readline/include/
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra #-g3 -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address
 
 RED = \033[1;31m
 BLUE = \033[1;36m
