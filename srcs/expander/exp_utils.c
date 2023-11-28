@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:15:03 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/28 11:35:57 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/28 11:39:32 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,27 +68,6 @@ void	ft_splt_cmls_if(int *comillad, int *comillas, int i, char *s)
 		*comillad = 0;
 	else if (s[i] == '\'' && *comillad == 0 && *comillas == 1)
 		*comillas = 0;
-}
-
-int	ft_doublesize2(const char *s, char c)
-{
-	int		size;
-	int		comillad;
-	int		comillas;
-	size_t	i;
-
-	size = 0;
-	comillad = 0;
-	comillas = 0;
-	i = 0;
-	while (++i <= ft_strlen(s))
-	{
-		ft_splt_cmls_if(&comillad, &comillas, i, (char *)s);
-		if ((s[1] == c || !s[1]) && (comillad == 0 && comillas == 0))
-			size++;
-		//i++;
-	}
-	return (size);
 }
 
 char	**ft_splt_cmls(char const *s, char c, int comillad, int comillas)
