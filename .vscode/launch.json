@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/jumoncad/Desktop/minishell/srcs/expander",
-      "program": "/Users/jumoncad/Desktop/minishell/srcs/expander/build/Debug/outDebug"
+      "cwd": "/Users/jumoncad/Desktop/minishell/srcs",
+      "program": "/Users/jumoncad/Desktop/minishell/srcs/build/Debug/outDebug"
     }
   ]
 }

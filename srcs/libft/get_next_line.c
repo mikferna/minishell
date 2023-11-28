@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/19 11:12:04 by jumoncad          #+#    #+#             */
-/*   Updated: 2023/11/23 12:34:08 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/28 17:35:57 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ int	get_next_line(int fd, char **line)
 	while (!p_nline && qbr > 0)
 	{
 		qbr = read(fd, buf, BUFFER_SIZE);
-		buf[qbr] = '\0';
+		if (qbr >= 0)
+			buf[qbr] = '\0';
 		p_nline = ft_new_line_checker(buf);
 		if (p_nline)
 		{

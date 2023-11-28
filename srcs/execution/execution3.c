@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 13:00:52 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/27 12:42:15 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/28 17:45:19 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	redir_here_document(char **input, t_env **env, int i)
 		g_error_num = 1;
 	else
 	{
-		write(1, "> ", 1);
+		/* write(1, "> ", 1);
 		while (get_next_line(0, &line) && line && g_error_num != 130)
 		{
 			if (ft_strcmp(line, input[i + 1]) == 0)
@@ -33,6 +33,21 @@ int	redir_here_document(char **input, t_env **env, int i)
 			ft_putstr_fd("\n", fd);
 			free(line);
 			write(1, "> ", 1);
+		}
+		(*env)->data->input_cpy = change_heredoc((*env)->data->input_cpy);
+		close(fd); */
+		while (diff != 0 && g_error_num != 130)
+		{
+			line = readline("> ");
+			if (ft_strcmp(line, input[i + 1]) == 0)
+				diff = 0;
+			else
+			{
+				ft_putstr_fd(line, fd);
+				ft_putstr_fd("\n", fd);
+			}
+			if (line)
+				free (line);
 		}
 		(*env)->data->input_cpy = change_heredoc((*env)->data->input_cpy);
 		close(fd);
