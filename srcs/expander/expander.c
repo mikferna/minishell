@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:10:24 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/28 15:49:29 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/28 17:25:09 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,26 +56,28 @@ char	*ret_doll_str(t_env *env, char *str, int i, char *tmp)
 {
 	char	*ret_dll;
 	char	*ret;
+	char	*tmp2;
 
-	while (str[i])
+	tmp2 = ft_strdup(str);
+	while (tmp2[i])
 	{
-		if (str[i + 1] && str[i] == '$')
+		if (tmp2[i + 1] && tmp2[i] == '$')
 		{
 			i++;
-			ret_dll = ret_dollar(env, str, i - 1, NULL);
-			tmp = ft_substr(str, 0, i - 1);
-			if (str[i] != '\'')
+			ret_dll = ret_dollar(env, tmp2, i - 1, NULL);
+			tmp = ft_substr(tmp2, 0, i - 1);
+			if (tmp2[i] != '\'')
 			{
 				ret = ft_strjoin(tmp, ret_dll);
 				if (ft_strlen(tmp) > 0)
 					free(tmp);
 			}
-			while (str[i] == '\"')
+			while (tmp2[i] == '\"')
 				i++;
-			while (str[i] != ' ' && str[i] != '\0' && str[i] != '\"'
-				&& str[i] != '\'' && str[i] != '$')
+			while (tmp2[i] != ' ' && tmp2[i] != '\0' && tmp2[i] != '\"'
+				&& tmp2[i] != '\'' && tmp2[i] != '$')
 				i++;
-			tmp = ft_strjoin(ret, &str[i]);
+			tmp = ft_strjoin(ret, &tmp2[i]);
 			free(ret);
 			if (ft_strcmp(tmp, "") == 0)
 			{
@@ -83,12 +85,16 @@ char	*ret_doll_str(t_env *env, char *str, int i, char *tmp)
 				tmp = ft_strdup(" ");
 			}
 			i = -1;
-			str = tmp;
+			free(tmp2);
+			tmp2 = ft_strdup(tmp);
+			free(tmp);
 			if (ft_strlen(ret_dll) >= 0)
 				free(ret_dll);
 		}
 		i++;
 	}
+	tmp = ft_strdup(tmp2);
+	free(tmp2);
 	if (!tmp)
 		tmp = ft_strdup(" ");
 	return (tmp);
