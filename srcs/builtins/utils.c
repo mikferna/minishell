@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 12:16:45 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/28 11:01:05 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/28 11:39:37 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,33 @@ void	free_split(char **arr)
 		i++;
 	}
 	free(arr);
+}
+
+int	ft_doublesize2(const char *s, char c)
+{
+	int		size;
+	int		comillad;
+	int		comillas;
+	size_t	i;
+
+	size = 0;
+	comillad = 0;
+	comillas = 0;
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == '"' && comillad == 0 && comillas == 0)
+			comillad = 1;
+		else if (s[i] == '\'' && comillad == 0 && comillas == 0)
+			comillas = 1;
+		else if (s[i] == '"' && comillad == 1 && comillas == 0)
+			comillad = 0;
+		else if (s[i] == '\'' && comillad == 0 && comillas == 1)
+			comillas = 0;
+		else if ((s[i] == c || s[i + 1] == '\0') && comillad == 0
+			&& comillas == 0)
+			size++;
+		i++;
+	}
+	return (size);
 }
