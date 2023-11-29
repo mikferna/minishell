@@ -61,6 +61,7 @@ SRCS = srcs/00_main.c \
 	srcs/builtins/echo.c \
 	srcs/expander/expander.c \
 	srcs/expander/exp_utils.c \
+	srcs/expander/exp_utils2.c \
 	srcs/execution/execution.c \
 	srcs/execution/execution2.c \
 	srcs/execution/execution3.c 

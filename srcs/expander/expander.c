@@ -3,26 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:10:24 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/29 12:22:00 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/29 13:31:40 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	init_j(int *j, char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] && (s[i] != '\'' && s[i] != '\"'))
-		i++;
-	*j = i;
-}
-
-char	**expander(t_env *env, char **s, char *tmp, int i)
+/* char	**expander(t_env *env, char **s, char *tmp, int i)
 {
 	int	j;
 
@@ -50,6 +40,16 @@ char	**expander(t_env *env, char **s, char *tmp, int i)
 		i++;
 	}
 	return (s);
+} */
+char	**expander(t_env *env, char **s, int i)
+{
+	while (s[i])
+	{
+		s[i] = process_dollar_sign(env, s, i);
+		s[i] = process_quotes(s, i);
+		i++;
+	}
+	return (s);
 }
 
 char	*ret_doll_str(t_env *env, char *str, int i, char *tmp)
@@ -66,11 +66,12 @@ char	*ret_doll_str(t_env *env, char *str, int i, char *tmp)
 			i++;
 			ret_dll = ret_dollar(env, tmp2, i - 1, NULL);
 			tmp = ft_substr(tmp2, 0, i - 1);
+			if (!tmp)
+				tmp = ft_strdup("");
 			if (tmp2[i] != '\'')
 			{
 				ret = ft_strjoin(tmp, ret_dll);
-				if (ft_strlen(tmp) > 0)
-					free(tmp);
+				free(tmp);
 			}
 			while (tmp2[i] == '\"')
 				i++;

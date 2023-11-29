@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   03_minishell.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:13:23 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/29 12:40:01 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/29 13:16:04 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	ft_aux_pipe(t_ldata *line, t_env **env, int i, pid_t pid)
 			dup2(line->pipe_fd[1], STDOUT_FILENO);
 		close(line->pipe_fd[0]);
 		line->input = ft_splt_cmls(line->split_pipes[i], ' ', 0, 0);
-		line->input = expander(*env, line->input, NULL, 0);
+		line->input = expander(*env, line->input, 0);
 		if (line->input[0] && ft_strncmp(line->input[0], "	", 1) != 0)
 			ft_redir(line, env, line->split_pipes[i], 0);
 		free_split(line->input);
@@ -98,7 +98,7 @@ void	minishell(t_ldata *line, t_env **env)
 		else
 		{
 			line->input = ft_splt_cmls(line->split_pipes[i], ' ', 0, 0);
-			line->input = expander(*env, line->input, NULL, 0);
+			line->input = expander(*env, line->input, 0);
 			if (line->input[0] && ft_strncmp(line->input[0], "	", 1) != 0)
 				ft_redir(line, env, line->split_pipes[i], 0);
 			free_split(line->input);

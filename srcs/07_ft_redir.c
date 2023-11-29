@@ -6,27 +6,28 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:30:23 by jumoncad          #+#    #+#             */
-/*   Updated: 2023/11/29 12:34:24 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/29 13:27:01 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_pre_redir(char *pipe, t_ldata *line, t_env **env,
-		char **splt_comillas)
+char	**ft_pre_redir(char *pipe, t_ldata *line, t_env **env)
 {
+	char	**splt_comillas;
+	
 	pipe = procesar_redirecciones(pipe, ft_strlen(pipe), NULL);
 	splt_comillas = ft_splt_cmls(pipe, ' ', 0, 0);
-	line->input_cpy = expander(*env, splt_comillas, NULL, 0);
+	line->input_cpy = expander(*env, splt_comillas, 0);
 	free(pipe);
+	return (splt_comillas);
 }
 
 void	ft_redir(t_ldata *line, t_env **env, char *pipe, int i)
 {
 	char	**splt_comillas;
 
-	splt_comillas = NULL;
-	ft_pre_redir(pipe, line, env, splt_comillas);
+	splt_comillas = ft_pre_redir(pipe, line, env);
 	(*env)->data->stdout_cpy = dup(STDOUT_FILENO);
 	(*env)->data->stdin_cpy = dup(STDIN_FILENO);
 	while (line->input_cpy && line->input_cpy[0] && line->input_cpy[i])
@@ -38,7 +39,7 @@ void	ft_redir(t_ldata *line, t_env **env, char *pipe, int i)
 		else if (ft_strncmp(line->input_cpy[i], "<", 2) == 0)
 			i = redir_in(line->input_cpy, env, i);
 		else if (ft_strncmp(line->input_cpy[i], "<<", 2) == 0)
-			i = redir_here_document(line->input_cpy, env, i);
+			i = redir_here_document(line->input_cpy, env, i, 1);
 		i++;
 	}
 	execution(line->input_cpy, env);
