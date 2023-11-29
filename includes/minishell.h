@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:44:19 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/29 12:32:02 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:40:50 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ char				**ft_splt_cmls(char const *s, char c, int comillad,
 
 /*-03_minishell.c-*/
 void				minishell(t_ldata *line, t_env **env);
-char	*procesar_redirecciones(const char *cadena, size_t len, char *ptr);
+char				*procesar_redirecciones(const char *cadena,
+						size_t len, char *ptr);
 
 /*-04_check_redir.c-*/
 int					ft_check_redir(char *s);
@@ -102,6 +103,6 @@ int					ft_doublesize(const char *s, char c);
 void				run_singl(int num);
 
 /*-07_ft_redir.c-*/
-void	ft_redir(t_ldata *line, t_env **env, char *pipe, int i);
+void				ft_redir(t_ldata *line, t_env **env, char *pipe, int i);
 
 #endif
