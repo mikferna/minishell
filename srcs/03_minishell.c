@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:13:23 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/28 19:02:17 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:04:29 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void	ft_redir(t_ldata *line, t_env **env, char *pipe)
 			i = redir_here_document(line->input_cpy, env, i);
 		i++;
 	}
-	//if (g_error_num != 1)
 	execution(line->input_cpy, env);
 	dup2((*env)->data->stdout_cpy, STDOUT_FILENO);
 	dup2((*env)->data->stdin_cpy, STDIN_FILENO);
