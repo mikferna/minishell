@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   00_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:59:02 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/29 12:12:20 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:14:26 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ void	init_minishell(t_ldata *line, t_env *env)
 
 void	free_structs(t_ldata *line, t_env *env)
 {
-	//(void)env;
 	free_split(line->input_cpy);
 	free_split(line->split_pipes);
 	free(line);
