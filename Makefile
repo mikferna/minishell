@@ -30,6 +30,7 @@ SRCS = srcs/00_main.c \
 	srcs/04_check_redir.c \
 	srcs/05_signal.c \
 	srcs/06_node_utils.c \
+	srcs/07_ft_redir.c \
 	srcs/libft/ft_itoa.c \
 	srcs/libft/ft_atoi.c \
 	srcs/libft/ft_putchar_fd.c \
