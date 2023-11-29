@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:10:24 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/29 13:32:11 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/29 18:55:45 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,38 @@ char	**expander(t_env *env, char **s, int i)
 	return (s);
 }
 
+void	tmp2x(char **tmp2, char *tmp, int i, char *ret_dll)
+{
+	char	*ret;
+
+	tmp = ft_substr(*tmp2, 0, i - 1);
+	if (!tmp)
+		tmp = ft_strdup("");
+	if ((*tmp2)[i] != '\'')
+	{
+		ret = ft_strjoin(tmp, ret_dll);
+		free(tmp);
+	}
+	while ((*tmp2)[i] == '\"')
+		i++;
+	while ((*tmp2)[i] != ' ' && (*tmp2)[i] != '\0' && (*tmp2)[i] != '\"'
+		&& (*tmp2)[i] != '\'' && (*tmp2)[i] != '$')
+		i++;
+	tmp = ft_strjoin(ret, &(*tmp2)[i]);
+	free(ret);
+	if (ft_strcmp(tmp, "") == 0)
+	{
+		free(tmp);
+		tmp = ft_strdup(" ");
+	}
+	free(*tmp2);
+	*tmp2 = ft_strdup(tmp);
+	free(tmp);
+}
+
 char	*ret_doll_str(t_env *env, char *str, int i, char *tmp)
 {
 	char	*ret_dll;
-	char	*ret;
 	char	*tmp2;
 
 	tmp2 = ft_strdup(str);
@@ -65,30 +93,8 @@ char	*ret_doll_str(t_env *env, char *str, int i, char *tmp)
 		{
 			i++;
 			ret_dll = ret_dollar(env, tmp2, i - 1, NULL);
-			tmp = ft_substr(tmp2, 0, i - 1);
-			if (!tmp)
-				tmp = ft_strdup("");
-			if (tmp2[i] != '\'')
-			{
-				ret = ft_strjoin(tmp, ret_dll);
-				free(tmp);
-			}
-			while (tmp2[i] == '\"')
-				i++;
-			while (tmp2[i] != ' ' && tmp2[i] != '\0' && tmp2[i] != '\"'
-				&& tmp2[i] != '\'' && tmp2[i] != '$')
-				i++;
-			tmp = ft_strjoin(ret, &tmp2[i]);
-			free(ret);
-			if (ft_strcmp(tmp, "") == 0)
-			{
-				free(tmp);
-				tmp = ft_strdup(" ");
-			}
+			tmp2x(&tmp2, NULL, i, ret_dll);
 			i = -1;
-			free(tmp2);
-			tmp2 = ft_strdup(tmp);
-			free(tmp);
 			if (ft_strlen(ret_dll) >= 0)
 				free(ret_dll);
 		}
@@ -134,12 +140,14 @@ char	*ret_dollar(t_env *env, char *str, int i, char *ret)
 	i = 1;
 	if (!str3[0])
 	{
-		free(tmp3);
+		if (tmp3)
+			free(tmp3);
 		free_split(str3);
 		return (ft_strdup(""));
 	}
 	ret = retu(tmp, ret, str3, tmp3);
-	free(tmp3);
+	if (!ret && tmp3)
+		free(tmp3);
 	free_split(str3);
 	if (!ret)
 		return (ft_strdup(""));

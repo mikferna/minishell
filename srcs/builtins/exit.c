@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 12:09:00 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/29 12:35:40 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/29 15:22:46 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	exitt(char **args)
 {
 	if (args[1] && is_digit2(args[1]))
 	{
-		ft_putstr_fd("exit\npipehell: exit: : numeric argument required\n"\
+		ft_putstr_fd("exit\n: exit: : numeric argument required\n"\
 					, 2);
 		exit(255);
 	}
@@ -42,7 +42,7 @@ int	exitt(char **args)
 	}
 	if (args[1] && args[2])
 	{
-		ft_putstr_fd("pipehell: exit too many arguments\n", 2);
+		ft_putstr_fd(": exit too many arguments\n", 2);
 		exit (-358);
 	}
 	else

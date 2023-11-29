@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 12:35:45 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/29 12:32:17 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/29 15:40:13 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,4 @@ void	do_unset(t_env **env, t_env *temp, t_env *temp2, int x)
 		*env = temp->next;
 	else
 		temp2->next = temp->next;
-	free(temp);
 }
