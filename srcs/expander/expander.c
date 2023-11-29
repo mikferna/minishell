@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:10:24 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/29 13:31:40 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/29 13:32:11 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,20 +138,7 @@ char	*ret_dollar(t_env *env, char *str, int i, char *ret)
 		free_split(str3);
 		return (ft_strdup(""));
 	}
-	if (str3[0][0] == '?')
-	{
-		free_split(str3);
-		return (ft_strjoin2(ft_itoa(g_error_num), tmp3, 0));
-	}
-	while (tmp)
-	{
-		if (ft_strcmp(tmp->env_name, str3[0]) == 0)
-		{
-			ret = ft_strdup(tmp->env);
-			break ;
-		}
-		tmp = tmp->next;
-	}
+	ret = retu(tmp, ret, str3, tmp3);
 	free(tmp3);
 	free_split(str3);
 	if (!ret)

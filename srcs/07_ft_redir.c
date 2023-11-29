@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:30:23 by jumoncad          #+#    #+#             */
-/*   Updated: 2023/11/29 13:27:01 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/29 13:32:53 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 char	**ft_pre_redir(char *pipe, t_ldata *line, t_env **env)
 {
 	char	**splt_comillas;
-	
 	pipe = procesar_redirecciones(pipe, ft_strlen(pipe), NULL);
 	splt_comillas = ft_splt_cmls(pipe, ' ', 0, 0);
 	line->input_cpy = expander(*env, splt_comillas, 0);

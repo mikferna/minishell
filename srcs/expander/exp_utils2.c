@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/29 13:15:07 by jumoncad          #+#    #+#             */
-/*   Updated: 2023/11/29 13:17:23 by jumoncad         ###   ########.fr       */
+/*   Created: 2023/11/29 13:30:05 by mikferna          #+#    #+#             */
+/*   Updated: 2023/11/29 13:34:43 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,20 @@ char	*process_quotes(char **s, int i)
             s[i] = delete_quotes(s[i], '\"', NULL, NULL);
     }
     return (s[i]);
+}
+
+char	*retu(t_env *tmp, char *ret, char **str3, char *tmp3)
+{
+	if (str3[0][0] == '?')
+		return (ft_strjoin2(ft_itoa(g_error_num), tmp3, 0));
+	while (tmp)
+	{
+		if (ft_strcmp(tmp->env_name, str3[0]) == 0)
+		{
+			ret = ft_strdup(tmp->env);
+			break ;
+		}
+		tmp = tmp->next;
+	}
+	return (ret);
 }

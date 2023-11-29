@@ -6,7 +6,7 @@
 /*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 13:22:31 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/29 13:15:46 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/29 13:35:12 by jumoncad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ char	*ret_doll_str(t_env *env, char *str, int i, char *tmp);
 char	**splitted(char *str, char **str2, char **str3, int i);
 char	*ret_dollar(t_env *env, char *str, int i, char *ret);
 
-/*-expander_utils.c-*/
+/*-exp_utils2.c-*/
 char	*process_dollar_sign(t_env *env, char **s, int i);
 char	*process_quotes(char **s, int i);
-
+char	*retu(t_env *tmp, char *ret, char **str3, char *tmp3);
 
 #endif

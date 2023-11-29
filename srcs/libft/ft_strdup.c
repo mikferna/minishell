@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 10:53:18 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/27 13:43:45 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/29 13:04:01 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_strdup(const char *s1)
 	unsigned int	i;
 	unsigned int	j;
 
+	if (!s1)
+		return (NULL);
 	j = ft_strlen(s1);
 	p = malloc(j + 1);
 	if (p == 0)
