@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:59:02 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/28 17:54:35 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:12:20 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ void	init_structs(t_ldata **line, t_env **env, char **envp)
 
 void	init_minishell(t_ldata *line, t_env *env)
 {
-	int	check;
-
 	while (1)
 	{
 		run_singl(1);
@@ -61,14 +59,16 @@ void	init_minishell(t_ldata *line, t_env *env)
 			run_singl(3);
 		if (line->inp_line)
 		{
-			check = check_line_quote(line);
-			if (check == 1)
-				printf("Input Error\n");
 			if (*line->inp_line != 0)
 				add_history(line->inp_line);
 			else
-			{	
+			{
 				free(line->inp_line);
+				continue ;
+			}
+			if (check_line_quote(line))
+			{
+				printf("Input Error\n");
 				continue ;
 			}
 			minishell(line, &env);
