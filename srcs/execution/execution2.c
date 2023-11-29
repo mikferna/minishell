@@ -6,15 +6,14 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:58:42 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/28 19:03:45 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:30:42 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	exec_cmd(char **input, t_env **env)
+void	exec_cmd(char **input, t_env **env, char *path)
 {
-	char	*path;
 	pid_t	pid;
 	int		fd[2];
 
@@ -124,7 +123,6 @@ char	**change_heredoc(char **original)
 	{
 		if (ft_strcmp(original[i], "<<") == 0)
 		{
-			// aqui
 			free(original[i]);
 			original[i] = ft_strdup("<");
 			free(original[i + 1]);

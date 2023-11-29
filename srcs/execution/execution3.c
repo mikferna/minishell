@@ -3,39 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   execution3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jumoncad <jumoncad@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 13:00:52 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/28 19:07:44 by jumoncad         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:30:48 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	redir_here_document(char **input, t_env **env, int i)
+int	redir_here_document(char **input, t_env **env, int i, int diff)
 {
 	int		fd;
-	int		diff;
 	char	*line;
 
-	diff = 1;
 	fd = open(".temp", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd < 0)
 		g_error_num = 1;
 	else
 	{
-		/* write(1, "> ", 1);
-		while (get_next_line(0, &line) && line && g_error_num != 130)
-		{
-			if (ft_strcmp(line, input[i + 1]) == 0)
-				break ;
-			ft_putstr_fd(line, fd);
-			ft_putstr_fd("\n", fd);
-			free(line);
-			write(1, "> ", 1);
-		}
-		(*env)->data->input_cpy = change_heredoc((*env)->data->input_cpy);
-		close(fd); */
 		while (diff != 0 && g_error_num != 130)
 		{
 			line = readline("> ");
@@ -60,7 +46,7 @@ int	redir_append(char **input, t_env **env, int i)
 	int	fd;
 
 	if (ft_strcmp(input[0], ">>") != 0)
-	{	
+	{
 		free((*env)->data->input_cpy);
 		(*env)->data->input_cpy = obtener_input(input, ">>");
 	}
@@ -97,5 +83,5 @@ void	execution(char **input, t_env **env)
 	else if (ft_strcmp(input[0], "exit") == 0)
 		g_error_num = exitt(input);
 	else
-		exec_cmd(input, env);
+		exec_cmd(input, env, NULL);
 }

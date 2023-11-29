@@ -6,12 +6,12 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 13:06:24 by mikferna          #+#    #+#             */
-/*   Updated: 2023/10/09 15:42:24 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:26:27 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<unistd.h>
-#include<stdlib.h>
+#include <unistd.h>
+#include <stdlib.h>
 #include "../../includes/minishell.h"
 
 static int	count(int a)

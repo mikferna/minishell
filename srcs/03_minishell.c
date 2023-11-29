@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:13:23 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/29 12:04:29 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:29:24 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	ft_redir(t_ldata *line, t_env **env, char *pipe)
 		else if (ft_strncmp(line->input_cpy[i], "<", 2) == 0)
 			i = redir_in(line->input_cpy, env, i);
 		else if (ft_strncmp(line->input_cpy[i], "<<", 2) == 0)
-			i = redir_here_document(line->input_cpy, env, i);
+			i = redir_here_document(line->input_cpy, env, i, 1);
 		i++;
 	}
 	execution(line->input_cpy, env);

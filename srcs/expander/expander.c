@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:10:24 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/29 11:49:24 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:22:00 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ char	**expander(t_env *env, char **s, char *tmp, int i)
 		if (ft_strncmp(s[0], "export", ft_strlen(s[0]) - 1) != 0)
 		{
 			if (s[i][j] == '\'')
-				s[i] = delete_quotes(s[i], '\'');
+				s[i] = delete_quotes(s[i], '\'', NULL, NULL);
 			else if (s[i][j] == '\"')
-				s[i] = delete_quotes(s[i], '\"');
+				s[i] = delete_quotes(s[i], '\"', NULL, NULL);
 		}
 		i++;
 	}

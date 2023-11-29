@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 12:09:00 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/23 12:52:53 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:35:40 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	exitt(char **args)
 		exit (-358);
 	}
 	else
-	{	
+	{
 		ft_putstr_fd("exit\n", 2);
 		exit (ft_atoi(args[1]));
 	}

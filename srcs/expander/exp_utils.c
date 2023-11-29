@@ -6,24 +6,20 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:15:03 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/29 12:01:23 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:21:48 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*delete_quotes(char *str, char c)
+char	*delete_quotes(char *str, char c, char *tmp, char *tmp2)
 {
 	int		i;
 	int		j;
-	char	*tmp;
-	char	*tmp2;
 	char	**split;
 
 	i = 1;
 	j = 0;
-	tmp = NULL;
-	tmp2 = NULL;
 	if (ft_strlen(str) == 2)
 	{
 		free(str);

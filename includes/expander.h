@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 13:22:31 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/28 19:55:50 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:23:02 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 char	**expander(t_env *env, char **s, char *tmp, int i);
 
 /*-exp_utils.c-*/
-char	*delete_quotes(char *str, char c);
+char	*delete_quotes(char *str, char c, char *tmp, char *tmp2);
 size_t	dllar_sign(char *str);
 char	*ret_doll_str(t_env *env, char *str, int i, char *tmp);
 char	**splitted(char *str, char **str2, char **str3, int i);
