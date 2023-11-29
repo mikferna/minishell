@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:10:24 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/29 12:22:00 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/29 13:30:21 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,12 @@ char	*ret_doll_str(t_env *env, char *str, int i, char *tmp)
 			i++;
 			ret_dll = ret_dollar(env, tmp2, i - 1, NULL);
 			tmp = ft_substr(tmp2, 0, i - 1);
+			if (!tmp)
+				tmp = ft_strdup("");
 			if (tmp2[i] != '\'')
 			{
 				ret = ft_strjoin(tmp, ret_dll);
-				if (ft_strlen(tmp) > 0)
-					free(tmp);
+				free(tmp);
 			}
 			while (tmp2[i] == '\"')
 				i++;
@@ -137,20 +138,7 @@ char	*ret_dollar(t_env *env, char *str, int i, char *ret)
 		free_split(str3);
 		return (ft_strdup(""));
 	}
-	if (str3[0][0] == '?')
-	{
-		free_split(str3);
-		return (ft_strjoin2(ft_itoa(g_error_num), tmp3, 0));
-	}
-	while (tmp)
-	{
-		if (ft_strcmp(tmp->env_name, str3[0]) == 0)
-		{
-			ret = ft_strdup(tmp->env);
-			break ;
-		}
-		tmp = tmp->next;
-	}
+	ret = retu(tmp, ret, str3, tmp3);
 	free(tmp3);
 	free_split(str3);
 	if (!ret)
