@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:37:49 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/29 17:32:23 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/30 11:52:14 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*exec_bin(char **input, t_env **env);
 
 /*-execution2.c-*/
 void	exec_cmd(char **input, t_env **env, char *path);
-char	**obtener_input(char **input, char *c);
+void	obtener_input(char **input, char *c);
 int		redir_out(char **input, t_env **env, int i);
 int		redir_in(char **input, t_env **env, int i);
 char	**change_heredoc(char	**original);

@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:58:42 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/29 17:32:53 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/30 11:55:50 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,41 +41,36 @@ void	exec_cmd(char **input, t_env **env, char *path)
 	}
 }
 
-char	**obtener_input(char **input, char *c)
+void	obtener_input(char **input, char *c)
 {
 	int		x;
-	char	**input2;
 	int		i;
 
 	x = 0;
-	i = 0;
-	while (input[i])
-		i++;
-	input2 = malloc(sizeof(char *) * (i - 1));
 	while (ft_strcmp(input[x], c) != 0)
-	{
-		input2[x] = ft_strdup(input[x]);
 		x++;
-	}
 	i = x;
 	x += 2;
 	while (input[x])
 	{
-		input2[i] = ft_strdup(input[x]);
+		free(input[i]);
+		input[i] = ft_strdup(input[x]);
 		x++;
 		i++;
 	}
-	input2[i] = NULL;
-	return (input2);
+	free(input[x - 1]);
+	free(input[x - 2]);
+	input[i] = NULL;
 }
 
 int	redir_out(char **input, t_env **env, int i)
 {
 	int	fd;
 
-	if (ft_strcmp(input[0], ">") != 0)
-		(*env)->data->input_cpy = obtener_input(input, ">");
+	(void)env;
 	fd = open(input[i + 1], O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	if (ft_strcmp(input[0], ">") != 0)
+		obtener_input(input, ">");
 	if (fd < 0)
 	{
 		ft_putstr_fd("minishell: ", 2);
@@ -95,8 +90,9 @@ int	redir_in(char **input, t_env **env, int i)
 {
 	int	fd;
 
+	(void)env;
 	if (ft_strcmp(input[0], "<") != 0)
-		(*env)->data->input_cpy = obtener_input(input, "<");
+		obtener_input(input, "<");
 	fd = open(input[i + 1], O_RDONLY, 0644);
 	if (fd < 0)
 	{
