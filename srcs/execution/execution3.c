@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 13:00:52 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/29 17:32:59 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/29 19:15:39 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,7 @@ int	redir_append(char **input, t_env **env, int i)
 	int	fd;
 
 	if (ft_strcmp(input[0], ">>") != 0)
-	{
-		//free((*env)->data->input_cpy);
 		(*env)->data->input_cpy = obtener_input(input, ">>");
-	}
 	fd = open(input[i + 1], O_CREAT | O_WRONLY | O_APPEND, 0644);
 	if (fd < 0)
 	{
