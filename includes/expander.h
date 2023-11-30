@@ -6,7 +6,7 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 13:22:31 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/29 17:32:25 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/30 12:25:12 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include "minishell.h"
 
 /*-expander.c-*/
-//char	**expander(t_env *env, char **s, char *tmp, int i);
 char	**expander(t_env *env, char **s, int i);
 
 /*-exp_utils.c-*/

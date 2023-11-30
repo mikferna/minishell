@@ -6,41 +6,12 @@
 /*   By: mikferna <mikferna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:10:24 by mikferna          #+#    #+#             */
-/*   Updated: 2023/11/29 18:55:45 by mikferna         ###   ########.fr       */
+/*   Updated: 2023/11/30 12:25:33 by mikferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/* char	**expander(t_env *env, char **s, char *tmp, int i)
-{
-	int	j;
-
-	while (s[i])
-	{
-		j = 0;
-		while (s[i][j] && (s[i][j] != '\'' && s[i][j] != '"') && s[i][j] != '$')
-			j++;
-		if (s[i][j] != '\'' && dllar_sign(s[i]) != 0 && s[i][dllar_sign(s[i])])
-		{
-			tmp = ret_doll_str(env, s[i], 0, NULL);
-			free(s[i]);
-			s[i] = ft_strdup(tmp);
-			if (tmp)
-				free(tmp);
-		}
-		init_j(&j, s[i]);
-		if (ft_strncmp(s[0], "export", ft_strlen(s[0]) - 1) != 0)
-		{
-			if (s[i][j] == '\'')
-				s[i] = delete_quotes(s[i], '\'', NULL, NULL);
-			else if (s[i][j] == '\"')
-				s[i] = delete_quotes(s[i], '\"', NULL, NULL);
-		}
-		i++;
-	}
-	return (s);
-} */
 char	**expander(t_env *env, char **s, int i)
 {
 	while (s[i])
